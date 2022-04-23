@@ -12,6 +12,7 @@ export const GET_CAMPAIGN = gql`
 			createdAt
 			likes
 			slug
+			category
 			author {
 				id
 				firstName
@@ -27,12 +28,12 @@ export const GET_CAMPAIGN = gql`
 export const GET_CAMPAIGNS = gql`
 	{
 		getCampaigns {
-			title
 			id
 			excerpt
 			slug
 			image
 			createdAt
+			category
 			promoted
 			endorsements {
 				id
@@ -50,6 +51,7 @@ export const GET_ACTIVE_CAMPAIGNS = gql`
 			image
 			createdAt
 			promoted
+			category
 			endorsements {
 				id
 			}
@@ -83,6 +85,7 @@ export const MY_CAMPAIGN = gql`
 			status
 			slug
 			promoted
+			category
 			views
 			endorsements {
 				__typename

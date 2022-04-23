@@ -3,10 +3,11 @@ import { GET_ACTIVE_CAMPAIGNS } from "apollo/queries/campaignQuery";
 import CampaignCard from "components/home/CampCard";
 import FrontLayout from "layout/FrontLayout";
 import { NextPage } from "next";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { ICampaign } from "types/Applicant.types";
 import Link from "next/link";
+import { useRouter } from 'next/router'
 
 const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 	campaigns,
@@ -14,6 +15,12 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 	campaigns: ICampaign[];
 }): JSX.Element => {
 	const [searchTerm, setSearchTerm] = useState("");
+	const [queryCampaigns, setQueryCampaigns] = useState<ICampaign[]>([]);
+
+	useEffect(() => {
+		setQueryCampaigns(campaigns)
+	}, [])
+	
 	const categories = [
 		{
 			title: 'All',
@@ -44,7 +51,7 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 			cate: 'Health'
 		},
 		{
-			title: 'Human Right',
+			title: 'Human Right P',
 			cate:'Human Right Preceeding'
 		},
 		{ 
@@ -64,10 +71,22 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 			cate:'Others'
 		}
 	]
+	const router = useRouter()
+	const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.preventDefault()
+    router.push('/startcamp')
+  }
 	const changeCategory = (event: React.MouseEvent<HTMLDivElement>):void => {
 		const item: HTMLDivElement = event.currentTarget
 		// const category: string = item.textContent
-		console.log(item)
+		const text = item.lastChild.innerText
+
+		if(text === 'All') {
+			setQueryCampaigns(campaigns)
+			return
+		}
+		const results = campaigns.filter(itemCamp => itemCamp.category === text)
+		setQueryCampaigns(results)
 	}
 	return (
 		<FrontLayout>
@@ -92,14 +111,14 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 									/>
 									<div className="flex">
 										{categories.map((item, index) => {
-											return <div onClick={changeCategory} className="p-2 m-2 rounded-lg shadow-lg cursor-pointer text-sm" key={index}>{ item.title }</div>
+											return <div onClick={changeCategory} className="p-2 m-2 rounded-lg shadow-lg cursor-pointer text-sm" key={index}>{ item.title } <span className="hidden">{ item.cate }</span></div>
 										})}
 									</div>
 								</div>
 							</div>
 						</div>
 						<div className="campaign-list ">
-							{campaigns
+							{queryCampaigns
 								.filter((camp) =>
 									camp.title
 										?.toLocaleLowerCase()
@@ -109,12 +128,11 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 									<CampaignCard key={i} camp={campaign} />
 								))}
 						</div>
-						<div className='w-10 m-auto' >
-							<Link  href="/startcamp">
-								<a className="btn btn-warning btn-lg rounded-pill px-2 py-3 text-light font-weight-bolder fs-20 text-center">
-									Start Campaign
-								</a>
-							</Link>
+						<div
+							className='w-40 text-center py-2 rounded-xl mt-5 text-light m-auto bg-[#f8b333] cursor-pointer'
+							onClick={handleClick}
+						>
+						Start Campaign
 						</div>
 					</div>
 				</div>
@@ -138,7 +156,6 @@ CampaignPage.getInitialProps = async (): Promise<{
 			query: GET_ACTIVE_CAMPAIGNS,
 		});
 		const campaigns: ICampaign[] = data?.getActiveCampaigns;
-
 		return {
 			campaigns,
 		};
