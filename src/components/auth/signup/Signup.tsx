@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { Loader } from "rsuite";
 import GoogleAuthComp from "../GoogleAuth";
+import Facebook from "../Facebook";
 
 const RegisterComp = (): JSX.Element => {
 	return (
@@ -72,8 +73,13 @@ export const SignupCom = ({
 	};
 	return (
 		<div className="form">
-			<div className="d-grid">
-				<GoogleAuthComp onSuccess={() => (window.location.href = "/mycomp")} />
+			{/* <div className="d-grid">
+				<GoogleAuthComp onSuccess={() => (window.location.href = "/mycamp")} />
+			</div> */}
+			<h4 className="text-center">Sign Up</h4>
+			<div className="flex center w-[88px] m-auto">
+				<Facebook onSuccess={() => (window.location.href = "/mycamp")}/>
+				<GoogleAuthComp onSuccess={() => (window.location.href = "/mycamp")} />
 			</div>
 			<form onSubmit={handleLogin}>
 				<div className="mb-3">

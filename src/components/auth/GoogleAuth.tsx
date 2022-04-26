@@ -50,7 +50,7 @@ const GoogleAuthComp = ({
 			render={(props: { onClick(): void }) => (
 				<button
 					onClick={props.onClick}
-					className="btn border mb-3 text-muted fs-5 d-block fw-bold"
+					className="w-[50px] h-[50px] rounded-[100px] border-stone-800"
 					disabled={loading}
 					// eslint-disable-next-line react/prop-types
 					// disabled={props?.disabled}
@@ -81,13 +81,7 @@ const GoogleAuthComp = ({
 									fill="#F14336"
 								/>
 							</g>
-							<defs>
-								<clipPath id="clip0">
-									<rect width="27" height="27" fill="white" />
-								</clipPath>
-							</defs>
 						</svg>
-						&nbsp;&nbsp;Sign in with Google
 					</span>
 				</button>
 			)}
