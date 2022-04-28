@@ -5,6 +5,7 @@ import ReactMde from "react-mde";
 import { useRecoilValue } from "recoil";
 import { Loader } from "rsuite";
 import { ICampaign } from "types/Applicant.types";
+import { useRouter } from 'next/router'
 
 const CREATE_ENDORSEMENT = gql`
 	mutation CreateEndorsement($input: EndorsementInput) {
@@ -17,6 +18,7 @@ const CREATE_ENDORSEMENT = gql`
 
 const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 	const [body, setBody] = useState("");
+	const router = useRouter()
 
 	const user = useRecoilValue(UserAtom);
 
@@ -30,7 +32,7 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 				variables: { input: { body, campaign: camp.id } },
 			});
 			console.log(data.createEndorsement);
-			window.location.href = `/promote?slug=${camp.slug}`;
+			router.push(`/campaigns/share?slug=${camp.slug}`)
 		} catch (error) {
 			console.log(error);
 			if (endorseError) {

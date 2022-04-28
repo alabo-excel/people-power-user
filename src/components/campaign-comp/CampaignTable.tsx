@@ -92,16 +92,14 @@ const SingleRow = ({ camp }: { camp: ICampaign }) => {
 				<Link href={`/promote?slug=${camp?.slug}`}>
 					<a className="btn p-0">{camp?.promoted ? "Upgrade" : "Promote"}</a>
 				</Link>
-			</td>
-			<td>
 				<Link href={`/promote?slug=${camp?.slug}`}>
-					<a className="btn p-0">Edit</a>
+					<a className="btn pl-2">Edit</a>
 				</Link>
 			</td>
 
 			<td>
 				<CampaignShareMenuList camp={camp}>
-					<span className="btn p-0">
+					<span className="btn pr-1">
 						<ShareIcon />
 					</span>
 				</CampaignShareMenuList>
