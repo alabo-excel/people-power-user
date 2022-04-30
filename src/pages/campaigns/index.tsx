@@ -111,7 +111,7 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 									/>
 									<div className="flex">
 										{categories.map((item, index) => {
-											return <div onClick={changeCategory} className="p-2 m-2 rounded-lg shadow-lg cursor-pointer text-sm" key={index}>{ item.title } <span className="hidden">{ item.cate }</span></div>
+											return <div onClick={changeCategory} className="p-2 m-2 rounded-lg  cursor-pointer text-sm" key={index}>{ item.title } <span className="hidden">{ item.cate }</span></div>
 										})}
 									</div>
 								</div>

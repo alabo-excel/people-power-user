@@ -54,8 +54,8 @@ const ShareChampaign = (): JSX.Element => {
 	return (
 		<Wrapper className="finalsec-wrap py-5">
 			<div className="container">
-				<div className="love-img d-flex justify-content-center mb-4 py-3">
-					<img src="images/love 1.svg" alt="" />
+				<div >
+					<img className="h-96 m-auto" src="/images/pana.png" alt="" />
 				</div>
 				<div className="finalsec-txt text-center py-3 mb-3 ">
 					Interesting choice! <br /> Sharing this campaign will Help gain

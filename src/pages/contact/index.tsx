@@ -22,15 +22,15 @@ const ContactPage: NextPage<IProps> = ({ meta }: IProps): JSX.Element => {
 				<div>
 					<Div className="d-flex container flex-column-reverse flex-sm-row py-3">
 						<div className="left d-flex flex-column justify-content-end">
-							<h1 className="text-secondary fw-bold">Contact Us</h1>
-							<p className="fs-5">
+							<h1 className="text-secondary fw-bold text-center">Contact Support</h1>
+							{/* <p className="fs-5">
 								by influencing policy makers. So much to campaign about: Social
 								policy, Government decisions, Environment, Empowerment etc.
-							</p>
+							</p> */}
 						</div>
-						<div className="right d-flex align-items-end">
+						{/* <div className="right d-flex align-items-end">
 							<Contactsvg />
-						</div>
+						</div> */}
 					</Div>
 					<section className="py-5">
 						<Contact className="container py-4 px-2 d-flex flex-column align-items-md-center flex-md-row bg-white">
@@ -55,19 +55,19 @@ const ContactPage: NextPage<IProps> = ({ meta }: IProps): JSX.Element => {
 										Call Us
 									</span>
 									<b className="text-center">{meta?.phone}</b>
-									<b className="text-center">+234 9012624162</b>
+									<b className="text-center">+1 737 210 1130 - USA</b>
 								</div>
 							</div>
 							<div className="right d-flex justify-content-end ">
 								<div className="right_">
-									<p className="fw-bold text-secondary fs-1 m-0 mb-2">
+									<p className=" text-lg mb-2">
 										Send us a message
 									</p>
-									<p className="m-0 mb-2 p-0">
+									{/* <p className="m-0 mb-2 p-0">
 										If you have any work from me or any types of queries related
 										to our forum you can send us a message now. Its our pleasure
 										to help
-									</p>
+									</p> */}
 									<form>
 										<div className="mb-3">
 											<input

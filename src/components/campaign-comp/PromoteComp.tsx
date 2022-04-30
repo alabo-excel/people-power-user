@@ -1,6 +1,7 @@
 import { gql, useQuery } from "@apollo/client";
 import { UserAtom } from "atoms/UserAtom";
-import PromoteModalComp from "components/PromoteModalComp";
+// import PromoteModalComp from "components/PromoteModalComp";x
+import ChoosePromotion from "components/ChoosePromotion";
 import Cookies from "js-cookie";
 import FrontLayout from "layout/FrontLayout";
 import router, { useRouter } from "next/router";
@@ -50,75 +51,82 @@ const PromoteComp = (): JSX.Element => {
 		return initialView;
 	}, [query]);
 
+	const endorse = useMemo(() => {
+		const initialEndorse = Boolean(query?.endorse);
+		console.log(initialEndorse)
+		return initialEndorse;
+	}, [query]);
+
 	if (loading) return <p className="mt-4">Loading...</p>;
-	return (
-		<FrontLayout>
-			<Wrapper className="container">
-				<PromoteModalComp show={showModal} onHide={() => setShowModal(false)} />
-				<div className="inner-wrapper">
-					{!view ? (
-						<div>
-							<div className="card">
-								<div className="card-img">
-									<img src={campaign?.image} alt="" />
+	if(!view && !endorse) {
+		return (
+			<FrontLayout>
+				<Wrapper className="container">
+					{/* <PromoteModalComp show={showModal} onHide={() => setShowModal(false)} /> */}
+					<ChoosePromotion show={showModal} onHide={() => setShowModal(false)} />
+					<div className="inner-wrapper">
+							<div>
+								<div className="card">
+									<div className="card-img">
+										<img src={campaign?.image} alt="" />
+									</div>
+									<div className="card-body">
+										<h4 className="fw-bold">{campaign?.title}</h4>
+	
+										<p>
+											<b className="text-primary">Campaign Target</b>:{" "}
+											{campaign?.target}
+										</p>
+									</div>
 								</div>
-								<div className="card-body">
-									<h4 className="fw-bold">{campaign?.title}</h4>
-
+								<div className="promotion mt-5">
 									<p>
-										<b className="text-primary">Campaign Target</b>:{" "}
-										{campaign?.target}
+										Hello {user?.firstName}, let our Community of Supporters know
+										about this campaign for support and more endorsements by
+										promoting it.
 									</p>
-								</div>
-							</div>
-							<div className="promotion mt-5">
-								<p>
-									Hello {user?.firstName}, let our Community of Supporters know
-									about this campaign for support and more endorsements by
-									promoting it.
-								</p>
-
-								<ul className="nav flex-column">
-									<li className="nav-item mb-2 ms-3">
-										Promoting this campaign will help push it to interested
-										supporters who will endorse it and enable you reach your
-										campaign goal.
-									</li>
-									<li className="nav-item mb-2 ms-3">
-										Our community of supporters can also help you promote this
-										campaign and spare in some cash if this campaign is promoted
-										to them.
-									</li>
-									<li className="nav-item mb-2 ms-3">
-										Hit the promote button below to reach our Community of
-										Supporters who are interested in supporting this Campaign.
-									</li>
-								</ul>
-
-								<div className="my-5 text-center promote-btn ">
-									<button
-										onClick={() =>
-											router.push(`/promote?slug=${query?.slug}&view=true`)
-										}
-										className="btn btn-warning "
-									>
-										Promote Now
-									</button>
-									<div className="text-center">
-										<a className="btn" onClick={() => setShowModal(true)}>
-											I Will Promote later
-										</a>
+	
+									<ul className="nav flex-column">
+										<li className="nav-item mb-2 ms-3">
+											Promoting this campaign will help push it to interested
+											supporters who will endorse it and enable you reach your
+											campaign goal.
+										</li>
+										<li className="nav-item mb-2 ms-3">
+											Our community of supporters can also help you promote this
+											campaign and spare in some cash if this campaign is promoted
+											to them.
+										</li>
+										<li className="nav-item mb-2 ms-3">
+											Hit the promote button below to reach our Community of
+											Supporters who are interested in supporting this Campaign.
+										</li>
+									</ul>
+	
+									<div className="my-5 text-center promote-btn ">
+										<button
+											onClick={() => setShowModal(true)}
+											className="btn btn-warning "
+										>
+											Promote Now
+										</button>
+										<div className="text-center">
+											<a className="btn" onClick={() => setShowModal(true)}>
+												I Will Promote later
+											</a>
+										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					) : (
-						campaign && <PromoteForm campaign={campaign} />
-					)}
-				</div>
-			</Wrapper>
-		</FrontLayout>
-	);
+					</div>
+				</Wrapper>
+			</FrontLayout>
+		);
+	} else if(endorse) {
+		return campaign && <PromoteFormEndorsement campaign={campaign} />
+	} else if(view) {
+		return campaign && <PromoteForm campaign={campaign} />
+	}
 };
 
 export default PromoteComp;
@@ -238,97 +246,261 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 	}, [currency, views]);
 
 	return (
-		<div>
-			<div className="text-center mt-3">
-				Wow <span className="fw-bold">{user?.firstName}</span>…you are just one
-				step away from reaching our Community of Supporters who will help you
-				achieve your campaign goal. Spare in some cash to win your supporters.
-			</div>
-			<p className="my-4 text-center fw-bold">
-				How do you want to promote your campaign ?
-			</p>
+		<FrontLayout>
+				<Wrapper className="container">
+				<div>
+					<div className="text-center mt-3">
+						Wow <span className="fw-bold">{user?.firstName}</span>…you are just one
+						step away from reaching our Community of Supporters who will help you
+						achieve your campaign goal. Spare in some cash to win your supporters.
+					</div>
+					<p className="my-4 text-center fw-bold">
+						How do you want to promote your campaign ?
+					</p>
 
-			<h5 className="fw-bold">Bulk Option</h5>
-			<div className="bulk">
-				{bulkOptions.map((option, i) => (
-					<button
-						key={i}
-						className="row w-100 bulk-option align-items-center justify-content-between"
-					>
-						<p className="m-0 col-4">
-							<i className="fas fa-eye"></i> {option.views} Views
-						</p>
-						<p className="m-0 col-4">=</p>
-						<PaystackButton
-							reference={new Date().getTime().toString()}
-							email={user?.email as string}
-							amount={option.price * 100}
-							firstname={user?.firstName}
-							lastname={user?.lastName}
-							onSuccess={onSuccess}
-							publicKey={
-								process.env.NODE_ENV === "production"
-									? (Cookies.get(IEnvironments.PAYSTACK_PK) as string)
-									: "pk_test_4611aa9c08b8fc8025407dbfae5253d0e5796383"
-							}
-							metadata={{
-								purpose: PaymentPurposeEnum.CAMPAIGN,
-								key: campaign?.id,
-								custom_fields: [
-									{
-										display_name: PaymentPurposeEnum.CAMPAIGN,
-										value: campaign?.title,
-										variable_name: "title",
-									},
-								],
-							}}
-							text={`N${option.price}`}
-							className="btn text-primary col-4"
-						/>
-					</button>
-				))}
-			</div>
+					<h5 className="fw-bold">Bulk Option</h5>
+					<div className="bulk">
+						{bulkOptions.map((option, i) => (
+							<button
+								key={i}
+								className="row w-100 bulk-option align-items-center justify-content-between"
+							>
+								<p className="m-0 col-4">
+									<i className="fas fa-eye"></i> {option.views} Views
+								</p>
+								<p className="m-0 col-4">=</p>
+								<PaystackButton
+									reference={new Date().getTime().toString()}
+									email={user?.email as string}
+									amount={option.price * 100}
+									firstname={user?.firstName}
+									lastname={user?.lastName}
+									onSuccess={onSuccess}
+									publicKey={
+										process.env.NODE_ENV === "production"
+											? (Cookies.get(IEnvironments.PAYSTACK_PK) as string)
+											: "pk_test_4611aa9c08b8fc8025407dbfae5253d0e5796383"
+									}
+									metadata={{
+										purpose: PaymentPurposeEnum.CAMPAIGN,
+										key: campaign?.id,
+										custom_fields: [
+											{
+												display_name: PaymentPurposeEnum.CAMPAIGN,
+												value: campaign?.title,
+												variable_name: "title",
+											},
+										],
+									}}
+									text={`N${option.price}`}
+									className="btn text-primary col-4"
+								/>
+							</button>
+						))}
+					</div>
 
-			<h5 className="fw-bold my-3">Customize</h5>
-			<form>
-				<div className="form-group text-center">
-					<label className="">
-						<i className="fas fa-eye"></i> Views
-					</label>
-					<input
-						type="number"
-						value={views}
-						onChange={(e) => setViews(+e.target.value)}
-						style={{ width: "4rem", appearance: "none" }}
-					/>
-					<i className="fas fa-exchange-alt"></i>
-					<input
-						type="text"
-						value={
-							loadingPrice ? "calculating..." : formateMoney(amount, currency)
-						}
-						disabled
-					/>
-					<select
-						className=""
-						onChange={(e) => setCurrency(e.target.value as CurrencyListEnum)}
-					>
-						<option>{CurrencyListEnum.NGN}</option>
-						<option>{CurrencyListEnum.GHS}</option>
-						<option>{CurrencyListEnum.ZAR}</option>
-						<option>{CurrencyListEnum.USD}</option>
-					</select>
+					<h5 className="fw-bold my-3">Customize</h5>
+					<form>
+						<div className="form-group text-center">
+							<label className="">
+								<i className="fas fa-eye"></i> Views
+							</label>
+							<input
+								type="number"
+								value={views}
+								onChange={(e) => setViews(+e.target.value)}
+								style={{ width: "4rem", appearance: "none" }}
+							/>
+							<i className="fas fa-exchange-alt"></i>
+							<input
+								type="text"
+								value={
+									loadingPrice ? "calculating..." : formateMoney(amount, currency)
+								}
+								disabled
+							/>
+							<select
+								className=""
+								onChange={(e) => setCurrency(e.target.value as CurrencyListEnum)}
+							>
+								<option>{CurrencyListEnum.NGN}</option>
+								<option>{CurrencyListEnum.GHS}</option>
+								<option>{CurrencyListEnum.ZAR}</option>
+								<option>{CurrencyListEnum.USD}</option>
+							</select>
+						</div>
+					</form>
+					<div className="text-center">
+						<button
+							className="btn btn-warning my-4"
+							onClick={() => initializePayment(onSuccess, onClose)}
+						>
+							Click to pay
+						</button>
+					</div>
 				</div>
-			</form>
-			<div className="text-center">
-				<button
-					className="btn btn-warning my-4"
-					onClick={() => initializePayment(onSuccess, onClose)}
-				>
-					Click to pay
-				</button>
-			</div>
-		</div>
+			</Wrapper>
+		</FrontLayout>
+	);
+};
+const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
+	const user = useRecoilValue(UserAtom);
+
+	const [views, setViews] = useState(10);
+
+	const [amount, setAmount] = useState(20);
+	const [loadingPrice, setLoadingPrice] = useState(false);
+
+	const [currency, setCurrency] = useState<CurrencyListEnum>(
+		CurrencyListEnum.NGN,
+	);
+
+	const paystack_config: PaystackProps = {
+		reference: new Date().getTime().toString(),
+		email: user?.email as string,
+		amount: parseFloat(amount.toFixed(2)) * 100,
+		firstname: user?.firstName,
+		lastname: user?.lastName,
+		currency,
+		publicKey:
+			process.env.NODE_ENV === "production"
+				? (Cookies.get(IEnvironments.PAYSTACK_PK) as string)
+				: "pk_test_4611aa9c08b8fc8025407dbfae5253d0e5796383",
+		metadata: {
+			purpose: PaymentPurposeEnum.CAMPAIGN,
+			key: campaign?.id,
+			custom_fields: [
+				{
+					display_name: PaymentPurposeEnum.CAMPAIGN,
+					value: campaign?.title,
+					variable_name: "title",
+				},
+			],
+		},
+	};
+
+	const initializePayment = usePaystackPayment(paystack_config);
+
+	const onSuccess = async () => {
+		window.location.href = "/mycamp";
+	};
+	const onClose = () => {
+		console.log("");
+	};
+
+	useEffect(() => {
+		const convert = async () => {
+			try {
+				setLoadingPrice(true);
+				const unit = await checkFX(currency);
+				const result = unit * 20;
+
+				setAmount(views * result);
+			} catch (error) {
+				console.log(error);
+			} finally {
+				setLoadingPrice(false);
+			}
+		};
+		convert();
+	}, [currency, views]);
+
+	return (
+		<FrontLayout>
+			<Wrapper className="container w-[506px]">
+				<div className="w-[506px]">
+					<div className="text-center mt-3 w-[506px]">
+						Wow <span className="fw-bold">{user?.firstName}</span>…you are just one
+						step away from reaching our Community of Supporters who will help you
+						achieve your campaign goal. Spare in some cash to win your supporters.
+					</div>
+					<p className="my-4 text-center fw-bold">
+						How do you want to promote your campaign Endorse ?
+					</p>
+
+					<h5 className="fw-bold">Bulk Option</h5>
+					<div className="bulk">
+						{bulkOptions.map((option, i) => (
+							<button
+								key={i}
+								className="row w-100 bulk-option align-items-center justify-content-between"
+							>
+								<p className="m-0 col-4">
+									<i className="fas fa-eye"></i> {option.views} Views
+								</p>
+								<p className="m-0 col-4">=</p>
+								<PaystackButton
+									reference={new Date().getTime().toString()}
+									email={user?.email as string}
+									amount={option.price * 100}
+									firstname={user?.firstName}
+									lastname={user?.lastName}
+									onSuccess={onSuccess}
+									publicKey={
+										process.env.NODE_ENV === "production"
+											? (Cookies.get(IEnvironments.PAYSTACK_PK) as string)
+											: "pk_test_4611aa9c08b8fc8025407dbfae5253d0e5796383"
+									}
+									metadata={{
+										purpose: PaymentPurposeEnum.CAMPAIGN,
+										key: campaign?.id,
+										custom_fields: [
+											{
+												display_name: PaymentPurposeEnum.CAMPAIGN,
+												value: campaign?.title,
+												variable_name: "title",
+											},
+										],
+									}}
+									text={`N${option.price}`}
+									className="btn text-primary col-4"
+								/>
+							</button>
+						))}
+					</div>
+
+					<h5 className="fw-bold my-3">Customize</h5>
+					<form>
+						<div className="form-group text-center">
+							<label className="">
+								<i className="fas fa-eye"></i> Views
+							</label>
+							<input
+								type="number"
+								value={views}
+								onChange={(e) => setViews(+e.target.value)}
+								style={{ width: "4rem", appearance: "none" }}
+							/>
+							<i className="fas fa-exchange-alt"></i>
+							<input
+								type="text"
+								value={
+									loadingPrice ? "calculating..." : formateMoney(amount, currency)
+								}
+								disabled
+							/>
+							<select
+								className=""
+								onChange={(e) => setCurrency(e.target.value as CurrencyListEnum)}
+							>
+								<option>{CurrencyListEnum.NGN}</option>
+								<option>{CurrencyListEnum.GHS}</option>
+								<option>{CurrencyListEnum.ZAR}</option>
+								<option>{CurrencyListEnum.USD}</option>
+							</select>
+						</div>
+					</form>
+					<div className="text-center">
+						<button
+							className="btn btn-warning my-4"
+							onClick={() => initializePayment(onSuccess, onClose)}
+						>
+							Click to pay
+						</button>
+					</div>
+				</div>
+			</Wrapper>
+		</FrontLayout>
 	);
 };
 

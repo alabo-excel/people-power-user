@@ -65,7 +65,7 @@ const Header = (): JSX.Element => {
 									// Work to be done !!
 									// When users click they should see updates
 								}
-									<div className='notify-bell bg-white shadow-lg'>
+									<div className='notify-bell pt-3'>
 										{/* <FontAwesomeIcon icon={faBell} size="1x" /> */}
 										<svg
 											width="19"
