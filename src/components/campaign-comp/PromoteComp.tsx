@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 import { UserAtom } from "atoms/UserAtom";
-// import PromoteModalComp from "components/PromoteModalComp";x
+import PromoteModalComp from "components/PromoteModalComp";
 import ChoosePromotion from "components/ChoosePromotion";
 import Cookies from "js-cookie";
 import FrontLayout from "layout/FrontLayout";
@@ -39,6 +39,7 @@ const PromoteComp = (): JSX.Element => {
 	const [campaign, setCampaign] = useState<ICampaign>();
 	const { query } = useRouter();
 	const [showModal, setShowModal] = useState(false);
+	const [showModalClose, setShowModalClose] = useState(false);
 
 	const { loading } = useQuery(GET_CAMPAIGN, {
 		variables: { slug: query.slug },
@@ -62,7 +63,7 @@ const PromoteComp = (): JSX.Element => {
 		return (
 			<FrontLayout>
 				<Wrapper className="container">
-					{/* <PromoteModalComp show={showModal} onHide={() => setShowModal(false)} /> */}
+					<PromoteModalComp show={showModalClose} onHide={() => setShowModalClose(false)} />
 					<ChoosePromotion show={showModal} onHide={() => setShowModal(false)} />
 					<div className="inner-wrapper">
 							<div>
@@ -111,7 +112,7 @@ const PromoteComp = (): JSX.Element => {
 											Promote Now
 										</button>
 										<div className="text-center">
-											<a className="btn" onClick={() => setShowModal(true)}>
+											<a className="btn" onClick={() => setShowModalClose(true)}>
 												I Will Promote later
 											</a>
 										</div>
@@ -209,6 +210,7 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 		metadata: {
 			purpose: PaymentPurposeEnum.CAMPAIGN,
 			key: campaign?.id,
+			numberOfViews: views,
 			custom_fields: [
 				{
 					display_name: PaymentPurposeEnum.CAMPAIGN,
@@ -220,9 +222,9 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 	};
 
 	const initializePayment = usePaystackPayment(paystack_config);
-
+	const router = useRouter()
 	const onSuccess = async () => {
-		window.location.href = "/mycamp";
+		router.push("/mycamp")
 	};
 	const onClose = () => {
 		console.log("");
@@ -248,14 +250,14 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 	return (
 		<FrontLayout>
 				<Wrapper className="container">
-				<div>
+				<div className="md:w-[506px] m-auto">
 					<div className="text-center mt-3">
 						Wow <span className="fw-bold">{user?.firstName}</span>…you are just one
 						step away from reaching our Community of Supporters who will help you
 						achieve your campaign goal. Spare in some cash to win your supporters.
 					</div>
 					<p className="my-4 text-center fw-bold">
-						How do you want to promote your campaign ?
+						How do you want to promote your campaign views?
 					</p>
 
 					<h5 className="fw-bold">Bulk Option</h5>
@@ -284,6 +286,7 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 									metadata={{
 										purpose: PaymentPurposeEnum.CAMPAIGN,
 										key: campaign?.id,
+										numberOfViews: option.views,
 										custom_fields: [
 											{
 												display_name: PaymentPurposeEnum.CAMPAIGN,
@@ -343,6 +346,7 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 		</FrontLayout>
 	);
 };
+
 const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 	const user = useRecoilValue(UserAtom);
 
@@ -367,11 +371,12 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 				? (Cookies.get(IEnvironments.PAYSTACK_PK) as string)
 				: "pk_test_4611aa9c08b8fc8025407dbfae5253d0e5796383",
 		metadata: {
-			purpose: PaymentPurposeEnum.CAMPAIGN,
+			purpose: PaymentPurposeEnum.CAMPAIGNENDORSE,
 			key: campaign?.id,
+			numberOfEndorsements: views,
 			custom_fields: [
 				{
-					display_name: PaymentPurposeEnum.CAMPAIGN,
+					display_name: PaymentPurposeEnum.CAMPAIGNENDORSE,
 					value: campaign?.title,
 					variable_name: "title",
 				},
@@ -380,9 +385,9 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 	};
 
 	const initializePayment = usePaystackPayment(paystack_config);
-
+	const router = useRouter()
 	const onSuccess = async () => {
-		window.location.href = "/mycamp";
+		router.push("/mycamp");
 	};
 	const onClose = () => {
 		console.log("");
@@ -407,26 +412,26 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 
 	return (
 		<FrontLayout>
-			<Wrapper className="container w-[506px]">
-				<div className="w-[506px]">
-					<div className="text-center mt-3 w-[506px]">
+			<Wrapper className="container">
+				<div className="md:w-[506px] m-auto">
+					<div className="text-center mt-3">
 						Wow <span className="fw-bold">{user?.firstName}</span>…you are just one
 						step away from reaching our Community of Supporters who will help you
 						achieve your campaign goal. Spare in some cash to win your supporters.
 					</div>
 					<p className="my-4 text-center fw-bold">
-						How do you want to promote your campaign Endorse ?
+						How do you want to promote your campaign Endorsements ?
 					</p>
 
 					<h5 className="fw-bold">Bulk Option</h5>
 					<div className="bulk">
-						{bulkOptions.map((option, i) => (
+						{bulkOptionsEndorse.map((option, i) => (
 							<button
 								key={i}
 								className="row w-100 bulk-option align-items-center justify-content-between"
 							>
 								<p className="m-0 col-4">
-									<i className="fas fa-eye"></i> {option.views} Views
+									{option.endorsements} Endorsements
 								</p>
 								<p className="m-0 col-4">=</p>
 								<PaystackButton
@@ -442,11 +447,12 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 											: "pk_test_4611aa9c08b8fc8025407dbfae5253d0e5796383"
 									}
 									metadata={{
-										purpose: PaymentPurposeEnum.CAMPAIGN,
+										purpose: PaymentPurposeEnum.CAMPAIGNENDORSE,
 										key: campaign?.id,
+										numberOfEndorsements: option.endorsements,
 										custom_fields: [
 											{
-												display_name: PaymentPurposeEnum.CAMPAIGN,
+												display_name: PaymentPurposeEnum.CAMPAIGNENDORSE,
 												value: campaign?.title,
 												variable_name: "title",
 											},
@@ -462,8 +468,8 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 					<h5 className="fw-bold my-3">Customize</h5>
 					<form>
 						<div className="form-group text-center">
-							<label className="">
-								<i className="fas fa-eye"></i> Views
+							<label className="pr-1">
+								Endorsements
 							</label>
 							<input
 								type="number"
@@ -511,4 +517,13 @@ const bulkOptions = [
 	{ views: 1000, price: 5000 },
 	{ views: 2000, price: 8000 },
 	{ views: 3000, price: 10000 },
+];
+
+const bulkOptionsEndorse = [
+	{ endorsements: 100, price: 800 },
+	{ endorsements: 200, price: 1200 },
+	{ endorsements: 400, price: 2200 },
+	{ endorsements: 1000, price: 4800 },
+	{ endorsements: 2000, price: 7800 },
+	{ endorsements: 3000, price: 9800 },
 ];

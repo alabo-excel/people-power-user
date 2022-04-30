@@ -32,7 +32,7 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 				variables: { input: { body, campaign: camp.id } },
 			});
 			console.log(data.createEndorsement);
-			router.push(`/campaigns/share?slug=${camp.slug}`)
+			router.push(`/campaigns/promote?slug=${camp.slug}`)
 		} catch (error) {
 			console.log(error);
 			if (endorseError) {

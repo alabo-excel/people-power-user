@@ -48,7 +48,7 @@ const ShareChampaign = (): JSX.Element => {
 			"You can start another campaign or promote your campaign to gain audience",
 		);
 		localStorage.clear();
-		window.location.href = "/mycamp";
+		router.push("/mycamp");
 	};
 	if (loading) return <p className="mt-3">Loading...</p>;
 	return (
