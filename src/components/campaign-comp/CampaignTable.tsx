@@ -83,8 +83,8 @@ const SingleRow = ({ camp }: { camp: ICampaign }) => {
 				></i>
 				{/* {camp.status} */}
 			</td>
-			<td> 0 </td>
-			<td> 0 </td>
+			<td className="text-center"> 0 </td>
+			<td className="text-center"> 0 </td>
 			<td> {camp?.views?.length} </td>
 			<td> {Number(camp?.endorsements?.length) + 1} </td>
 
