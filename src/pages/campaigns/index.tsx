@@ -129,10 +129,10 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 								))}
 						</div>
 						<div
-							className='w-40 text-center py-2 rounded-xl mt-5 text-light m-auto bg-[#f8b333] cursor-pointer'
+							className='w-52 text-center py-3 rounded-xl mt-5 text-light m-auto bg-[#00401c] cursor-pointer'
 							onClick={handleClick}
 						>
-						Start Campaign
+						Start your own Campaign
 						</div>
 					</div>
 				</div>

@@ -63,7 +63,7 @@ const ShareChampaign = (): JSX.Element => {
 					more supporters and endorsements.
 				</div>
 				<div className="num-of-end text-muted text-center py-2 mb-3 ">
-					{Number(campaign?.endorsements?.length) + 1} new endorsements were
+					{Number(campaign?.endorsements?.length) + 1} new endorsement(s) were
 					added to <br /> this campaign. Thanks to the people who <br /> shared
 					it. Join them and help this campaign <br /> reach its desired target
 					and goal!

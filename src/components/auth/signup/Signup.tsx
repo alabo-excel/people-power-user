@@ -1,11 +1,13 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useState } from "react";
+import { useRouter } from 'next/router'
 import { Loader } from "rsuite";
 import GoogleAuthComp from "../GoogleAuth";
 import Facebook from "../Facebook";
 
 const RegisterComp = (): JSX.Element => {
+	const router = useRouter()
 	return (
 		<div className="signup-main">
 			<div className="d-flex flex-column justify-content-end">
@@ -38,6 +40,7 @@ export const SignupCom = ({
 }: {
 	onSucess(data?: any): void;
 }): JSX.Element => {
+	const router = useRouter()
 	const [loading, setLoading] = useState(false);
 	const [info, setInfo] = useState({
 		email: "",
@@ -61,7 +64,7 @@ export const SignupCom = ({
 		setLoading(true);
 		try {
 			const { data } = await axios.post("/auth/register", info);
-			window.location.href = "/auth?mode=verify token";
+			router.push("/auth?mode=verify token");
 			onSucess(data);
 			setLoading(false);
 		} catch (error) {
@@ -73,13 +76,10 @@ export const SignupCom = ({
 	};
 	return (
 		<div className="form">
-			{/* <div className="d-grid">
-				<GoogleAuthComp onSuccess={() => (window.location.href = "/mycamp")} />
-			</div> */}
 			<h4 className="text-center">Sign Up</h4>
 			<div className="flex center w-[88px] m-auto">
-				<Facebook onSuccess={() => (window.location.href = "/mycamp")}/>
-				<GoogleAuthComp onSuccess={() => (window.location.href = "/mycamp")} />
+				<Facebook onSuccess={() => (router.push("/mycamp"))}/>
+				<GoogleAuthComp onSuccess={() => (router.push("/mycamp"))} />
 			</div>
 			<form onSubmit={handleLogin}>
 				<div className="mb-3">
