@@ -1,9 +1,11 @@
 import { UserAtom } from "atoms/UserAtom";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import NoticeList from './Notice'
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import UserMenu from "./user-profile/UserMenu";
+
 
 const Header = (): JSX.Element => {
 	const [menu, setMenu] = useState(false);
@@ -12,7 +14,6 @@ const Header = (): JSX.Element => {
 	const user = useRecoilValue(UserAtom);
 	const { pathname } = useRouter();
 	const text = `PEOPLE'S POWER`
-
 
 	return (
 		<header>
@@ -82,30 +83,10 @@ const Header = (): JSX.Element => {
 
 									</div>
 									{showNotification ? (
-										<div className="bg-white w-64  absolute top-[82px] right-[84px] rounded-xl shadow-xl p-1">
-										<ul className="p-2">
-											<li className="w-[14rem] flex border-b-2 border-zinc-800 mt-2 justify-between">
-											<img
-												src={user?.image}
-												alt=""
-												className="image rounded-circle border border-3 h-[50px]"
-											/>
-												<div className="w-40 break-words">Great Endorsed your camp kjnldfgdfgdgdfgdffgdffgdfdfgfdgdfgdffgdffg</div>
-												</li>
-											<li className="w-[14rem] flex border-b-2 border-zinc-800 mt-2">
-											<img
-												src={user?.image}
-												alt=""
-												className="image rounded-circle border border-3 h-[50px]"
-											/>
-												<div className="w-40 break-words">Great Endorsed your camp kjnldfgdfgdgdfgdffgdffgdfdfgfdgdfgdffgdffg</div>
-												</li>
-										</ul>
-									</div>
+										<NoticeList />
 									): (
 										<div></div>
 									)
-										
 									}
 									<div className='p-1'></div>
 									<UserMenu />
