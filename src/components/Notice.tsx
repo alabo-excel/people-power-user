@@ -19,7 +19,7 @@ const NoticeList = (): JSX.Element => {
 	})
 
 	return (
-			<div className="bg-white w-64  absolute top-[82px] right-[84px] rounded-xl shadow-xl p-1">
+			<div className="bg-white w-72  absolute top-[82px] right-[84px] rounded-xl shadow-xl p-1">
         <ul className="p-2 h-[400px] overflow-auto">
           {notification.map((notice, i) => (
             <li className="w-[14rem] flex border-b-2 border-zinc-800 mt-2 justify-between" key={i}>
