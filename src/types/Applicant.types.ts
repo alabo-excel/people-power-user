@@ -165,6 +165,7 @@ export interface ICampaign extends Document {
 	endorsements: IEndorsement[];
 	promoted: boolean;
 	views: IViews[];
+	checked?: boolean;
 }
 
 export interface IViews {

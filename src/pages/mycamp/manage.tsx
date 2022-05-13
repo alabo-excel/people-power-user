@@ -2,11 +2,12 @@ import { gql, useQuery } from "@apollo/client";
 import axios from "axios";
 import FrontLayout from "layout/FrontLayout";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Loader } from "rsuite";
 import styled from "styled-components";
 import { ICampaign } from "types/Applicant.types";
 import dayjs from "dayjs";
+import Checkbox from "../../components/CheckBox";
 
 const GET_CAMPAIGNS = gql`
 	{
@@ -35,10 +36,14 @@ const GET_CAMPAIGNS = gql`
 
 const ManageCampaignPage = (): JSX.Element => {
 	const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
-
+	
 	const { loading } = useQuery(GET_CAMPAIGNS, {
+
 		onCompleted: (data) => {
-			setCampaigns(data.getCampaigns);
+			console.log(data.getCampaigns)
+			setCampaigns(
+				data.getCampaigns.map(item => ({...item, checked: false}))
+				);
 		},
 		onError: (error) => console.log(error),
 	});
@@ -75,9 +80,23 @@ const ManageCampaignPage = (): JSX.Element => {
 		}
 	};
 
+	// const updateCampInterFace = () => {
+	// 	setCampaigns(
+	// 		campaigns.map(item => ({...item, checked: false}))
+	// 	)
+	// }
+	const handleChangeA = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log(e.target.checked);
+  };
+
+	// useEffect(() => {
+	// 	updateCampInterFace()
+	// }, 
+	// [campaigns])
+
 	return (
 		<FrontLayout>
-			<Wrapper className="container ">
+			<Wrapper className="container">
 				<div className="campaign-page">
 					<h1 className="text-center fs-3 mb-5 mt-3">Mange campaign</h1>
 					<button className="btn btn-success text-white mr-2">Send Email</button>
@@ -102,7 +121,11 @@ const ManageCampaignPage = (): JSX.Element => {
 								<tbody>
 									{campaigns?.map((campaign, i) => (
 										<tr key={i}>
-											<td>[]</td>
+											<td><Checkbox
+												handleChange={handleChangeA}
+												isChecked={i.checked}
+												label="A"
+											/></td>
 											<td>
 												<i
 													className={`fas fa-dot-circle me-2 ${
@@ -126,13 +149,26 @@ const ManageCampaignPage = (): JSX.Element => {
 															<span className="pl-1">{campaign?.author?.firstName}{" "}
 														{campaign?.author?.lastName}</span>
 														</div>
+
+														<div className="flex">
+														<svg
+															width="15"
+															height="15"
+															xmlns="http://www.w3.org/2000/svg"
+															viewBox="0 0 192 512"
+														>
+															<path d="M160 448h-32V224c0-17.69-14.33-32-32-32L32 192c-17.67 0-32 14.31-32 32s14.33 31.1 32 31.1h32v192H32c-17.67 0-32 14.31-32 32s14.33 32 32 32h128c17.67 0 32-14.31 32-32S177.7 448 160 448zM96 128c26.51 0 48-21.49 48-48S122.5 32.01 96 32.01s-48 21.49-48 48S69.49 128 96 128z"/>
+															</svg>
+															<span className="pl-1">
 														{campaign?.target}
+														</span>
+														</div>
 													</a>
 												</Link>
 											</td>
 											<td>{dayjs(campaign?.createdAt).format("DD/MM/YYYY")}</td>
 											<td className="text-center"> 0   |   0 </td>
-											<td>{campaign?.views?.length}</td>
+											<td>{Number(campaign?.views?.length)}</td>
 											<td>{Number(campaign?.endorsements?.length) + 1}</td>
 											<td>Nigeria</td>
 											<td>
