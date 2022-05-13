@@ -60,6 +60,7 @@
     "ts-money": "^0.4.6"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.1",
     "@types/cookie": "^0.4.0",
     "@types/exchange-rates-api": "^1.0.0",
     "@types/js-cookie": "^2.2.6",

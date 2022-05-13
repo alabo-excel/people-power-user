@@ -64,7 +64,7 @@ export const SignupCom = ({
 		setLoading(true);
 		try {
 			const { data } = await axios.post("/auth/register", info);
-			router.push("/auth?mode=verify token");
+			router.push("/mycamp");
 			onSucess(data);
 			setLoading(false);
 		} catch (error) {
