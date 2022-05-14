@@ -8,6 +8,7 @@ import styled from "styled-components";
 import { ICampaign } from "types/Applicant.types";
 import dayjs from "dayjs";
 import Checkbox from "../../components/CheckBox";
+import SendMsgModel from "../../components/campaign-comp/SendMessage";
 
 const GET_CAMPAIGNS = gql`
 	{
@@ -33,6 +34,10 @@ const GET_CAMPAIGNS = gql`
 		}
 	}
 `;
+
+interface campaign_id {
+	id: string
+}
 
 const ManageCampaignPage = (): JSX.Element => {
 	const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
@@ -80,27 +85,41 @@ const ManageCampaignPage = (): JSX.Element => {
 		}
 	};
 
-	// const updateCampInterFace = () => {
-	// 	setCampaigns(
-	// 		campaigns.map(item => ({...item, checked: false}))
-	// 	)
-	// }
+	// Show message model
+	const [showModal, setShowModal] = useState(false);
+
+	// Handling selecting 
+	const [campIds, setCampIds] = useState<campaign_id[]>([])
+
 	const handleChangeA = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.checked);
+
+		// Find and update checked Info
+		const camp = campaigns.find(item => item.id.toString() === e.target.id.toString() )
+		camp.checked = !camp.checked
+		// setCampaigns(campaigns)
+		console.log(campaigns)
   };
 
-	// useEffect(() => {
-	// 	updateCampInterFace()
-	// }, 
-	// [campaigns])
+	const submit = (e) => {
+		console.log(e)
+	}
+
 
 	return (
 		<FrontLayout>
 			<Wrapper className="container">
+			<SendMsgModel show={showModal} onHide={() => setShowModal(false)} submit={submit} />
 				<div className="campaign-page">
 					<h1 className="text-center fs-3 mb-5 mt-3">Mange campaign</h1>
-					<button className="btn btn-success text-white mr-2">Send Email</button>
-					<button className="btn btn-success text-white">Send SMS</button>
+					<div className="flex w-full justify-between">
+						<div>
+						<button className="btn btn-success text-white mr-2" onClick={() => setShowModal(true)}>Send Email</button>
+						<button className="btn btn-success text-white">Send SMS</button>
+						</div>
+						<div>
+							<label htmlFor="all" className="font-bold">Select All <input id="all" className="rounded text-[#9bad58]" type="checkbox" /></label>
+						</div>
+					</div>
 					{loading ? (
 						<div className="text-center">
 							<Loader className="text-center" content="fetching campaigns..." />
@@ -124,7 +143,7 @@ const ManageCampaignPage = (): JSX.Element => {
 											<td><Checkbox
 												handleChange={handleChangeA}
 												isChecked={i.checked}
-												label="A"
+												label={`${campaign.id}`}
 											/></td>
 											<td>
 												<i
