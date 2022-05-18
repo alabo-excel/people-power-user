@@ -1,13 +1,15 @@
 import axios from "axios";
 import Link from "next/link";
 import React, { useState } from "react";
-import { useRouter } from 'next/router'
+import cookie from "js-cookie";
+import { TOKEN_NAME } from "utils/constants";
+// import { useRouter } from 'next/router'
 import { Loader } from "rsuite";
 import GoogleAuthComp from "../GoogleAuth";
 import Facebook from "../Facebook";
 
 const RegisterComp = (): JSX.Element => {
-	const router = useRouter()
+	// const router = useRouter()
 	return (
 		<div className="signup-main">
 			<div className="d-flex flex-column justify-content-end">
@@ -40,7 +42,7 @@ export const SignupCom = ({
 }: {
 	onSucess(data?: any): void;
 }): JSX.Element => {
-	const router = useRouter()
+	// const router = useRouter()
 	const [loading, setLoading] = useState(false);
 	const [info, setInfo] = useState({
 		email: "",
@@ -64,7 +66,11 @@ export const SignupCom = ({
 		setLoading(true);
 		try {
 			const { data } = await axios.post("/auth/register", info);
-			router.push("/mycamp");
+			cookie.set("user_id", data?.id);
+
+			cookie.set(TOKEN_NAME, data?.token);
+			// router.push("/mycamp/profile");
+			window.location.href = 'mycamp/profile'
 			onSucess(data);
 			setLoading(false);
 		} catch (error) {
