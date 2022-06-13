@@ -18,6 +18,7 @@ const CampaignTable = (): JSX.Element => {
 
 	const campaigns: any = [
 		{
+			id: 1,
 			title: "string",
 			video: "string",
 			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
@@ -39,6 +40,7 @@ const CampaignTable = (): JSX.Element => {
 			promoted: true,
 		},
 		{
+			id: 1,
 			title: "string",
 			video: "string",
 			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
@@ -138,12 +140,12 @@ const SingleRow = ({ camp }: { camp: ICampaign }) => {
 				<Link href={`/promote?slug=${camp?.slug}`}>
 					<a className="btn p-0">{camp?.promoted ? "Upgrade" : "Promote"}</a>
 				</Link>
-				<Link href={`/startcamp?category=${camp?.category}`}>
+				<Link href={`/editcamp?slug=${camp?.id}`}>
 					<a className="btn pl-2">Edit</a>
 				</Link>
-				{/* http://localhost:3000/startcamp?category=Social%20Policy */}
 			</td>
 
+			
 			<td>
 				<CampaignShareMenuList camp={camp}>
 					<span className="btn pr-1">
