@@ -19,7 +19,52 @@ dayjs.extend(relativeTime);
 
 const MyCamp: NextPage = (): JSX.Element => {
 	const user = useRecoilValue(UserAtom);
-	const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
+	// const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
+	const [campaigns, setCampaigns] = useState([
+		{
+			title: "string",
+			video: "string",
+			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
+			picture: "string",
+			aim: "string",
+			target: "strin",
+			body: "string",
+			slug: "string",
+			status: "CampaignStatusEnum",
+			author: "IUser",
+			createdAt: "Date",
+			updatedAt: "Date",
+			addedFrom: "string",
+			category: "string",
+			excerpt: "string",
+			// likes: string[];
+			likeCount: 5,
+			// endorsements: IEndorsement[];
+			promoted: true,
+		},
+		{
+			title: "string",
+			video: "string",
+			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
+			picture: "string",
+			aim: "string",
+			target: "strin",
+			body: "string",
+			slug: "string",
+			status: "CampaignStatusEnum",
+			author: "IUser",
+			createdAt: "Date",
+			updatedAt: "Date",
+			addedFrom: "string",
+			category: "string",
+			excerpt: "string",
+			// likes: string[];
+			likeCount: 5,
+			// endorsements: IEndorsement[];
+			promoted: true,
+		}
+	])
+	// const loading = true;
 	const { loading } = useQuery(MY_CAMPAIGN, {
 		onCompleted: (data) => setCampaigns(data.myCampaign),
 		onError: (e) => console.log(e),
@@ -69,4 +114,5 @@ const MyCamp: NextPage = (): JSX.Element => {
 	);
 };
 
-export default authGuard(MyCamp);
+// export default authGuard(MyCamp);
+export default MyCamp;

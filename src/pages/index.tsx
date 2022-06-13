@@ -19,6 +19,9 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 import { Zoom } from "react-reveal";
 import styled from "styled-components";
+import SliderTwo from "react-slick";
+import CampaignSlider from "../components/camp-slider/Slider"
+
 import {
 	ICampaign,
 	Strapi_Lawyer,
@@ -43,9 +46,158 @@ export const GET_CAMPAIGNS = gql`
 		}
 	}
 `;
+const campaigns: any = [
+	{
+		title: "string",
+		video: "string",
+		image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
+		picture: "string",
+		aim: "string",
+		target: "strin",
+		body: "string",
+		slug: "string",
+		status: "CampaignStatusEnum",
+		author: "IUser",
+		createdAt: "Date",
+		updatedAt: "Date",
+		addedFrom: "string",
+		category: "string",
+		excerpt: "string",
+		// likes: string[];
+		likeCount: 5,
+		// endorsements: IEndorsement[];
+		promoted: true,
+	},
+	{
+		title: "string",
+		video: "string",
+		image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
+		picture: "string",
+		aim: "string",
+		target: "strin",
+		body: "string",
+		slug: "string",
+		status: "CampaignStatusEnum",
+		author: "IUser",
+		createdAt: "Date",
+		updatedAt: "Date",
+		addedFrom: "string",
+		category: "string",
+		excerpt: "string",
+		// likes: string[];
+		likeCount: 5,
+		// endorsements: IEndorsement[];
+		promoted: true,
+	},
+	{
+		title: "string",
+		video: "string",
+		image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
+		picture: "string",
+		aim: "string",
+		target: "strin",
+		body: "string",
+		slug: "string",
+		status: "CampaignStatusEnum",
+		author: "IUser",
+		createdAt: "Date",
+		updatedAt: "Date",
+		addedFrom: "string",
+		category: "string",
+		excerpt: "string",
+		// likes: string[];
+		likeCount: 5,
+		// endorsements: IEndorsement[];
+		promoted: true,
+	},
+	{
+		title: "string",
+		video: "string",
+		image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
+		picture: "string",
+		aim: "string",
+		target: "strin",
+		body: "string",
+		slug: "string",
+		status: "CampaignStatusEnum",
+		author: "IUser",
+		createdAt: "Date",
+		updatedAt: "Date",
+		addedFrom: "string",
+		category: "string",
+		excerpt: "string",
+		// likes: string[];
+		likeCount: 5,
+		// endorsements: IEndorsement[];
+		promoted: true,
+	},
+	{
+		title: "string",
+		video: "string",
+		image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
+		picture: "string",
+		aim: "string",
+		target: "strin",
+		body: "string",
+		slug: "string",
+		status: "CampaignStatusEnum",
+		author: "IUser",
+		createdAt: "Date",
+		updatedAt: "Date",
+		addedFrom: "string",
+		category: "string",
+		excerpt: "string",
+		// likes: string[];
+		likeCount: 5,
+		// endorsements: IEndorsement[];
+		promoted: true,
+	},
+];
+var settings = {
+	infinite: true,
+	speed: 500,
+	slidesToShow: 4,
+	slidesToScroll: 1,
+	initialSlide: 0,
+	autoplaySpeed: 1000,
+	autoplay: true,
+	responsive: [
+		{
+			breakpoint: 1024,
+			settings: {
+				slidesToShow: 4,
+				slidesToScroll: 1,
+				infinite: true,
+				autoplay: true,
+				autoplaySpeed: 5000,
+			}
+		},
+		{
+			breakpoint: 600,
+			settings: {
+				slidesToShow: 2,
+				slidesToScroll: 2,
+				initialSlide: 2,
+				infinite: true,
+				autoplay: true,
+				autoplaySpeed: 2000,
+			}
+		},
+		{
+			breakpoint: 480,
+			settings: {
+				slidesToShow: 1,
+				slidesToScroll: 1,
+				infinite: true,
+				autoplay: true,
+				autoplaySpeed: 2000,
+			}
+		}
+	]
+};
 
 interface HomeProps {
-	campaigns: ICampaign[];
+	// campaigns: ICampaign[];
 	reps: Strapi_Rep[] | null;
 	lawyers: Strapi_Lawyer[] | null;
 	campaignBanner: Strapi_Single_Campaign | null;
@@ -53,7 +205,7 @@ interface HomeProps {
 }
 
 const HomePage: NextPage<HomeProps> = ({
-	campaigns,
+	// campaigns,
 	campaignBanner,
 	testimonies,
 }: HomeProps): JSX.Element => {
@@ -89,12 +241,42 @@ const HomePage: NextPage<HomeProps> = ({
 								</Link>
 							</div>
 						</div>
+
 						<Zoom>
 							<div className="_index-img">
 								<Indexsvg />
 							</div>
 						</Zoom>
 					</div>
+					
+					<CampaignSlider />
+
+					{/* {campaigns.some((c) => c.promoted) && (
+					<section className="running-camp mb-5">
+						<p
+							className="container fw-500 fs-18 mb-3 fs-2 "
+							style={{ color: "#00401C" }}
+						>
+							Promoted Campaigns
+						</p>
+						<div className="py-2">
+							<SliderTwo  {...settings}>
+								{campaigns
+									?.filter((c) => c.promoted)
+									?.map((camp, i) => (
+										<div className="mx-3">
+											<img
+												src={camp?.image}
+												alt=""
+												key={i}
+												width="90%"
+											/>
+										</div>
+									))}
+							</SliderTwo>
+						</div>
+					</section>
+				)} */}
 					<div className="second-row  d-flex align-items justify-content-around">
 						{secondRowContent?.map((e, i) => (
 							<SecondRowComp {...e} key={i} />
@@ -123,37 +305,8 @@ const HomePage: NextPage<HomeProps> = ({
 						</main>
 					</div>
 				</section>
-				{campaigns.some((c) => c.promoted) && (
-					<section className="running-camp my-5 ">
-						<p
-							className="container fw-500 fs-18 mb-3 fs-2 "
-							style={{ color: "#00401C" }}
-						>
-							Promoted Campaigns
-						</p>
-						<div className="py-2">
-							<Marquee
-								pauseOnHover={true}
-								speed={50}
-								delay={3}
-								style={{ display: "flex" }}
-							>
-								{campaigns
-									?.filter((c) => c.promoted)
-									?.map((camp, i) => (
-										<img
-											src={camp?.image}
-											alt=""
-											key={i}
-											width="200"
-											height="160"
-											className="mx-1 shadow"
-										/>
-									))}
-							</Marquee>
-						</div>
-					</section>
-				)}
+
+
 
 				<h4 className="text-center event-title fs-3 fw-bold mb-5">
 					Up-coming Events
@@ -162,7 +315,7 @@ const HomePage: NextPage<HomeProps> = ({
 					campaignBanner={campaignBanner as Strapi_Single_Campaign}
 				/>
 
-	
+
 				<section className="py-5 community-saying">
 					<div className="_community-saying container">
 						<p className="text-center mb-5 fs-1 fw-bold">

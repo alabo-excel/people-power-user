@@ -1,6 +1,6 @@
 export const TOKEN_NAME = "__ed_KEY";
 
-export const SERVER_URL = 'http://localhost:8000'
+export const SERVER_URL = 'https://edfhr.org'
 	// process.env.NODE_ENV === "production"
 	// 	? "https://edfhr.org"
 	// 	: "http://localhost:8000";

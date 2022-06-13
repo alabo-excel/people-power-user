@@ -139,7 +139,10 @@ export const SignupCom = ({
 						required
 					/>
 				</div>
-
+				<div className="mb-3">
+					<input className="mr-3" type="checkbox" required />
+					<label className="p-1" htmlFor="">I have read and accept <Link href="/privacy">the terms and condition and privacy policy</Link> </label>
+				</div>
 				<button
 					disabled={loading}
 					className="btn btn-warning d-block w-100 text-white fw-bold py-2"
