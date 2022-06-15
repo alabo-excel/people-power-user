@@ -40,7 +40,7 @@ const CampaignTable = (): JSX.Element => {
 			promoted: true,
 		},
 		{
-			id: 1,
+			id: 2,
 			title: "string",
 			video: "string",
 			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
@@ -123,11 +123,10 @@ const SingleRow = ({ camp }: { camp: ICampaign }) => {
 
 			<td>
 				<i
-					className={`fas me-2 ${
-						camp?.status === "Pending"
+					className={`fas me-2 ${camp?.status === "Pending"
 							? "text-warning fa-dot-circle"
 							: "text-success fa-check-circle"
-					}`}
+						}`}
 				></i>
 				{/* {camp.status} */}
 			</td>
@@ -140,12 +139,12 @@ const SingleRow = ({ camp }: { camp: ICampaign }) => {
 				<Link href={`/promote?slug=${camp?.slug}`}>
 					<a className="btn p-0">{camp?.promoted ? "Upgrade" : "Promote"}</a>
 				</Link>
-				<Link href={`/editcamp?slug=${camp?.id}`}>
+				<Link href={`/editcamp?${camp?.id}`}>
 					<a className="btn pl-2">Edit</a>
 				</Link>
 			</td>
 
-			
+
 			<td>
 				<CampaignShareMenuList camp={camp}>
 					<span className="btn pr-1">

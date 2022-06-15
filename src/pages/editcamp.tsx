@@ -8,6 +8,7 @@ import ReactMde from "react-mde";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { ICampaign } from "types/Applicant.types";
+import Router from 'next/router'
 // import PromoteComp from "./PromoteComp";
 // import ShareChampaign from "./ShareChampaign";
 
@@ -26,37 +27,70 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
     const router = useRouter();
     const { query } = router;
 
-    const [filePreview, setFilePreview] = useState<IFile>({
-        type: "",
-        file: "",
-        name: "",
-    });
 
-    const [camp, setCamp] = useState<Partial<ICampaign>>({
-        title: "",
-        aim: "",
-        target: "",
-        body: "Type the issues that you want to be addressed...",
-    });
-
+    const campaigns: any = [
+        {
+            id: 1,
+            title: "string",
+            video: "string",
+            image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
+            picture: "string",
+            aim: "string",
+            target: "strin",
+            body: "string",
+            slug: "string",
+            status: "CampaignStatusEnum",
+            author: "IUser",
+            createdAt: "Date",
+            updatedAt: "Date",
+            addedFrom: "string",
+            category: "Social Policy",
+            excerpt: "string",
+            // likes: string[];
+            likeCount: 5,
+            // endorsements: IEndorsement[];
+            promoted: true,
+        },
+        {
+            id: 2,
+            title: "string",
+            video: "string",
+            image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
+            picture: "string",
+            aim: "string",
+            target: "strin",
+            body: "string",
+            slug: "string",
+            status: "CampaignStatusEnum",
+            author: "IUser",
+            createdAt: "Date",
+            updatedAt: "Date",
+            addedFrom: "string",
+            category: "string",
+            excerpt: "string",
+            // likes: string[];
+            likeCount: 5,
+            // endorsements: IEndorsement[];
+            promoted: true,
+        }
+    ];
+    let position = 0
     useEffect(() => {
-
-        // if (process.browser) {
-        //     let savedCamp = localStorage.getItem(
-        //         "camp",
-        //     ) as unknown as Partial<ICampaign>;
-        //     let savedFilePreview = localStorage.getItem(
-        //         "filePreview",
-        //     ) as unknown as IFile;
-        //     if (savedCamp) {
-        //         savedCamp = JSON.parse(savedCamp as string);
-        //         setCamp(savedCamp);
-        //     }
-        //     savedFilePreview = JSON.parse(savedFilePreview as unknown as string);
-        //     if (setFilePreview) setFilePreview(savedFilePreview);
-        // }
-        
+        const text = Router.asPath
+        let syn = text.indexOf('?') + 1
+        position = parseInt(text.slice(syn))
     }, []);
+    const [camp, setCamp] = useState<Partial<ICampaign>>({
+        title: campaigns[position].title,
+        aim: campaigns[position].aim,
+        target: campaigns[position].target,
+        body: campaigns[position].body,
+    });
+    const [filePreview, setFilePreview] = useState<IFile>({
+        type: "image",
+        file:  campaigns[position].image,
+        name: campaigns[position].picture,
+    });
     const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         const reader = new FileReader();

@@ -2,7 +2,7 @@
 require("dotenv").config();
 const axios = require("axios");
 
-// const SERVER_URL = process.env.SERVER_URL;
+const SERVER_URL = process.env.SERVER_URL;
 const STRAPI_URL = "https://cms.edfhr.org"
     // process.env.NODE_ENV === "production" ?
     // "https://cms.edfhr.org"
