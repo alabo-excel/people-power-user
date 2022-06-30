@@ -84,6 +84,7 @@ export const MY_CAMPAIGN = gql`
 			image
 			excerpt
 			status
+			body
 			slug
 			promoted
 			category

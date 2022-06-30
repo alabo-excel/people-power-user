@@ -8,12 +8,13 @@ import styled from "styled-components";
 import { ICampaign } from "types/Applicant.types";
 import * as timeago from "timeago.js";
 import Link from "next/link";
-import { ApolloProvider } from "@apollo/client";
+import { apollo } from "apollo";
 
 const SwipeToSlide = () => {
 	const [campaigns, setCampaign] = useState<ICampaign[]>([]);
 
 	useQuery(MY_CAMPAIGN, {
+		client: apollo,
 		onCompleted: (data) => {
 			setCampaign(data.myCampaign);
 		},
@@ -122,12 +123,12 @@ const SwipeToSlide = () => {
 					<div
 						className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
 					>
-						<div className="relative w-full mx-auto max-w-3xl">
+						<div className="relative w-full mx-auto max-w-3xl top-0 z-10">
 							{/*content*/}
-							<div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none">
+							<div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none mt-10 absolute top-0">
 								{/*header*/}
 								<div className="flex items-start justify-between px-4 py-2 rounded-t">
-									<h3 className="text-3xl font-semibold">
+									<h3 className="text-3xl font-semibold uppercase">
 										{campaigns[position].title}
 									</h3>
 									<button

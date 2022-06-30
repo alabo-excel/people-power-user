@@ -9,6 +9,8 @@ import React from "react";
 import { useSetRecoilState } from "recoil";
 import { IUser } from "types/Applicant.types";
 import { TOKEN_NAME } from "utils/constants";
+import { apollo } from "apollo";
+
 interface IProps extends AppProps {
 	user: IUser;
 	children: React.ReactChildren;
@@ -27,6 +29,7 @@ const authGuard = (
 		const setCampaign = useSetRecoilState(UserCampaignAtom);
 
 		useQuery(MY_CAMPAIGN, {
+			client: apollo,
 			onCompleted: (data) => {
 				setCampaign(data.myCampaign);
 			},

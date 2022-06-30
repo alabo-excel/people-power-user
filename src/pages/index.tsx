@@ -21,7 +21,7 @@ import { Zoom } from "react-reveal";
 import styled from "styled-components";
 import SliderTwo from "react-slick";
 import CampaignSlider from "../components/camp-slider/Slider"
-import { ApolloProvider } from "@apollo/client";
+// import { ApolloProvider } from "@apollo/client";
 // import { apollo } from "apollo";
 
 import {
@@ -101,9 +101,9 @@ const HomePage: NextPage<HomeProps> = ({
 							</div>
 						</Zoom>
 					</div>
-					<ApolloProvider client={apollo}>
+					{/* <ApolloProvider client={apollo}> */}
 						<CampaignSlider />
-					</ApolloProvider>
+					{/* </ApolloProvider> */}
 
 					{/* {campaigns.some((c) => c.promoted) && (
 					<section className="running-camp mb-5">
