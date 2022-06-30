@@ -9,6 +9,8 @@ import { ICampaign } from "types/Applicant.types";
 import Link from "next/link";
 import { useRouter } from 'next/router'
 import CampaignSlider from "../../components/camp-slider/Slider"
+import { ApolloProvider } from "@apollo/client";
+
 
 const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 	campaigns,
@@ -136,7 +138,11 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 									<CampaignCard key={i} camp={campaign} />
 								))}
 						</div>
-						<CampaignSlider />
+
+						<ApolloProvider client={apollo}>
+							<CampaignSlider />
+						</ApolloProvider>
+						
 						<div
 							className='w-52 text-center py-3 rounded-xl mt-5 text-light m-auto bg-[#00401c] cursor-pointer'
 							onClick={handleClick}

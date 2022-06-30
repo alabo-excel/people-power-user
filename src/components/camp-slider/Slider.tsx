@@ -1,15 +1,25 @@
-import { UserCampaignAtom } from "atoms/UserAtom";
-import React from "react";
+import { useQuery } from "@apollo/client";
+import { MY_CAMPAIGN } from "apollo/queries/campaignQuery";
+// import { UserCampaignAtom } from "atoms/UserAtom";
+import React, { Fragment, useState } from "react";
 import SliderTwo from "react-slick";
-import { useRecoilValue } from "recoil";
+// import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { ICampaign } from "types/Applicant.types";
 import * as timeago from "timeago.js";
 import Link from "next/link";
-
+import { ApolloProvider } from "@apollo/client";
 
 const SwipeToSlide = () => {
-	// const campaigns = useRecoilValue<ICampaign[]>(UserCampaignAtom);
+	const [campaigns, setCampaign] = useState<ICampaign[]>([]);
+
+	useQuery(MY_CAMPAIGN, {
+		onCompleted: (data) => {
+			setCampaign(data.myCampaign);
+		},
+		onError: (err) => console.log(err),
+	});
+
 
 	const [showModal, setShowModal] = React.useState(false);
 	const [position, setPosition] = React.useState(0);
@@ -56,150 +66,24 @@ const SwipeToSlide = () => {
 		]
 	};
 
-	const campaigns: any = [
-		{
-			title: "string",
-			video: "string",
-			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-			picture: "string",
-			aim: "string",
-			target: "strin",
-			body: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Commodi praesentium deserunt ad vel minima quibusdam non, mollitia accusantium eius eos?",
-			slug: "string",
-			status: "CampaignStatusEnum",
-			author: "IUser",
-			createdAt: "Date",
-			updatedAt: "Date",
-			addedFrom: "string",
-			category: "string",
-			excerpt: "string",
-			// likes: string[];
-			likeCount: 5,
-			// endorsements: IEndorsement[];
-			promoted: false,
-		},
-		{
-			title: "string",
-			video: "string",
-			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-			picture: "string",
-			aim: "string",
-			target: "strin",
-			body: "string",
-			slug: "string",
-			status: "CampaignStatusEnum",
-			author: "IUser",
-			createdAt: "Date",
-			updatedAt: "Date",
-			addedFrom: "string",
-			category: "string",
-			excerpt: "string",
-			// likes: string[];
-			likeCount: 5,
-			// endorsements: IEndorsement[];
-			promoted: true,
-		},
-		{
-			title: "string",
-			video: "string",
-			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-			picture: "string",
-			aim: "string",
-			target: "strin",
-			body: "string",
-			slug: "string",
-			status: "CampaignStatusEnum",
-			author: "IUser",
-			createdAt: "Date",
-			updatedAt: "Date",
-			addedFrom: "string",
-			category: "string",
-			excerpt: "string",
-			// likes: string[];
-			likeCount: 5,
-			// endorsements: IEndorsement[];
-			promoted: true,
-		},
-		{
-			title: "string",
-			video: "string",
-			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-			picture: "string",
-			aim: "string",
-			target: "strin",
-			body: "string",
-			slug: "string",
-			status: "CampaignStatusEnum",
-			author: "IUser",
-			createdAt: "Date",
-			updatedAt: "Date",
-			addedFrom: "string",
-			category: "string",
-			excerpt: "string",
-			// likes: string[];
-			likeCount: 5,
-			// endorsements: IEndorsement[];
-			promoted: true,
-		},
-		{
-			title: "string",
-			video: "string",
-			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-			picture: "string",
-			aim: "string",
-			target: "strin",
-			body: "string",
-			slug: "string",
-			status: "CampaignStatusEnum",
-			author: "IUser",
-			createdAt: "Date",
-			updatedAt: "Date",
-			addedFrom: "string",
-			category: "string",
-			excerpt: "string",
-			// likes: string[];
-			likeCount: 5,
-			// endorsements: IEndorsement[];
-			promoted: true,
-		},
-		{
-			title: "string",
-			video: "string",
-			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-			picture: "string",
-			aim: "string",
-			target: "strin",
-			body: "string",
-			slug: "string",
-			status: "CampaignStatusEnum",
-			author: "IUser",
-			createdAt: "Date",
-			updatedAt: "Date",
-			addedFrom: "string",
-			category: "string",
-			excerpt: "string",
-			// likes: string[];
-			likeCount: 5,
-			// endorsements: IEndorsement[];
-			promoted: true,
-		}
-	];
-
-	// const setting = slideSettings(campaigns.length);
-
 	return (
 		<>
 			<div className="">
 				<SliderTwo {...settings}>
 					{campaigns.map((camp, i) => (
-						<div className="mx-3">
-							<img
-								src={camp?.image}
-								alt=""
-								key={i}
-								width="90%"
-								className=""
-							/>
+						<div className="mx-3 my-6">
+							<div className="relative">
+								<img
+									src={camp?.image}
+									alt=""
+									key={i}
+									width="90%"
+									className="h-44"
+								/>
+								<div
+									className="h-44 absolute top-0 bg-black opacity-50" style={{width: 90 +"%"}}>
+								</div>
+							</div>
 							<div className="py-2 relative" >
 								{!camp.promoted ? (
 									<Link href={`/promote?slug=${camp.slug}`}>
@@ -216,7 +100,7 @@ const SwipeToSlide = () => {
 									<strong className="d-block text-capitalize">{camp?.title}</strong>
 
 									<small className="mt-0 pt-0 break-all">
-										<span className="text-xs">{camp?.body}
+										<span className="text-xs">{camp?.excerpt}
 											<button type="button" className="text-xs" onClick={() => {
 												setShowModal(true)
 												setPosition(i)

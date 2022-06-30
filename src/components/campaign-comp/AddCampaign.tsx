@@ -81,7 +81,8 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 			return false;
 		}
 
-		localStorage.setItem("filePreview", JSON.stringify(filePreview));
+		// localStorage.setItem("filePreview", JSON.stringify(filePreview));
+
 		const payload = {
 			...camp,
 			category,

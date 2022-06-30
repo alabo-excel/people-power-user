@@ -14,55 +14,8 @@ import { ICampaign } from "types/Applicant.types";
 import { BASEURL } from "utils/constants";
 
 const CampaignTable = (): JSX.Element => {
-	// const campaigns = useRecoilValue<ICampaign[]>(UserCampaignAtom);
-
-	const campaigns: any = [
-		{
-			id: 1,
-			title: "string",
-			video: "string",
-			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-			picture: "string",
-			aim: "string",
-			target: "strin",
-			body: "string",
-			slug: "string",
-			status: "CampaignStatusEnum",
-			author: "IUser",
-			createdAt: "Date",
-			updatedAt: "Date",
-			addedFrom: "string",
-			category: "Social Policy",
-			excerpt: "string",
-			// likes: string[];
-			likeCount: 5,
-			// endorsements: IEndorsement[];
-			promoted: true,
-		},
-		{
-			id: 2,
-			title: "string",
-			video: "string",
-			image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-			picture: "string",
-			aim: "string",
-			target: "strin",
-			body: "string",
-			slug: "string",
-			status: "CampaignStatusEnum",
-			author: "IUser",
-			createdAt: "Date",
-			updatedAt: "Date",
-			addedFrom: "string",
-			category: "string",
-			excerpt: "string",
-			// likes: string[];
-			likeCount: 5,
-			// endorsements: IEndorsement[];
-			promoted: true,
-		}
-	];
-
+	const campaigns = useRecoilValue<ICampaign[]>(UserCampaignAtom);
+	// console.log(campaigns);
 	return (
 		<div>
 			<div className="container">
@@ -124,8 +77,8 @@ const SingleRow = ({ camp }: { camp: ICampaign }) => {
 			<td>
 				<i
 					className={`fas me-2 ${camp?.status === "Pending"
-							? "text-warning fa-dot-circle"
-							: "text-success fa-check-circle"
+						? "text-warning fa-dot-circle"
+						: "text-success fa-check-circle"
 						}`}
 				></i>
 				{/* {camp.status} */}

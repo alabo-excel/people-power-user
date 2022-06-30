@@ -21,6 +21,8 @@ import { Zoom } from "react-reveal";
 import styled from "styled-components";
 import SliderTwo from "react-slick";
 import CampaignSlider from "../components/camp-slider/Slider"
+import { ApolloProvider } from "@apollo/client";
+// import { apollo } from "apollo";
 
 import {
 	ICampaign,
@@ -46,158 +48,9 @@ export const GET_CAMPAIGNS = gql`
 		}
 	}
 `;
-const campaigns: any = [
-	{
-		title: "string",
-		video: "string",
-		image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-		picture: "string",
-		aim: "string",
-		target: "strin",
-		body: "string",
-		slug: "string",
-		status: "CampaignStatusEnum",
-		author: "IUser",
-		createdAt: "Date",
-		updatedAt: "Date",
-		addedFrom: "string",
-		category: "string",
-		excerpt: "string",
-		// likes: string[];
-		likeCount: 5,
-		// endorsements: IEndorsement[];
-		promoted: true,
-	},
-	{
-		title: "string",
-		video: "string",
-		image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-		picture: "string",
-		aim: "string",
-		target: "strin",
-		body: "string",
-		slug: "string",
-		status: "CampaignStatusEnum",
-		author: "IUser",
-		createdAt: "Date",
-		updatedAt: "Date",
-		addedFrom: "string",
-		category: "string",
-		excerpt: "string",
-		// likes: string[];
-		likeCount: 5,
-		// endorsements: IEndorsement[];
-		promoted: true,
-	},
-	{
-		title: "string",
-		video: "string",
-		image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-		picture: "string",
-		aim: "string",
-		target: "strin",
-		body: "string",
-		slug: "string",
-		status: "CampaignStatusEnum",
-		author: "IUser",
-		createdAt: "Date",
-		updatedAt: "Date",
-		addedFrom: "string",
-		category: "string",
-		excerpt: "string",
-		// likes: string[];
-		likeCount: 5,
-		// endorsements: IEndorsement[];
-		promoted: true,
-	},
-	{
-		title: "string",
-		video: "string",
-		image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-		picture: "string",
-		aim: "string",
-		target: "strin",
-		body: "string",
-		slug: "string",
-		status: "CampaignStatusEnum",
-		author: "IUser",
-		createdAt: "Date",
-		updatedAt: "Date",
-		addedFrom: "string",
-		category: "string",
-		excerpt: "string",
-		// likes: string[];
-		likeCount: 5,
-		// endorsements: IEndorsement[];
-		promoted: true,
-	},
-	{
-		title: "string",
-		video: "string",
-		image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-		picture: "string",
-		aim: "string",
-		target: "strin",
-		body: "string",
-		slug: "string",
-		status: "CampaignStatusEnum",
-		author: "IUser",
-		createdAt: "Date",
-		updatedAt: "Date",
-		addedFrom: "string",
-		category: "string",
-		excerpt: "string",
-		// likes: string[];
-		likeCount: 5,
-		// endorsements: IEndorsement[];
-		promoted: true,
-	},
-];
-var settings = {
-	infinite: true,
-	speed: 500,
-	slidesToShow: 4,
-	slidesToScroll: 1,
-	initialSlide: 0,
-	autoplaySpeed: 1000,
-	autoplay: true,
-	responsive: [
-		{
-			breakpoint: 1024,
-			settings: {
-				slidesToShow: 4,
-				slidesToScroll: 1,
-				infinite: true,
-				autoplay: true,
-				autoplaySpeed: 5000,
-			}
-		},
-		{
-			breakpoint: 600,
-			settings: {
-				slidesToShow: 2,
-				slidesToScroll: 2,
-				initialSlide: 2,
-				infinite: true,
-				autoplay: true,
-				autoplaySpeed: 2000,
-			}
-		},
-		{
-			breakpoint: 480,
-			settings: {
-				slidesToShow: 1,
-				slidesToScroll: 1,
-				infinite: true,
-				autoplay: true,
-				autoplaySpeed: 2000,
-			}
-		}
-	]
-};
 
 interface HomeProps {
-	// campaigns: ICampaign[];
+	campaigns: ICampaign[];
 	reps: Strapi_Rep[] | null;
 	lawyers: Strapi_Lawyer[] | null;
 	campaignBanner: Strapi_Single_Campaign | null;
@@ -205,7 +58,7 @@ interface HomeProps {
 }
 
 const HomePage: NextPage<HomeProps> = ({
-	// campaigns,
+	campaigns,
 	campaignBanner,
 	testimonies,
 }: HomeProps): JSX.Element => {
@@ -248,8 +101,9 @@ const HomePage: NextPage<HomeProps> = ({
 							</div>
 						</Zoom>
 					</div>
-					
-					<CampaignSlider />
+					<ApolloProvider client={apollo}>
+						<CampaignSlider />
+					</ApolloProvider>
 
 					{/* {campaigns.some((c) => c.promoted) && (
 					<section className="running-camp mb-5">

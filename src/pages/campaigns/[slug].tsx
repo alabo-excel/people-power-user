@@ -57,7 +57,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 	};
 
 	const viewCamp = async () => {
-		if(!user) return
+		if (!user) return
 		const data = {
 			userId: user?.id
 		}
@@ -73,6 +73,8 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 		}
 		viewCamp()
 	}, [camp, user]);
+
+	let target = 2000;
 
 	// useEffect(() => {
 	// 	const test = async () => {
@@ -124,15 +126,31 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 											</CampaignShareMenuList>
 										</div>
 									</div>
-									<h3 className="mb-0 p-0 fw-bold m-0">{camp?.title}</h3>
+									<h3 className="mb-0 p-0 fw-bold m-0 capitalize">{camp?.title}</h3>
 									<p className="m-0 mt-2 fw-bold">
 										{`Created by ${camp?.author?.firstName} ${camp?.author?.lastName}`}
 									</p>
+									<div className="h-4 mt-2 relative max-w-xl rounded-full overflow-hidden">
+										<div className="w-full h-full bg-gray-200 absolute"></div>
+										<div id="bar" className={'h-full bg-warning relative w-4'}
+											style={{
+												width: Number(endorsements?.length) < 100
+													? + 10 + 'px'
+													: (Number(endorsements?.length) >= 300 ? + 500 + 'px' : + 300 + 'px')
+											}} ></div>
+									</div>
 									<p className="mt-0">
-										{Number(endorsements?.length) + 1} Endorsed
+										{Number(endorsements?.length) + 1} has Endorsed this campaign, Lets get it to {Number(endorsements?.length) >= target ? target + 100 : target}
 									</p>
 
 									<ReactMarkdown className="fs-5">{camp?.body}</ReactMarkdown>
+
+									<div>
+										<div className="mt-4">
+											<textarea name="" placeholder="Post an Update" className="w-full rounded-md"></textarea>
+											<button className="bg-warning p-2 mt-1 w-32 rounded-md">Send </button>
+										</div>
+									</div>
 
 									{user && user?.id !== camp?.author?.id && (
 										<button
