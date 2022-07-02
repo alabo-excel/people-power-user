@@ -63,8 +63,10 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 			reader.readAsDataURL(files[0]);
 			reader.onloadend = () => {
 				if (reader.result) {
+					let type = files[0].name.substr(files[0].name.length - 3)
+					console.log(type)
 					setFilePreview({
-						type: "image",
+						type: type === "mp4" ? "video" : "image",
 						file: reader.result as string,
 						name: files[0].name,
 					});
@@ -72,7 +74,6 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 			};
 		}
 	};
-
 	const handleNext = (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!filePreview) {
@@ -80,7 +81,8 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 			return false;
 		}
 
-		localStorage.setItem("filePreview", JSON.stringify(filePreview));
+		// localStorage.setItem("filePreview", JSON.stringify(filePreview));
+
 		const payload = {
 			...camp,
 			category,
@@ -88,6 +90,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 		localStorage.setItem("camp", JSON.stringify(payload));
 		router.push(`/startcamp?category=${query.category}&&step=preview`);
 	};
+
 	const handleSubmit = async () => {
 		if (!user) {
 			return setShow(true);
@@ -142,7 +145,9 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 											width="500"
 											controls={true}
 											className="embed-responsive-item"
-										></video>
+										>
+											<source src={filePreview.file} type="video/mp4" />
+										</video>
 									)}
 									<div className="_upload-pic">
 										{!filePreview?.file && (

@@ -12,9 +12,9 @@ const AuthLayout = ({ children }: { children: ReactChild }): JSX.Element => {
 						<div className="auth-container py-2 container">
 							<div className="auth-container-toggle-comp">{children}</div>
 							<div className="auth-container-right d-none d-md-flex align-items-center">
-								<a>
+								{/* <a>
 									<Indexsvg />
-								</a>
+								</a> */}
 							</div>
 						</div>
 						<div className="auth-footer text-center text-secondary">

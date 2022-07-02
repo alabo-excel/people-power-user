@@ -14,6 +14,7 @@ import { ICampaign } from "types/Applicant.types";
 import { PaymentPurposeEnum } from "types/payment.interface";
 import { IEnvironments } from "utils/constants";
 import { checkFX, formateMoney } from "utils/formateMoney";
+import Link from "next/link";
 
 export const GET_CAMPAIGN = gql`
 	query ($slug: String) {
@@ -58,7 +59,21 @@ const PromoteComp = (): JSX.Element => {
 		return initialEndorse;
 	}, [query]);
 
-	if (loading) return <p className="mt-4">Loading...</p>;
+	if (loading) return (
+		<div className="my-10 w-full text-center">
+		<img className="mx-auto" src="/images/logo.svg" alt="" />
+		<div className="my-4">
+			<div className="text-xl">Hold on while we Process your request</div>
+			<div className="text-base">Ensure your internet is stable</div>
+		</div>
+		<Link href="/">
+			<button className="px-12 bg-warning p-2 my-3 rounded-md">
+				Go back
+			</button>
+		</Link>
+
+	</div>
+	);
 	if(!view && !endorse) {
 		return (
 			<FrontLayout>

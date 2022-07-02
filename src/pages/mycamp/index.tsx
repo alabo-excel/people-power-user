@@ -14,13 +14,18 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { ICampaign } from "types/Applicant.types";
+import { apollo } from "apollo";
 
 dayjs.extend(relativeTime);
 
 const MyCamp: NextPage = (): JSX.Element => {
 	const user = useRecoilValue(UserAtom);
+
 	const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
+	// const loading = true;
+	
 	const { loading } = useQuery(MY_CAMPAIGN, {
+		client: apollo,
 		onCompleted: (data) => setCampaigns(data.myCampaign),
 		onError: (e) => console.log(e),
 	});

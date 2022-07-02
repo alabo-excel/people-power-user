@@ -19,6 +19,11 @@ import React from "react";
 import Marquee from "react-fast-marquee";
 import { Zoom } from "react-reveal";
 import styled from "styled-components";
+import SliderTwo from "react-slick";
+import CampaignSlider from "../components/camp-slider/Slider"
+// import { ApolloProvider } from "@apollo/client";
+// import { apollo } from "apollo";
+
 import {
 	ICampaign,
 	Strapi_Lawyer,
@@ -26,9 +31,6 @@ import {
 	Strapi_Single_Campaign,
 	Strapi_Testimony,
 } from "types/Applicant.types";
-// import getConfig from "next/config";
-// const { publicRuntimeConfig } = getConfig();
-// console.log(publicRuntimeConfig);
 
 export const GET_CAMPAIGNS = gql`
 	query ($limit: Int) {
@@ -40,6 +42,12 @@ export const GET_CAMPAIGNS = gql`
 			createdAt
 			excerpt
 			likes
+			author {
+				id
+				firstName
+				lastName
+				image
+			}
 		}
 	}
 `;
@@ -89,12 +97,43 @@ const HomePage: NextPage<HomeProps> = ({
 								</Link>
 							</div>
 						</div>
+
 						<Zoom>
 							<div className="_index-img">
 								<Indexsvg />
 							</div>
 						</Zoom>
 					</div>
+					{/* <ApolloProvider client={apollo}> */}
+						<CampaignSlider />
+					{/* </ApolloProvider> */}
+
+					{/* {campaigns.some((c) => c.promoted) && (
+					<section className="running-camp mb-5">
+						<p
+							className="container fw-500 fs-18 mb-3 fs-2 "
+							style={{ color: "#00401C" }}
+						>
+							Promoted Campaigns
+						</p>
+						<div className="py-2">
+							<SliderTwo  {...settings}>
+								{campaigns
+									?.filter((c) => c.promoted)
+									?.map((camp, i) => (
+										<div className="mx-3">
+											<img
+												src={camp?.image}
+												alt=""
+												key={i}
+												width="90%"
+											/>
+										</div>
+									))}
+							</SliderTwo>
+						</div>
+					</section>
+				)} */}
 					<div className="second-row  d-flex align-items justify-content-around">
 						{secondRowContent?.map((e, i) => (
 							<SecondRowComp {...e} key={i} />
@@ -123,37 +162,8 @@ const HomePage: NextPage<HomeProps> = ({
 						</main>
 					</div>
 				</section>
-				{campaigns.some((c) => c.promoted) && (
-					<section className="running-camp my-5 ">
-						<p
-							className="container fw-500 fs-18 mb-3 fs-2 "
-							style={{ color: "#00401C" }}
-						>
-							Promoted Campaigns
-						</p>
-						<div className="py-2">
-							<Marquee
-								pauseOnHover={true}
-								speed={50}
-								delay={3}
-								style={{ display: "flex" }}
-							>
-								{campaigns
-									?.filter((c) => c.promoted)
-									?.map((camp, i) => (
-										<img
-											src={camp?.image}
-											alt=""
-											key={i}
-											width="200"
-											height="160"
-											className="mx-1 shadow"
-										/>
-									))}
-							</Marquee>
-						</div>
-					</section>
-				)}
+
+
 
 				<h4 className="text-center event-title fs-3 fw-bold mb-5">
 					Up-coming Events
@@ -162,7 +172,7 @@ const HomePage: NextPage<HomeProps> = ({
 					campaignBanner={campaignBanner as Strapi_Single_Campaign}
 				/>
 
-	
+
 				<section className="py-5 community-saying">
 					<div className="_community-saying container">
 						<p className="text-center mb-5 fs-1 fw-bold">

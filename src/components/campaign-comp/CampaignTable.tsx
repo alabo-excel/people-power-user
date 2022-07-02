@@ -15,6 +15,7 @@ import { BASEURL } from "utils/constants";
 
 const CampaignTable = (): JSX.Element => {
 	const campaigns = useRecoilValue<ICampaign[]>(UserCampaignAtom);
+	// console.log(campaigns);
 	return (
 		<div>
 			<div className="container">
@@ -75,11 +76,10 @@ const SingleRow = ({ camp }: { camp: ICampaign }) => {
 
 			<td>
 				<i
-					className={`fas me-2 ${
-						camp?.status === "Pending"
-							? "text-warning fa-dot-circle"
-							: "text-success fa-check-circle"
-					}`}
+					className={`fas me-2 ${camp?.status === "Pending"
+						? "text-warning fa-dot-circle"
+						: "text-success fa-check-circle"
+						}`}
 				></i>
 				{/* {camp.status} */}
 			</td>
@@ -92,8 +92,13 @@ const SingleRow = ({ camp }: { camp: ICampaign }) => {
 				<Link href={`/promote?slug=${camp?.slug}`}>
 					<a className="btn p-0">{camp?.promoted ? "Upgrade" : "Promote"}</a>
 				</Link>
-				<Link href={`/promote?slug=${camp?.slug}`}>
+
+				<Link href={`/editcamp?page=${camp?.slug}`}>
 					<a className="btn pl-2">Edit</a>
+				</Link>
+
+				<Link href={`/updates?page=${camp?.slug}`}>
+					<a className="btn pl-2">Update</a>
 				</Link>
 			</td>
 

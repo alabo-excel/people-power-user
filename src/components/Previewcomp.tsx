@@ -19,6 +19,7 @@ const previewcamp = ({
 
   loading,
 }: IProps): JSX.Element => {
+  
   return (
     <main>
       <div className="preview-camp py-5">
@@ -41,7 +42,6 @@ const previewcamp = ({
           {filePreview?.type === "video" && (
             <div className="embed-responsive mb-4 embed-responsive-16by9">
               <video
-                src={filePreview.file}
                 controls={true}
                 className="embed-responsive-item d-block"
                 style={{
@@ -50,7 +50,9 @@ const previewcamp = ({
                   objectFit: "contain",
                   margin: "auto",
                 }}
-              ></video>
+              >
+                <source src={filePreview.file} type="video/mp4" />
+              </video>
             </div>
           )}
 

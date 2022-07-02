@@ -9,6 +9,7 @@ export const GET_CAMPAIGN = gql`
 			status
 			body
 			image
+			aim
 			createdAt
 			likes
 			slug
@@ -20,6 +21,7 @@ export const GET_CAMPAIGN = gql`
 				phone
 				email
 				country
+				image
 			}
 		}
 	}
@@ -38,6 +40,12 @@ export const GET_CAMPAIGNS = gql`
 			endorsements {
 				id
 			}
+			author {
+				id
+				firstName
+				lastName
+				image
+			}
 		}
 	}
 `;
@@ -54,6 +62,12 @@ export const GET_ACTIVE_CAMPAIGNS = gql`
 			category
 			endorsements {
 				id
+			}
+			author {
+				id
+				firstName
+				lastName
+				image
 			}
 		}
 	}
@@ -82,7 +96,9 @@ export const MY_CAMPAIGN = gql`
 			title
 			createdAt
 			image
+			excerpt
 			status
+			body
 			slug
 			promoted
 			category
