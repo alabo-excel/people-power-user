@@ -10,6 +10,7 @@ import Facebook from "../Facebook";
 
 const RegisterComp = (): JSX.Element => {
 	// const router = useRouter()
+
 	return (
 		<div className="signup-main">
 			<div className="d-flex flex-column justify-content-end">
@@ -50,7 +51,11 @@ export const SignupCom = ({
 		password2: "",
 		name: "",
 	});
-
+	const [passwordShown, setPasswordShown] = useState(false);
+	const togglePassword = () => {
+		setPasswordShown(!passwordShown);
+	};
+	
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const { name, value } = e.target;
 		setInfo({
@@ -81,52 +86,58 @@ export const SignupCom = ({
 		}
 	};
 	return (
-		<div className="form">
+		<div className="form lg:w-1/2 mx-auto">
 			<h4 className="text-center">Sign Up</h4>
 			<div className="flex center w-[88px] m-auto">
-				<Facebook onSuccess={() => (window.location.href = "/mycamp")}/>
+				<Facebook onSuccess={() => (window.location.href = "/mycamp")} />
 				<GoogleAuthComp onSuccess={() => (window.location.href = "/mycamp")} />
 			</div>
-			<form onSubmit={handleLogin}>
-				<div className="mb-3">
+			<form className="" onSubmit={handleLogin}>
+				<div className="mb-1">
 					<label className="form-label">Full Name</label>
 					<input
 						type="text"
 						name="name"
-						className="form-control py-2"
+						className="form-control py-2 h-10"
 						value={info.name}
 						onChange={handleChange}
 						required
+						placeholder="Name or Organization/NGO"
 					/>
 				</div>
 
-				<div className="mb-3">
+				<div className="mb-1">
 					<label htmlFor="exampleInputEmail1" className="form-label">
 						Email address
 					</label>
 					<input
 						type="email"
 						name="email"
-						className="form-control py-2"
+						className="form-control py-2 h-10"
 						value={info.email}
 						onChange={handleChange}
 						required
+						placeholder="Your Email Address"
 					/>
 				</div>
-				<div className="mb-3">
+				<div className="mb-1 relative">
 					<label htmlFor="exampleInputPassword1" className="form-label">
 						Password
 					</label>
 					<input
-						type="password"
-						className="form-control py-2"
+						type={passwordShown ? "text" : "password"}
+						className="form-control py-2 h-10"
 						name="password"
 						value={info.password}
 						onChange={handleChange}
 						required
+						placeholder="Password"
 					/>
+					<div className="absolute top-10 right-6" onClick={togglePassword}>
+						<i className="fa fa-eye"></i>
+					</div>
 				</div>
-				<div className="mb-3">
+				{/* <div className="mb-3">
 					<label htmlFor="exampleInputPassword1" className="form-label">
 						Confirm Password
 					</label>
@@ -138,9 +149,9 @@ export const SignupCom = ({
 						onChange={handleChange}
 						required
 					/>
-				</div>
-				<div className="mb-3">
-					<input className="mr-3" type="checkbox" required />
+				</div> */}
+				<div className="mb-3 flex">
+					<input className="mr-3 mt-3" type="checkbox" required />
 					<label className="p-1" htmlFor="">I have read and accept <Link href="/privacy">the terms and condition and privacy policy</Link> </label>
 				</div>
 				<button

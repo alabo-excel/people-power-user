@@ -101,7 +101,7 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 							Browse and join hundred others endorse a campaign you’d like to
 							support.
 						</p>
-						<div className="ex-bar d-flex mb-4">
+						<div className="ex-bar d-flex">
 							<div className="ex-input d-flex mb-3">
 								<div className="_ex-input">
 									<input
@@ -127,6 +127,9 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 								</select>
 							</div>
 						</div>
+						
+						<CampaignSlider />
+
 						<div className="campaign-list ">
 							{queryCampaigns
 								.filter((camp) =>
@@ -139,10 +142,6 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 								))}
 						</div>
 
-						{/* <ApolloProvider client={apollo}> */}
-							<CampaignSlider />
-						{/* </ApolloProvider> */}
-						
 						<div
 							className='w-52 text-center py-3 rounded-xl mt-5 text-light m-auto bg-[#00401c] cursor-pointer'
 							onClick={handleClick}

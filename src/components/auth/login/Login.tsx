@@ -6,6 +6,7 @@ import LoginComp from "./LoginComp";
 import { useRouter } from 'next/router'
 
 const LoginPage = (): JSX.Element => {
+
 	const router = useRouter()
 	return (
 		<>

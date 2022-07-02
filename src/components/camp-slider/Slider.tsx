@@ -26,7 +26,7 @@ const SwipeToSlide = () => {
 	const [position, setPosition] = React.useState(0);
 
 	var settings = {
-		infinite: true,
+		infinite: false,
 		speed: 500,
 		slidesToShow: 4,
 		slidesToScroll: 1,
@@ -105,7 +105,7 @@ const SwipeToSlide = () => {
 											<button type="button" className="text-xs" onClick={() => {
 												setShowModal(true)
 												setPosition(i)
-											}}> ...load more
+											}}>   ...view more
 											</button>
 										</span>
 										{/* <em>{timeago.format(camp?.createdAt)}</em> */}

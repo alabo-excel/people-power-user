@@ -114,7 +114,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 										<div className="d-flex  share-like align-items-center">
 											<a
 												className={`btn rounded-circle me-5 like-btn 
-                    ${isLiked ? "bg-sky text-primary" : "text-muted"}`}
+                   								 ${isLiked ? "bg-sky text-primary" : "text-muted"}`}
 												onClick={() => {
 													user?.id !== camp?.author?.id && handleLike();
 												}}
@@ -133,22 +133,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 									<p className="m-0 mt-2 fw-bold">
 										{`Created by ${camp?.author?.firstName} ${camp?.author?.lastName}`}
 									</p>
-									<div className="h-4 mt-2 relative max-w-xl rounded-full overflow-hidden">
-										<div className="w-full h-full bg-gray-200 absolute"></div>
-										<div id="bar" className={'h-full bg-warning relative w-4'}
-											style={{
-												width: Number(endorsements?.length) < 100
-													? + 10 + 'px'
-													: (Number(endorsements?.length) >= 300 ? + 500 + 'px' : + 300 + 'px')
-											}} ></div>
-									</div>
-									<p className="mt-0">
-										{Number(endorsements?.length) + 1} has Endorsed this campaign, Lets get it to {Number(endorsements?.length) >= target ? target + 100 : target}
-									</p>
-
 									<ReactMarkdown className="fs-5">{camp?.body}</ReactMarkdown>
-
-									
 									<Link href={`/report?page=${camp?.slug}`}>
 										<div className="text-red-500">Report Abuse</div>
 									</Link>
@@ -172,6 +157,22 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 								</div>
 
 								<aside className="sec-2 align-items-center flex-column d-flex right">
+									<div>
+										<p className="mt-0 font-bold text-xl">
+											{Number(endorsements?.length) + 1} {Number(endorsements?.length)  + 1 <= 1 ? "has" : "have"} endorsed this campaign, Lets get it to 
+											{Number(endorsements?.length) >= target ? " " + target + 100 : target}
+										</p>
+										<div className="h-4 mt-2 relative max-w-xl rounded-full overflow-hidden w-full">
+											<div className="w-full h-full bg-gray-200 absolute"></div>
+											<div id="bar" className={'h-full bg-warning relative w-4'}
+												style={{
+													width: Number(endorsements?.length) < 150
+														? + 10 + 'px'
+														: (Number(endorsements?.length) >= 300 ? + 500 + 'px' : + 50 + 'px')
+												}} ></div>
+										</div>
+									</div>
+
 									{endorsements?.length ? (
 										<p className="mb-4 bg-sky ps-1 py-2 fs-5 text-center rounded text-muted w-100 fw-bold">
 											Endorsements

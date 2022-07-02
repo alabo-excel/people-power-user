@@ -15,6 +15,7 @@ import Router from 'next/router'
 import { useQuery } from "@apollo/client";
 import { GET_CAMPAIGN } from "apollo/queries/campaignQuery";
 import { apollo } from "apollo";
+import Link from "next/link";
 
 interface IFile {
     file: string;
@@ -27,16 +28,25 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
     const [show, setShow] = useState(false);
     const user = useRecoilValue(UserAtom);
     const uploadRef = useRef<HTMLInputElement>(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { query } = useRouter();
 
     // const [campaigns, setCampaign] = useState<ICampaign[]>([]);
     const [camp, setCamp] = useState<Partial<ICampaign>>({
+        id: "",
         title: "",
         aim: "",
         target: "",
         body: "",
+        // author: {
+        //     country: "",
+        //     email: "",
+        //     firstName: "",
+        //     id: "",
+        //     lastName: "",
+        //     phone: ""
+        // }
     });
     const [filePreview, setFilePreview] = useState<IFile>({
         type: "image",
@@ -48,19 +58,28 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
         client: apollo,
         variables: { slug: query.page },
         onCompleted: (data) => {
-            // console.log(data.getCampaign);
+            console.log(data.getCampaign);
             setCamp({
+                id: data.getCampaign.id,
                 title: data.getCampaign.title,
                 aim: data.getCampaign.aim,
                 target: data.getCampaign.target,
                 body: data.getCampaign.body,
+                // author: {
+                //     country: data.getCampaign.author.country,
+                //     email: data.getCampaign.email,
+                //     firstName: data.getCampaign.firstName,
+                //     id: data.getCampaign.id,
+                //     lastName: data.getCampaign.lastName,
+                //     phone: data.getCampaign.phone
+                // }
             })
             setFilePreview({
                 type: "image",
                 file: data.getCampaign.image,
                 name: data.getCampaign.picture,
             })
-            setLoading(false)
+            setLoading(true)
 
         },
         onError: (err) => console.log(err),
@@ -116,7 +135,6 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
                 category,
                 image: filePreview.type === "image" ? filePreview.file : "",
             });
-
             setCampaignData(data);
             setLoading(false);
             // localStorage.clear();
@@ -129,7 +147,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
     return (
         <Wrapper>
             <main>
-                {!query.step && (
+                {loading ? (
                     <div className="upload-container py-5 position-relative">
                         <div className="container upload">
                             <form className="py-5" onSubmit={handleSubmit}>
@@ -242,6 +260,20 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
                                 </div>
                             </form>
                         </div>
+                    </div>
+                ) : (
+                    <div className="my-10 w-full text-center">
+                        <img className="mx-auto" src="/images/logo.svg" alt="" />
+                        <div className="my-4">
+                            <div className="text-xl">Hold on while we Process your request</div>
+                            <div className="text-base">Ensure your internet is stable</div>
+                        </div>
+                        <Link href="/mycamp">
+                            <button className="px-12 bg-warning p-2 my-3 rounded-md">
+                                Go back
+                            </button>
+                        </Link>
+
                     </div>
                 )}
 

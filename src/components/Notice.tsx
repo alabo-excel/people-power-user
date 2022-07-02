@@ -17,7 +17,7 @@ const NoticeList = (): JSX.Element => {
   io.on('get-campaigns', msg => {
 		setNotification(msg)
 	})
-
+  
 	return (
 			<div className="bg-white w-72  absolute top-[82px] right-[84px] rounded-xl shadow-xl p-1">
         <ul className="p-2 h-[400px] overflow-auto">
@@ -26,7 +26,7 @@ const NoticeList = (): JSX.Element => {
             <img
               src={user?.image}
               alt=""
-              className="image rounded-circle border border-3 h-[50px]"
+              className="image rounded-circle border border-3 h-[50px] w-[50px]"
             />
               <div className="w-40 break-words">{notice.message}</div>
               </li>

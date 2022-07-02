@@ -39,6 +39,12 @@ export const GET_CAMPAIGNS = gql`
 			endorsements {
 				id
 			}
+			author {
+				id
+				firstName
+				lastName
+				image
+			}
 		}
 	}
 `;
@@ -55,6 +61,12 @@ export const GET_ACTIVE_CAMPAIGNS = gql`
 			category
 			endorsements {
 				id
+			}
+			author {
+				id
+				firstName
+				lastName
+				image
 			}
 		}
 	}

@@ -31,9 +31,6 @@ import {
 	Strapi_Single_Campaign,
 	Strapi_Testimony,
 } from "types/Applicant.types";
-// import getConfig from "next/config";
-// const { publicRuntimeConfig } = getConfig();
-// console.log(publicRuntimeConfig);
 
 export const GET_CAMPAIGNS = gql`
 	query ($limit: Int) {
@@ -45,6 +42,12 @@ export const GET_CAMPAIGNS = gql`
 			createdAt
 			excerpt
 			likes
+			author {
+				id
+				firstName
+				lastName
+				image
+			}
 		}
 	}
 `;
