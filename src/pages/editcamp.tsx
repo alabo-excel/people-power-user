@@ -12,6 +12,10 @@ import Router from 'next/router'
 // import PromoteComp from "./PromoteComp";
 // import ShareChampaign from "./ShareChampaign";
 
+import { useQuery } from "@apollo/client";
+import { GET_CAMPAIGN } from "apollo/queries/campaignQuery";
+import { apollo } from "apollo";
+
 interface IFile {
     file: string;
     type: string;
@@ -23,74 +27,46 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
     const [show, setShow] = useState(false);
     const user = useRecoilValue(UserAtom);
     const uploadRef = useRef<HTMLInputElement>(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const router = useRouter();
-    const { query } = router;
+    const { query } = useRouter();
 
-
-    const campaigns: any = [
-        {
-            id: 1,
-            title: "string",
-            video: "string",
-            image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-            picture: "string",
-            aim: "string",
-            target: "strin",
-            body: "string",
-            slug: "string",
-            status: "CampaignStatusEnum",
-            author: "IUser",
-            createdAt: "Date",
-            updatedAt: "Date",
-            addedFrom: "string",
-            category: "Social Policy",
-            excerpt: "string",
-            // likes: string[];
-            likeCount: 5,
-            // endorsements: IEndorsement[];
-            promoted: true,
-        },
-        {
-            id: 2,
-            title: "string",
-            video: "string",
-            image: "https://images.unsplash.com/photo-1608644139016-4b938587ff67?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=754&q=80",
-            picture: "string",
-            aim: "string",
-            target: "strin",
-            body: "string",
-            slug: "string",
-            status: "CampaignStatusEnum",
-            author: "IUser",
-            createdAt: "Date",
-            updatedAt: "Date",
-            addedFrom: "string",
-            category: "string",
-            excerpt: "string",
-            // likes: string[];
-            likeCount: 5,
-            // endorsements: IEndorsement[];
-            promoted: true,
-        }
-    ];
-    let position = 0
-    useEffect(() => {
-        const text = Router.asPath
-        let syn = text.indexOf('?') + 1
-        position = parseInt(text.slice(syn))
-    }, []);
+    // const [campaigns, setCampaign] = useState<ICampaign[]>([]);
     const [camp, setCamp] = useState<Partial<ICampaign>>({
-        title: campaigns[position].title,
-        aim: campaigns[position].aim,
-        target: campaigns[position].target,
-        body: campaigns[position].body,
+        title: "",
+        aim: "",
+        target: "",
+        body: "",
     });
     const [filePreview, setFilePreview] = useState<IFile>({
         type: "image",
-        file:  campaigns[position].image,
-        name: campaigns[position].picture,
+        file: "",
+        name: "",
     });
+
+    useQuery(GET_CAMPAIGN, {
+        client: apollo,
+        variables: { slug: query.page },
+        onCompleted: (data) => {
+            // console.log(data.getCampaign);
+            setCamp({
+                title: data.getCampaign.title,
+                aim: data.getCampaign.aim,
+                target: data.getCampaign.target,
+                body: data.getCampaign.body,
+            })
+            setFilePreview({
+                type: "image",
+                file: data.getCampaign.image,
+                name: data.getCampaign.picture,
+            })
+            setLoading(false)
+
+        },
+        onError: (err) => console.log(err),
+    });
+
+
     const handleImage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const files = e.target.files;
         const reader = new FileReader();
@@ -110,6 +86,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
             };
         }
     };
+
     // const handleNext = (e: React.FormEvent) => {
     //     e.preventDefault();
     //     if (!filePreview) {
@@ -126,23 +103,24 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
     //     router.push(`/startcamp?category=${query.category}&&step=preview`);
     // };
 
-    const handleSubmit = async () => {
-        if (!user) {
-            return setShow(true);
-        }
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // if (!user) {
+        //     return setShow(true);
+        // }
         try {
             setLoading(true);
-            const { data } = await axios.post("/campaign", {
+            const { data } = await axios.put("/campaign", {
                 ...camp,
                 category,
                 image: filePreview.type === "image" ? filePreview.file : "",
             });
 
             setCampaignData(data);
-
             setLoading(false);
-            localStorage.clear();
-            router.push(`/promote?slug=${data?.slug}`);
+            // localStorage.clear();
+            router.push(`/mycamp`);
         } catch (error) {
             console.log(error);
             setLoading(false);

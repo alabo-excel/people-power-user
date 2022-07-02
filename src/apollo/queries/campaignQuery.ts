@@ -9,6 +9,7 @@ export const GET_CAMPAIGN = gql`
 			status
 			body
 			image
+			aim
 			createdAt
 			likes
 			slug

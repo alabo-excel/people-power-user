@@ -100,8 +100,8 @@ const SwipeToSlide = () => {
 								<div className="text-white absolute -top-40 p-2 w-11/12">
 									<strong className="d-block text-capitalize">{camp?.title}</strong>
 
-									<small className="mt-0 pt-0 break-all">
-										<span className="text-xs">{camp?.excerpt}
+									<small className="mt-20 pt-0 break-all">
+										<span className="text-xs">{camp?.excerpt.substring(0, 100)}
 											<button type="button" className="text-xs" onClick={() => {
 												setShowModal(true)
 												setPosition(i)
@@ -123,9 +123,9 @@ const SwipeToSlide = () => {
 					<div
 						className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
 					>
-						<div className="relative w-full mx-auto max-w-3xl top-0 z-10">
+						<div className="relative w-full mx-auto max-w-3xl top-0 z-10 h-4/5">
 							{/*content*/}
-							<div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none mt-10 absolute top-0">
+							<div className="border-0 rounded-lg shadow-lg relative flex flex-col w-full bg-white outline-none focus:outline-none mt-10 absolute top-0 z-[100]">
 								{/*header*/}
 								<div className="flex items-start justify-between px-4 py-2 rounded-t">
 									<h3 className="text-3xl font-semibold uppercase">
@@ -144,7 +144,7 @@ const SwipeToSlide = () => {
 
 								<div className="relative px-6 py-2 flex-auto">
 									<div>
-										<img className="w-full h-52" src={campaigns[position].image} alt="" />
+										<img className="w-full" src={campaigns[position].image} alt="" />
 									</div>
 									<div>
 										<div></div>

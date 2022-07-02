@@ -26,6 +26,8 @@ import ReactMarkdown from "react-markdown";
 import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { ICampaign, IEndorsement } from "types/Applicant.types";
+import Link from "next/link";
+
 // const io = socket(SERVER_URL, {
 // 	extraHeaders: {
 // 		authorization: Cookies.get("token") || "",
@@ -36,6 +38,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 }: {
 	camp: ICampaign;
 }): JSX.Element => {
+
 	const [endorsements, setEndorsements] = useState<IEndorsement[]>();
 	const [isLiked, setIsLiked] = useState(false);
 	const [showEndorsement, setShowEndorsement] = useState(false);
@@ -145,13 +148,10 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 
 									<ReactMarkdown className="fs-5">{camp?.body}</ReactMarkdown>
 
-									<div>
-										<div className="mt-4">
-											<textarea name="" placeholder="Post an Update" className="w-full rounded-md"></textarea>
-											<button className="bg-warning p-2 mt-1 w-32 rounded-md">Send </button>
-										</div>
-									</div>
-
+									
+									<Link href={`/report?page=${camp?.slug}`}>
+										<div className="text-red-500">Report Abuse</div>
+									</Link>
 									{user && user?.id !== camp?.author?.id && (
 										<button
 											onClick={() => setShowEndorsement(true)}
