@@ -5,7 +5,6 @@ import { ICampaign } from "types/Applicant.types";
 import { truncateWord } from "utils";
 
 const CampaignCard = ({ camp }: { camp: ICampaign }): JSX.Element => {
-	console.log(camp)
 	return (
 		<Wrapper>
 			<div className="card  overflow-hidden">
@@ -15,13 +14,13 @@ const CampaignCard = ({ camp }: { camp: ICampaign }): JSX.Element => {
 						<div className="card-body ">
 							<div className="flex">
 								{camp?.author.image === null ? (
-									<img className="w-8 h-8 opacity-50" src="/images/logo.svg" alt="" />
+									<img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
 								) : (
 									<img className="w-8 h-8 " src={camp?.author.image} alt="" />
 								)}
 								<p className="pl-2 mt-2">{camp?.author.firstName} {camp?.author.lastName}</p>
 							</div>
-							<p className="card-title fs-5 fw-bold ">
+							<p className="card-title fs-5 fw-bold capitalize">
 								{camp?.title?.length > 30
 									? `${camp?.title?.slice(0, 30)}...`
 									: camp?.title}

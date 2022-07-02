@@ -27,6 +27,7 @@ import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { ICampaign, IEndorsement } from "types/Applicant.types";
 import Link from "next/link";
+import router, { useRouter } from "next/router";
 
 // const io = socket(SERVER_URL, {
 // 	extraHeaders: {
@@ -43,8 +44,10 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 	const [isLiked, setIsLiked] = useState(false);
 	const [showEndorsement, setShowEndorsement] = useState(false);
 	const [showLogin, setShowLogin] = useState(false);
-
+	const { query } = useRouter();
 	const user = useRecoilValue(UserAtom);
+
+	// console.log(user)
 
 	useQuery(GET_ENDORSEMENTS_BY_CAMPAIGN, {
 		variables: { campaign_id: camp?.id },
@@ -130,21 +133,32 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 										</div>
 									</div>
 									<h3 className="mb-0 p-0 fw-bold m-0 capitalize">{camp?.title}</h3>
-									<p className="m-0 mt-2 fw-bold">
-										{`Created by ${camp?.author?.firstName} ${camp?.author?.lastName}`}
-									</p>
+									<div className="m-0 mt-2 fw-bold flex">
+										{camp?.author?.image === null ? (
+											<img src="/images/logo.svg" className="w-8 h-8 opacity-20 rounded-full" alt="" />
+										) : (
+											<img className="w-8 h-8 rounded-full" src={camp?.author?.image} alt="" />
+										)}
+										{camp?.author?.image}
+										<p className="ml-3">
+											{`${camp?.author?.firstName} ${camp?.author?.lastName}`} launched this campaign to {camp?.target}
+										</p>
+									</div>
 									<ReactMarkdown className="fs-5">{camp?.body}</ReactMarkdown>
 									<Link href={`/report?page=${camp?.slug}`}>
 										<div className="text-red-500">Report Abuse</div>
 									</Link>
-									{user && user?.id !== camp?.author?.id && (
+
+
+									{user?.id === camp?.author?.id ? (
 										<button
-											onClick={() => setShowEndorsement(true)}
-											className="btn m-0 my-4 btn-warning text-white fw-bold px-4 py-2 rounded-pill"
+											onClick={() =>
+												router.push(`/promote?slug=${query?.slug}&view=true`)
+											} className="btn m-0 my-4 btn-warning text-white fw-bold px-4 py-2 rounded-pill"
 										>
-											Endorse Campaign
+											Promote Campaign
 										</button>
-									)}
+									) : (<div></div>)}
 									{!user && (
 										<button
 											className="btn m-0 my-4 btn-warning text-white fw-bold px-4 py-2 rounded-pill"
@@ -153,13 +167,13 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 											Endorse campaign
 										</button>
 									)}
-									{showEndorsement && <EndorseCampaignComp camp={camp} />}
+									{/* {showEndorsement && <EndorseCampaignComp camp={camp} />} */}
 								</div>
 
 								<aside className="sec-2 align-items-center flex-column d-flex right">
 									<div>
 										<p className="mt-0 font-bold text-xl">
-											{Number(endorsements?.length) + 1} {Number(endorsements?.length)  + 1 <= 1 ? "has" : "have"} endorsed this campaign, Lets get it to 
+											{Number(endorsements?.length) + 1} {Number(endorsements?.length) + 1 <= 1 ? "has" : "have"} endorsed this campaign, Lets get it to
 											{Number(endorsements?.length) >= target ? " " + target + 100 : target}
 										</p>
 										<div className="h-4 mt-2 relative max-w-xl rounded-full overflow-hidden w-full">
@@ -189,7 +203,17 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 											<Endorsements endorsement={endorsement} key={i} />
 										))}
 									</div>
-
+									{user && user?.id !== camp?.author?.id && (
+										<div>
+											<EndorseCampaignComp camp={camp} />
+											{/* <button
+												onClick={() => setShowEndorsement(true)}
+												className="btn m-0 my-4 btn-warning text-white fw-bold px-4 py-2 rounded-pill"
+											>
+												Endorse Campaign
+											</button> */}
+										</div>
+									)}
 									{endorsements && endorsements?.length > 5 && (
 										<button className="btn btn-warning text-white fw-bold w-100 py-2">
 											More reasons for endorsing

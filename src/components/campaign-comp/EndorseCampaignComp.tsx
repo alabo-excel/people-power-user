@@ -55,19 +55,19 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 					</div>
 					<hr />
 
+					<small>Why do you endorse? (Optional)</small>
 					<ReactMde
 						toolbarCommands={[]}
 						value={body}
 						onChange={(txt) => setBody(txt)}
 					/>
 					<div className="d-flex align-items-center justify-content-between">
-						<small>Why do you endorse ?</small>
 						<button
-							className="fw-bold btn mb-3 text-primary pb-0 "
+							className="bg-warning my-3 p-2 rounded-full"
 							onClick={handleSubmit}
 							disabled={loading}
 						>
-							{loading ? <Loader content="Processing" /> : "Add a comment"}
+							{loading ? <Loader content="Processing" /> : "Endorse Campaign"}
 						</button>
 					</div>
 				</div>

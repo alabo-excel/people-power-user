@@ -21,6 +21,7 @@ export const GET_CAMPAIGN = gql`
 				phone
 				email
 				country
+				image
 			}
 		}
 	}
