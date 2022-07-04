@@ -6,6 +6,7 @@ import { useRecoilValue } from "recoil";
 import { Loader } from "rsuite";
 import { ICampaign } from "types/Applicant.types";
 import { useRouter } from 'next/router'
+import Link from "next/link";
 
 const CREATE_ENDORSEMENT = gql`
 	mutation CreateEndorsement($input: EndorsementInput) {
@@ -21,7 +22,7 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 	const router = useRouter()
 
 	const user = useRecoilValue(UserAtom);
-
+	console.log(user)
 	const [addEndorsement, { loading, error: endorseError }] =
 		useMutation(CREATE_ENDORSEMENT);
 
@@ -50,7 +51,10 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 							<img src={user?.image} alt="" className="position-absolute" />
 						</div>
 						<div className="comment-profile-txt fw-bold text-muted">
-							{user?.firstName} {user?.lastName}
+							{user?.firstName} {user?.lastName} || {user?.country} || {user?.city} || {" "}
+							<Link href="/mycamp/profile">
+								<i className="fa fa-pen fa-2"></i>
+							</Link>
 						</div>
 					</div>
 					<hr />
