@@ -11,7 +11,9 @@ import fetch from "isomorphic-unfetch";
 import jscookie from "js-cookie";
 import { NextPageContext } from "next";
 import { useMemo } from "react";
-import { SERVER_URL, STRAPI_URI, TOKEN_NAME, WS_URI } from "utils/constants";
+// import { SERVER_URL, STRAPI_URI, TOKEN_NAME, WS_URI } from "utils/constants";
+import { SERVER_URL, TOKEN_NAME, WS_URI } from "utils/constants";
+
 import { getTokenCookie } from "utils/cookieUtils";
 
 let apolloClient: ApolloClient<any>;
@@ -31,11 +33,11 @@ export const apollo: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 	},
 });
 
-export const apolloStrapi: ApolloClient<NormalizedCacheObject> =
-	new ApolloClient({
-		uri: `${STRAPI_URI}/graphql`,
-		cache: new InMemoryCache(),
-	});
+// export const apolloStrapi: ApolloClient<NormalizedCacheObject> =
+	// new ApolloClient({
+	// 	uri: `${STRAPI_URI}/graphql`,
+	// 	cache: new InMemoryCache(),
+	// });
 
 const createLink = (initialState: any, token: string) => {
 	const cookie = process.browser
@@ -52,33 +54,33 @@ const createLink = (initialState: any, token: string) => {
 
 	const wsLink: any = process.browser
 		? new WebSocketLink({
-				uri: `${WS_URI}/api/v1/graphql`,
-				options: {
-					reconnect: true,
-					lazy: true,
-					timeout: 20000,
+			uri: `${WS_URI}/api/v1/graphql`,
+			options: {
+				reconnect: true,
+				lazy: true,
+				timeout: 20000,
 
-					connectionParams: () => ({
-						header: {
-							Authorization: cookie || " ",
-						},
-					}),
-				},
-		  })
+				connectionParams: () => ({
+					header: {
+						Authorization: cookie || " ",
+					},
+				}),
+			},
+		})
 		: null;
 
 	const link = process.browser
 		? split(
-				({ query }) => {
-					const definition = getMainDefinition(query);
-					return (
-						definition.kind === "OperationDefinition" &&
-						definition.operation === "subscription"
-					);
-				},
-				wsLink,
-				httpLink,
-		  )
+			({ query }) => {
+				const definition = getMainDefinition(query);
+				return (
+					definition.kind === "OperationDefinition" &&
+					definition.operation === "subscription"
+				);
+			},
+			wsLink,
+			httpLink,
+		)
 		: httpLink;
 
 	return new ApolloClient({
