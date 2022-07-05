@@ -29,6 +29,8 @@ const Header = (): JSX.Element => {
 		setNotification(msg)
 	})
 
+    // console.log(notification)
+
 	return (
 		<header>
 			<nav className="navbar">
@@ -85,7 +87,7 @@ const Header = (): JSX.Element => {
 										className='notify-bell pt-3 group cursor-pointer relative'
 										onClick={() => setShowNotification(!showNotification)}
 									>
-										<div className="text-white text-xs absolute bg-red-500 font-semibold top-3 px-1 right-3 h-[15px] w-[15px] rounded-full">{notification.length + 1}</div>
+										<div className="text-white text-xs absolute bg-red-500 font-semibold top-3 px-1 right-3 h-[15px] w-[15px] rounded-full">{notification.length}</div>
 
 										<svg
 											width="19"
@@ -97,7 +99,7 @@ const Header = (): JSX.Element => {
 
 									</div>
 									{showNotification ? (
-										<NoticeList />
+										<NoticeList notification={notification} />
 									) : (
 										<div></div>
 									)

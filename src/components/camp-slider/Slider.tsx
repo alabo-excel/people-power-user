@@ -25,7 +25,7 @@ const SwipeToSlide = () => {
 		},
 		onError: (err) => console.log(err),
 	});
-	console.log(campaigns)
+	// console.log(campaigns)
 	
 	const [showModal, setShowModal] = React.useState(false);
 	const [position, setPosition] = React.useState(0);

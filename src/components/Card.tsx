@@ -5,6 +5,7 @@ import { ICampaign } from "types/Applicant.types";
 import { CardImg } from "./styled/style";
 
 const cardComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
+	console.log(camp)
 	return (
 		<>
 			<div className="col">

@@ -10,6 +10,12 @@ import dayjs from "dayjs";
 import Checkbox from "../../components/CheckBox";
 import SendMsgModel from "../../components/campaign-comp/SendMessage";
 
+
+import socketIOClient from "socket.io-client";
+import { TOKEN_NAME, WS_URI } from "../../utils/constants";
+import cookie from "js-cookie";
+
+
 const GET_CAMPAIGNS = gql`
 	{
 		getCampaigns {
@@ -42,17 +48,42 @@ interface campaign_id {
 
 const ManageCampaignPage = (): JSX.Element => {
 	const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
+	const [users, setUsers] = useState([])
 
+	const token = cookie.get(TOKEN_NAME);
+	const [notification, setNotification] = useState([])
+
+	const io = socketIOClient(WS_URI as string, {
+		extraHeaders: { Authorization: token || "" },
+	})
+
+	io.on('get-campaigns', msg => {
+		setNotification(msg)
+	})
+	console.log(notification)
+
+	useEffect(() => {
+		axios.get(`/user`)
+			.then(function (response) {
+				// console.log(response.data);
+				setUsers(response.data)
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+	}, [])
 	const { loading } = useQuery(GET_CAMPAIGNS, {
 
 		onCompleted: (data) => {
-			console.log(data.getCampaigns)
+			// console.log(data.getCampaigns)
 			setCampaigns(
 				data.getCampaigns.map(item => ({ ...item, checked: false }))
 			);
 		},
 		onError: (error) => console.log(error),
 	});
+
+
 
 	const deleteCampaign = async (id: string) => {
 		console.log(id);
@@ -86,7 +117,7 @@ const ManageCampaignPage = (): JSX.Element => {
 		}
 	};
 
-	console.log(campaigns)
+	// console.log(campaigns)
 	let promoted = 0;
 
 	campaigns.map((camp) => {
@@ -135,22 +166,22 @@ const ManageCampaignPage = (): JSX.Element => {
 						<div>
 							<div className="text-lg">Overview</div>
 							<div className="lg:flex justify-between mt-4">
-								<div className="lg:w-80 p-3  bg-success text-white text-center rounded-md">
+								<div className="lg:w-80 p-3 my-2 bg-success text-white text-center rounded-md">
 									Total No. of  Campaigns
 									<div className="text-2xl font-bold">{campaigns?.length}</div>
 								</div>
-								<div className="lg:w-80 p-3 bg-success text-white text-center rounded-md">
+								<div className="lg:w-80 p-3 my-2 bg-success text-white text-center rounded-md">
 									Total No. of Campaigners
-									<div className="text-2xl font-bold">100</div>
+									<div className="text-2xl font-bold">{users?.length}</div>
 								</div>
-								<div className="lg:w-80 p-3 bg-success text-white text-center rounded-md">
+								<div className="lg:w-80 p-3 my-2 bg-success text-white text-center rounded-md">
 									No. of Promoted Campaigns
 									<div className="text-2xl font-bold">{promoted}</div>
 								</div>
 							</div>
 						</div>
 						<div className="mt-4 lg:flex">
-							<div className="lg:w-3/5 flex lg:mr-4 pt-9 justify-between">
+							<div className="lg:w-3/5 lg:flex lg:mr-4 pt-9 justify-between">
 								<div className="border border-green-800 rounded-md lg:w-80">
 									<div className="bg-green-800 text-white p-3 ">
 										All Campaigns
@@ -207,11 +238,16 @@ const ManageCampaignPage = (): JSX.Element => {
 										<div className="bg-green-800 text-white p-3 ">
 											Recent Notifications
 										</div>
-										<div className="p-2">
-											<div className="flex justify-between">
-												<img src="/images/logo.svg" className="w-6 h-6" alt="" />
-												<div><strong>Hillary Duff</strong> Endorsed <strong>Freedom for Lora</strong></div>         Just Now
-											</div>
+										<div className="">
+											{notification.slice(0, 6).map((notice) => (
+												<div className="flex justify-between p-2">
+													<div className="flex">
+														<img src="/images/logo.svg" className="w-6 h-6 mr-3" alt="" />
+														<div>{notice.message}</div>
+													</div>
+													<div className="text-xs">{notice.createdAt.substring(0,10) }</div>
+												</div>
+											))}
 										</div>
 									</div>
 								</div>

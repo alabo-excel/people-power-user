@@ -65,6 +65,7 @@ const HomePage: NextPage<HomeProps> = ({
 	campaignBanner,
 	testimonies,
 }: HomeProps): JSX.Element => {
+	console.log(campaigns)
 	return (
 		<FrontLayout>
 			<Wrapper>
