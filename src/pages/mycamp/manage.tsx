@@ -20,6 +20,7 @@ const GET_CAMPAIGNS = gql`
 			aim
 			status
 			views
+			promoted
 			createdAt
 			endorsements {
 				id
@@ -41,14 +42,14 @@ interface campaign_id {
 
 const ManageCampaignPage = (): JSX.Element => {
 	const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
-	
+
 	const { loading } = useQuery(GET_CAMPAIGNS, {
 
 		onCompleted: (data) => {
 			console.log(data.getCampaigns)
 			setCampaigns(
-				data.getCampaigns.map(item => ({...item, checked: false}))
-				);
+				data.getCampaigns.map(item => ({ ...item, checked: false }))
+			);
 		},
 		onError: (error) => console.log(error),
 	});
@@ -85,6 +86,15 @@ const ManageCampaignPage = (): JSX.Element => {
 		}
 	};
 
+	console.log(campaigns)
+	let promoted = 0;
+
+	campaigns.map((camp) => {
+		if (camp.promoted === true) {
+			promoted++
+		}
+	})
+
 	// Show message model
 	const [showModal, setShowModal] = useState(false);
 
@@ -92,147 +102,277 @@ const ManageCampaignPage = (): JSX.Element => {
 	const [campIds, setCampIds] = useState<campaign_id[]>([])
 
 	const handleChangeA = (e: React.ChangeEvent<HTMLInputElement>) => {
-
 		// Find and update checked Info
-		const camp = campaigns.find(item => item.id.toString() === e.target.id.toString() )
+		const camp = campaigns.find(item => item.id.toString() === e.target.id.toString())
 		camp.checked = !camp.checked
 		// setCampaigns(campaigns)
 		console.log(campaigns)
-  };
+	};
 
 	const submit = (e) => {
 		console.log(e)
 	}
 
-
 	return (
 		<FrontLayout>
 			<Wrapper className="container">
-			<SendMsgModel show={showModal} onHide={() => setShowModal(false)} submit={submit} />
-				<div className="campaign-page">
-					<h1 className="text-center fs-3 mb-5 mt-3">Mange campaign</h1>
-					<div className="flex w-full justify-between">
-						<div>
-						<button className="btn btn-success text-white mr-2" onClick={() => setShowModal(true)}>Send Email</button>
-						<button className="btn btn-success text-white">Send SMS</button>
+				<SendMsgModel show={showModal} onHide={() => setShowModal(false)} submit={submit} />
+				{loading ? (
+					<div className="my-10 w-full text-center">
+						<img className="mx-auto" src="/images/logo.svg" alt="" />
+						<div className="my-4">
+							<div className="text-xl">Hold on while we Process your request</div>
+							<div className="text-base">Ensure your internet is stable</div>
 						</div>
+						<Link href="/mycamp">
+							<button className="px-12 bg-warning p-2 my-3 rounded-md">
+								Go back
+							</button>
+						</Link>
+					</div>
+				) : (
+					<div>
 						<div>
-							<label htmlFor="all" className="font-bold">Select All <input id="all" className="rounded text-[#9bad58]" type="checkbox" /></label>
+							<div className="text-lg">Overview</div>
+							<div className="lg:flex justify-between mt-4">
+								<div className="lg:w-80 p-3  bg-success text-white text-center rounded-md">
+									Total No. of  Campaigns
+									<div className="text-2xl font-bold">{campaigns?.length}</div>
+								</div>
+								<div className="lg:w-80 p-3 bg-success text-white text-center rounded-md">
+									Total No. of Campaigners
+									<div className="text-2xl font-bold">100</div>
+								</div>
+								<div className="lg:w-80 p-3 bg-success text-white text-center rounded-md">
+									No. of Promoted Campaigns
+									<div className="text-2xl font-bold">{promoted}</div>
+								</div>
+							</div>
+						</div>
+						<div className="mt-4 lg:flex">
+							<div className="lg:w-3/5 flex lg:mr-4 pt-9 justify-between">
+								<div className="border border-green-800 rounded-md lg:w-80">
+									<div className="bg-green-800 text-white p-3 ">
+										All Campaigns
+									</div>
+									<div className="p-2 flex justify-between">
+										<div className="flex">
+											<div className="p-1 h-1 w-1 mt-2 bg-green-300 mr-3"></div>
+											Promoted Campaigns</div>
+										<span className="text-xs pt-1">60%</span>
+									</div>
+									<div className="p-2 flex justify-between">
+										<div className="flex">
+											<div className="p-1 h-1 w-1 mt-2 bg-yellow-300 mr-3"></div>
+											Pending Campaigns</div>
+										<span className="text-xs pt-1">60%</span>
+									</div>
+									<div className="p-2 flex justify-between">
+										<div className="flex">
+											<div className="p-1 h-1 w-1 mt-2 bg-red-300 mr-3"></div>
+											Failed Campaigns</div>
+										<span className="text-xs pt-1">60%</span>
+									</div>
+								</div>
+								<div className="border border-green-800 rounded-md lg:w-72 lg:ml-3">
+									<div className="bg-green-800 text-white p-3 ">
+										User Roles
+									</div>
+									<div className="p-2 flex justify-between">
+										<div className="flex">
+											State Reps </div>
+										<span className="text-xs pt-1">60</span>
+									</div>
+									<div className="p-2 flex justify-between">
+										<div className="flex">
+											Legal World </div>
+										<span className="text-xs pt-1">60</span>
+									</div>
+									<div className="p-2 flex justify-between">
+										<div className="flex">
+											Lawyers </div>
+										<span className="text-xs pt-1">60</span>
+									</div>
+									<div className="p-2 flex justify-between">
+										<div className="flex">
+											Supervisors </div>
+										<span className="text-xs pt-1">60</span>
+									</div>
+								</div>
+							</div>
+							<div className="lg:w-1/2">
+								<div className="text-lg mb-2">Activities</div>
+								<div>
+									<div className="border border-green-800 rounded-md">
+										<div className="bg-green-800 text-white p-3 ">
+											Recent Notifications
+										</div>
+										<div className="p-2">
+											<div className="flex justify-between">
+												<img src="/images/logo.svg" className="w-6 h-6" alt="" />
+												<div><strong>Hillary Duff</strong> Endorsed <strong>Freedom for Lora</strong></div>         Just Now
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className="lg:flex mt-5">
+							<div className="lg:w-1/2 lg:mr-3">
+								<div className="border border-green-800 rounded-md">
+									<div className="bg-green-800 text-white p-3 ">
+										Payments / Transaction
+									</div>
+									<div className="p-2">
+										<div className="flex justify-between">
+											<img src="/images/logo.svg" className="w-6 h-6" alt="" />
+											<div><strong>Hillary Duff</strong> Endorsed <strong>Freedom for Lora</strong></div>         Just Now
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div className="lg:w-1/2">
+								<div className="border border-green-800 rounded-md">
+									<div className="bg-green-800 text-white p-3 ">
+										Case Reports
+									</div>
+									<div className="p-2">
+										<div className="flex justify-between">
+											<img src="/images/logo.svg" className="w-6 h-6" alt="" />
+											<div><strong>Hillary Duff</strong> Endorsed <strong>Freedom for Lora</strong></div>         Just Now
+										</div>
+									</div>
+
+								</div>
+							</div>
+						</div>
+						<div className="campaign-page">
+							<h1 className="text-center fs-3 mb-5 mt-3">Mange campaign</h1>
+							<div className="flex w-full justify-between">
+								<div>
+									<button className="btn btn-success text-white mr-2" onClick={() => setShowModal(true)}>Send Email</button>
+									<button className="btn btn-success text-white">Send SMS</button>
+								</div>
+								<div>
+									<label htmlFor="all" className="font-bold">Select All <input id="all" className="rounded text-[#9bad58]" type="checkbox" /></label>
+								</div>
+							</div>
+							{loading ? (
+								<div className="text-center">
+									<Loader className="text-center" content="fetching campaigns..." />
+								</div>
+							) : (
+								<div className="campaign-table">
+									<table className="table">
+										<thead>
+											<th></th>
+											<th>Title</th>
+											<th>Date Created</th>
+											<th className="text-center"> Promotion <br /> Amount | target</th>
+											<th> Views </th>
+											<th> Endorsements </th>
+											<th> Country/State </th>
+											<th>Actions</th>
+										</thead>
+										<tbody>
+											{campaigns?.map((campaign, i) => (
+												<tr key={i}>
+													<td><Checkbox
+														handleChange={handleChangeA}
+														isChecked={i.checked}
+														label={`${campaign.id}`}
+													/></td>
+													<td>
+														<i
+															className={`fas fa-dot-circle me-2 ${campaign?.status === "Pending"
+																? "text-warning"
+																: "text-success"
+																}`}
+														></i>
+														<Link href={`/campaigns/${campaign?.slug}`}>
+															<a className="text-decoration-none">
+																{campaign?.title}
+																<br />
+																<div className="flex">
+																	<svg
+																		width="15"
+																		height="15"
+																		xmlns="http://www.w3.org/2000/svg"
+																		viewBox="0 0 448 512"
+																	>
+																		<path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z" /></svg>
+																	<span className="pl-1">{campaign?.author?.firstName}{" "}
+																		{campaign?.author?.lastName}</span>
+																</div>
+
+																<div className="flex">
+																	<svg
+																		width="15"
+																		height="15"
+																		xmlns="http://www.w3.org/2000/svg"
+																		viewBox="0 0 192 512"
+																	>
+																		<path d="M160 448h-32V224c0-17.69-14.33-32-32-32L32 192c-17.67 0-32 14.31-32 32s14.33 31.1 32 31.1h32v192H32c-17.67 0-32 14.31-32 32s14.33 32 32 32h128c17.67 0 32-14.31 32-32S177.7 448 160 448zM96 128c26.51 0 48-21.49 48-48S122.5 32.01 96 32.01s-48 21.49-48 48S69.49 128 96 128z" />
+																	</svg>
+																	<span className="pl-1">
+																		{campaign?.target}
+																	</span>
+																</div>
+															</a>
+														</Link>
+													</td>
+													<td>{dayjs(campaign?.createdAt).format("DD/MM/YYYY")}</td>
+													<td className="text-center"> 0   |   0 </td>
+													<td>{Number(campaign?.views?.length)}</td>
+													<td>{Number(campaign?.endorsements?.length) + 1}</td>
+													<td>Nigeria</td>
+													<td>
+														<div className="dropdown">
+															<button
+																className="btn btn-sm p-0"
+																data-bs-toggle="dropdown"
+																aria-expanded="false"
+															>
+																<i className="fas fa-ellipsis-v"></i>
+															</button>
+															<ul className="dropdown-menu">
+																<li onClick={() => approveCampaign(campaign?.id)}>
+																	<a className="dropdown-item c-hand">
+																		{campaign?.status === "Pending"
+																			? "Approve"
+																			: "Pend"}
+																	</a>
+																</li>
+
+																<li onClick={() => deleteCampaign(campaign?.id)}>
+																	<a className="dropdown-item c-hand">
+																		Promote
+																	</a>
+																</li>
+																<li onClick={() => deleteCampaign(campaign?.id)}>
+																	<a className="dropdown-item c-hand">
+																		Edit
+																	</a>
+																</li>
+																<li onClick={() => deleteCampaign(campaign?.id)}>
+																	<a className="dropdown-item c-hand text-danger">
+																		Delete
+																	</a>
+																</li>
+															</ul>
+														</div>
+													</td>
+												</tr>
+											))}
+										</tbody>
+									</table>
+								</div>
+							)}
 						</div>
 					</div>
-					{loading ? (
-						<div className="text-center">
-							<Loader className="text-center" content="fetching campaigns..." />
-						</div>
-					) : (
-						<div className="campaign-table">
-							<table className="table">
-								<thead>
-									<th></th>
-									<th>Title</th>
-									<th>Date Created</th>
-									<th className="text-center"> Promotion <br /> Amount | target</th>
-									<th> Views </th>
-									<th> Endorsements </th>
-									<th> Country/State </th>
-									<th>Actions</th>
-								</thead>
-								<tbody>
-									{campaigns?.map((campaign, i) => (
-										<tr key={i}>
-											<td><Checkbox
-												handleChange={handleChangeA}
-												isChecked={i.checked}
-												label={`${campaign.id}`}
-											/></td>
-											<td>
-												<i
-													className={`fas fa-dot-circle me-2 ${
-														campaign?.status === "Pending"
-															? "text-warning"
-															: "text-success"
-													}`}
-												></i>
-												<Link href={`/campaigns/${campaign?.slug}`}>
-													<a className="text-decoration-none">
-														{campaign?.title}
-														<br />
-														<div className="flex">
-														<svg
-															width="15"
-															height="15"
-															xmlns="http://www.w3.org/2000/svg"
-															viewBox="0 0 448 512"
-														>
-															<path d="M224 256c70.7 0 128-57.31 128-128s-57.3-128-128-128C153.3 0 96 57.31 96 128S153.3 256 224 256zM274.7 304H173.3C77.61 304 0 381.6 0 477.3c0 19.14 15.52 34.67 34.66 34.67h378.7C432.5 512 448 496.5 448 477.3C448 381.6 370.4 304 274.7 304z"/></svg>
-															<span className="pl-1">{campaign?.author?.firstName}{" "}
-														{campaign?.author?.lastName}</span>
-														</div>
+				)}
 
-														<div className="flex">
-														<svg
-															width="15"
-															height="15"
-															xmlns="http://www.w3.org/2000/svg"
-															viewBox="0 0 192 512"
-														>
-															<path d="M160 448h-32V224c0-17.69-14.33-32-32-32L32 192c-17.67 0-32 14.31-32 32s14.33 31.1 32 31.1h32v192H32c-17.67 0-32 14.31-32 32s14.33 32 32 32h128c17.67 0 32-14.31 32-32S177.7 448 160 448zM96 128c26.51 0 48-21.49 48-48S122.5 32.01 96 32.01s-48 21.49-48 48S69.49 128 96 128z"/>
-															</svg>
-															<span className="pl-1">
-														{campaign?.target}
-														</span>
-														</div>
-													</a>
-												</Link>
-											</td>
-											<td>{dayjs(campaign?.createdAt).format("DD/MM/YYYY")}</td>
-											<td className="text-center"> 0   |   0 </td>
-											<td>{Number(campaign?.views?.length)}</td>
-											<td>{Number(campaign?.endorsements?.length) + 1}</td>
-											<td>Nigeria</td>
-											<td>
-												<div className="dropdown">
-													<button
-														className="btn btn-sm p-0"
-														data-bs-toggle="dropdown"
-														aria-expanded="false"
-													>
-														<i className="fas fa-ellipsis-v"></i>
-													</button>
-													<ul className="dropdown-menu">
-														<li onClick={() => approveCampaign(campaign?.id)}>
-															<a className="dropdown-item c-hand">
-																{campaign?.status === "Pending"
-																	? "Approve"
-																	: "Pend"}
-															</a>
-														</li>
-
-														<li onClick={() => deleteCampaign(campaign?.id)}>
-															<a className="dropdown-item c-hand">
-																Promote
-															</a>
-														</li>
-														<li onClick={() => deleteCampaign(campaign?.id)}>
-															<a className="dropdown-item c-hand">
-																Edit
-															</a>
-														</li>
-														<li onClick={() => deleteCampaign(campaign?.id)}>
-															<a className="dropdown-item c-hand text-danger">
-																Delete
-															</a>
-														</li>
-													</ul>
-												</div>
-											</td>
-										</tr>
-									))}
-								</tbody>
-							</table>
-						</div>
-					)}
-				</div>
 			</Wrapper>
 		</FrontLayout>
 	);

@@ -32,6 +32,8 @@ export const GET_CAMPAIGNS = gql`
 		getCampaigns {
 			id
 			excerpt
+			title
+			body
 			slug
 			image
 			createdAt
