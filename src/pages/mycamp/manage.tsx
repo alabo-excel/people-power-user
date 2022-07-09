@@ -9,6 +9,7 @@ import { ICampaign } from "types/Applicant.types";
 import dayjs from "dayjs";
 import Checkbox from "../../components/CheckBox";
 import SendMsgModel from "../../components/campaign-comp/SendMessage";
+import { useRouter } from "next/router";
 
 
 import socketIOClient from "socket.io-client";
@@ -49,9 +50,10 @@ interface campaign_id {
 const ManageCampaignPage = (): JSX.Element => {
 	const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
 	const [users, setUsers] = useState([])
-
+	const [reports, setReport] = useState([])
 	const token = cookie.get(TOKEN_NAME);
 	const [notification, setNotification] = useState([])
+	const router = useRouter();
 
 	const io = socketIOClient(WS_URI as string, {
 		extraHeaders: { Authorization: token || "" },
@@ -60,7 +62,7 @@ const ManageCampaignPage = (): JSX.Element => {
 	io.on('get-campaigns', msg => {
 		setNotification(msg)
 	})
-	console.log(notification)
+	// console.log(notification)
 
 	useEffect(() => {
 		axios.get(`/user`)
@@ -71,7 +73,33 @@ const ManageCampaignPage = (): JSX.Element => {
 			.catch(function (error) {
 				console.log(error);
 			})
+
+		axios({
+			method: 'get',
+			url: 'https://pow-report.herokuapp.com/report',
+		})
+			.then(function (response) {
+				console.log(response.data);
+				setReport(response.data)
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
 	}, [])
+	const resolve = (id) => {
+		axios({
+			method: 'put',
+			url: `https://pow-report.herokuapp.com/report/${id}`,
+		})
+			.then(function (response) {
+				// console.log(response.data);
+				// setReport(response.data)
+				router.push(`/mycamp/manage`)
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+	}
 	const { loading } = useQuery(GET_CAMPAIGNS, {
 
 		onCompleted: (data) => {
@@ -245,7 +273,7 @@ const ManageCampaignPage = (): JSX.Element => {
 														<img src="/images/logo.svg" className="w-6 h-6 mr-3" alt="" />
 														<div>{notice.message}</div>
 													</div>
-													<div className="text-xs">{notice.createdAt.substring(0,10) }</div>
+													<div className="text-xs">{notice.createdAt.substring(0, 10)}</div>
 												</div>
 											))}
 										</div>
@@ -273,10 +301,30 @@ const ManageCampaignPage = (): JSX.Element => {
 									<div className="bg-green-800 text-white p-3 ">
 										Case Reports
 									</div>
-									<div className="p-2">
-										<div className="flex justify-between">
-											<img src="/images/logo.svg" className="w-6 h-6" alt="" />
-											<div><strong>Hillary Duff</strong> Endorsed <strong>Freedom for Lora</strong></div>         Just Now
+									<div>
+										<div className="accordion" id="accordionExample">
+											{reports.map((report) => (
+
+												<div className="accordion-item">
+													<h2 className="accordion-header" id="headingOne">
+														<button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={"#" + report?.reportMessage.substring(0, 3)} aria-expanded="true" aria-controls={report?.reportMessage.substring(0, 3)}>
+															<div>
+																<div>{report?.reportType} </div>
+															</div>
+														</button>
+													</h2>
+													<div id={report?.reportMessage.substring(0, 3)} className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+														<div className="accordion-body">
+															{report?.reportMessage}
+															<div>Created At: {report?.createdAt.substring(0, 10)}</div>
+															<div className="flex mt-2 justify-between tect-xs">
+																<button onClick={() => router.push(`/campaigns/${report?.campaignSlug}`)} className="p-1 text-white bg-warning">View Campaign</button>
+																<button onClick={() => resolve(report?._id)} className="p-1 text-white bg-green-800">Resolve</button>
+															</div>
+														</div>
+													</div>
+												</div>
+											))}
 										</div>
 									</div>
 
@@ -410,7 +458,7 @@ const ManageCampaignPage = (): JSX.Element => {
 				)}
 
 			</Wrapper>
-		</FrontLayout>
+		</FrontLayout >
 	);
 };
 

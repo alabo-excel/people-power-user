@@ -150,7 +150,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 									</Link>
 
 
-									{user?.id === camp?.author?.id ? (
+									{user?.id === camp?.author?.id && camp?.promoted !== true ? (
 										<button
 											onClick={() =>
 												router.push(`/promote?slug=${query?.slug}&view=true`)
