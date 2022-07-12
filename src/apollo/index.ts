@@ -12,7 +12,7 @@ import jscookie from "js-cookie";
 import { NextPageContext } from "next";
 import { useMemo } from "react";
 // import { SERVER_URL, STRAPI_URI, TOKEN_NAME, WS_URI } from "utils/constants";
-import { SERVER_URL, TOKEN_NAME, WS_URI } from "utils/constants";
+import { SERVER_URL, TOKEN_NAME, WS_URI, STRAPI_URI } from "utils/constants";
 
 import { getTokenCookie } from "utils/cookieUtils";
 
@@ -33,11 +33,11 @@ export const apollo: ApolloClient<NormalizedCacheObject> = new ApolloClient({
 	},
 });
 
-// export const apolloStrapi: ApolloClient<NormalizedCacheObject> =
-	// new ApolloClient({
-	// 	uri: `${STRAPI_URI}/graphql`,
-	// 	cache: new InMemoryCache(),
-	// });
+export const apolloStrapi: ApolloClient<NormalizedCacheObject> =
+	new ApolloClient({
+		uri: `${STRAPI_URI}/graphql`,
+		cache: new InMemoryCache(),
+	});
 
 const createLink = (initialState: any, token: string) => {
 	const cookie = process.browser
