@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { MY_CAMPAIGN } from "apollo/queries/campaignQuery";
+import { GET_CAMPAIGNS } from "apollo/queries/campaignQuery";
 // import { UserCampaignAtom } from "atoms/UserAtom";
 import React, { Fragment, useState } from "react";
 import SliderTwo from "react-slick";
@@ -12,16 +12,21 @@ import { apollo } from "apollo";
 
 const SwipeToSlide = () => {
 	const [campaigns, setCampaign] = useState<ICampaign[]>([]);
+	// const [promoted, setpromoted] = useState<ICampaign[]>([]);
 
-	useQuery(MY_CAMPAIGN, {
+	useQuery(GET_CAMPAIGNS, {
 		client: apollo,
 		onCompleted: (data) => {
-			setCampaign(data.myCampaign);
+			data.getCampaigns.map((promoted) => {
+				if (promoted.promoted === true) {
+					setCampaign([...campaigns, promoted])
+				}
+			})
 		},
 		onError: (err) => console.log(err),
 	});
-
-
+	// console.log(campaigns)
+	
 	const [showModal, setShowModal] = React.useState(false);
 	const [position, setPosition] = React.useState(0);
 
@@ -82,7 +87,7 @@ const SwipeToSlide = () => {
 									className="h-44"
 								/>
 								<div
-									className="h-44 absolute top-0 bg-black opacity-50" style={{width: 90 +"%"}}>
+									className="h-44 absolute top-0 bg-black opacity-50" style={{ width: 90 + "%" }}>
 								</div>
 							</div>
 							<div className="py-2 relative" >
@@ -93,14 +98,14 @@ const SwipeToSlide = () => {
 										</a>
 									</Link>
 								) : (
-									<span className="btn btn-success btn-sm m-1 absolute -top-48 rounded-pill px-3 fw-bold">
+									<span className="btn btn-success btn-sm m-1 absolute -top-44 rounded-pill px-3 fw-bold">
 										Promoted <i className="fas fa-sm fa-check"></i>
 									</span>
 								)}
-								<div className="text-white absolute -top-40 p-2 w-11/12">
+								<div className="text-white absolute -top-36 p-2 w-11/12">
 									<strong className="d-block text-capitalize">{camp?.title}</strong>
 
-									<small className="mt-20 pt-0 break-all">
+									<small className="mt-10 pt-0 break-all">
 										<span className="text-xs">{camp?.excerpt.substring(0, 100)}
 											<button type="button" className="text-xs" onClick={() => {
 												setShowModal(true)

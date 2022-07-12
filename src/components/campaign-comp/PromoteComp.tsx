@@ -61,86 +61,85 @@ const PromoteComp = (): JSX.Element => {
 
 	if (loading) return (
 		<div className="my-10 w-full text-center">
-		<img className="mx-auto" src="/images/logo.svg" alt="" />
-		<div className="my-4">
-			<div className="text-xl">Hold on while we Process your request</div>
-			<div className="text-base">Ensure your internet is stable</div>
+			<img className="mx-auto" src="/images/logo.svg" alt="" />
+			<div className="my-4">
+				<div className="text-xl">Hold on while we Process your request</div>
+				<div className="text-base">Ensure your internet is stable</div>
+			</div>
+			<Link href="/">
+				<button className="px-12 bg-warning p-2 my-3 rounded-md">
+					Go back
+				</button>
+			</Link>
 		</div>
-		<Link href="/">
-			<button className="px-12 bg-warning p-2 my-3 rounded-md">
-				Go back
-			</button>
-		</Link>
-
-	</div>
 	);
-	if(!view && !endorse) {
+	if (!view && !endorse) {
 		return (
 			<FrontLayout>
 				<Wrapper className="container">
 					<PromoteModalComp show={showModalClose} onHide={() => setShowModalClose(false)} />
 					<ChoosePromotion show={showModal} onHide={() => setShowModal(false)} />
 					<div className="inner-wrapper">
-							<div>
-								<div className="card">
-									<div className="card-img">
-										<img src={campaign?.image} alt="" />
-									</div>
-									<div className="card-body">
-										<h4 className="fw-bold">{campaign?.title}</h4>
-	
-										<p>
-											<b className="text-primary">Campaign Target</b>:{" "}
-											{campaign?.target}
-										</p>
-									</div>
+						<div>
+							<div className="card">
+								<div className="card-img">
+									<img src={campaign?.image} alt="" />
 								</div>
-								<div className="promotion mt-5">
+								<div className="card-body">
+									<h4 className="fw-bold">{campaign?.title}</h4>
+
 									<p>
-										Hello {user?.firstName}, let our Community of Supporters know
-										about this campaign for support and more endorsements by
-										promoting it.
+										<b className="text-primary">Campaign Target</b>:{" "}
+										{campaign?.target}
 									</p>
-	
-									<ul className="nav flex-column">
-										<li className="nav-item mb-2 ms-3">
-											Promoting this campaign will help push it to interested
-											supporters who will endorse it and enable you reach your
-											campaign goal.
-										</li>
-										<li className="nav-item mb-2 ms-3">
-											Our community of supporters can also help you promote this
-											campaign and spare in some cash if this campaign is promoted
-											to them.
-										</li>
-										<li className="nav-item mb-2 ms-3">
-											Hit the promote button below to reach our Community of
-											Supporters who are interested in supporting this Campaign.
-										</li>
-									</ul>
-	
-									<div className="my-5 text-center promote-btn ">
-										<button
-											onClick={() => setShowModal(true)}
-											className="btn btn-warning "
-										>
-											Promote Now
-										</button>
-										<div className="text-center">
-											<a className="btn" onClick={() => setShowModalClose(true)}>
-												I Will Promote later
-											</a>
-										</div>
+								</div>
+							</div>
+							<div className="promotion mt-5">
+								<p>
+									Hello {user?.firstName}, let our Community of Supporters know
+									about this campaign for support and more endorsements by
+									promoting it.
+								</p>
+
+								<ul className="nav flex-column">
+									<li className="nav-item mb-2 ms-3">
+										Promoting this campaign will help push it to interested
+										supporters who will endorse it and enable you reach your
+										campaign goal.
+									</li>
+									<li className="nav-item mb-2 ms-3">
+										Our community of supporters can also help you promote this
+										campaign and spare in some cash if this campaign is promoted
+										to them.
+									</li>
+									<li className="nav-item mb-2 ms-3">
+										Hit the promote button below to reach our Community of
+										Supporters who are interested in supporting this Campaign.
+									</li>
+								</ul>
+
+								<div className="my-5 text-center promote-btn ">
+									<button
+										onClick={() => setShowModal(true)}
+										className="btn btn-warning "
+									>
+										Promote Now
+									</button>
+									<div className="text-center">
+										<a className="btn" onClick={() => setShowModalClose(true)}>
+											I Will Promote later
+										</a>
 									</div>
 								</div>
 							</div>
+						</div>
 					</div>
 				</Wrapper>
 			</FrontLayout>
 		);
-	} else if(endorse) {
+	} else if (endorse) {
 		return campaign && <PromoteFormEndorsement campaign={campaign} />
-	} else if(view) {
+	} else if (view) {
 		return campaign && <PromoteForm campaign={campaign} />
 	}
 };
@@ -221,14 +220,14 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 		publicKey:
 			process.env.NODE_ENV === "production"
 				? (Cookies.get(IEnvironments.PAYSTACK_PK) as string)
-				: "pk_test_4611aa9c08b8fc8025407dbfae5253d0e5796383",
+				: "pk_test_1cfa6a57d59d651f7f19a383620e681aa88afe9a",
 		metadata: {
-			purpose: PaymentPurposeEnum.CAMPAIGN,
+			purpose: PaymentPurposeEnum.CAMPAIGN_VIEWS,
 			key: campaign?.id,
 			numberOfViews: views,
 			custom_fields: [
 				{
-					display_name: PaymentPurposeEnum.CAMPAIGN,
+					display_name: PaymentPurposeEnum.CAMPAIGN_VIEWS,
 					value: campaign?.title,
 					variable_name: "title",
 				},
@@ -264,7 +263,7 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 
 	return (
 		<FrontLayout>
-				<Wrapper className="container">
+			<Wrapper className="container">
 				<div className="md:w-[506px] m-auto">
 					<div className="text-center mt-3">
 						Wow <span className="fw-bold">{user?.firstName}</span>…you are just one
@@ -296,7 +295,7 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 									publicKey={
 										process.env.NODE_ENV === "production"
 											? (Cookies.get(IEnvironments.PAYSTACK_PK) as string)
-											: "pk_test_4611aa9c08b8fc8025407dbfae5253d0e5796383"
+											: "pk_test_1cfa6a57d59d651f7f19a383620e681aa88afe9a"
 									}
 									metadata={{
 										purpose: PaymentPurposeEnum.CAMPAIGN,
@@ -384,7 +383,7 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 		publicKey:
 			process.env.NODE_ENV === "production"
 				? (Cookies.get(IEnvironments.PAYSTACK_PK) as string)
-				: "pk_test_4611aa9c08b8fc8025407dbfae5253d0e5796383",
+				: "pk_test_1cfa6a57d59d651f7f19a383620e681aa88afe9a",
 		metadata: {
 			purpose: PaymentPurposeEnum.CAMPAIGNENDORSE,
 			key: campaign?.id,
@@ -459,7 +458,7 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 									publicKey={
 										process.env.NODE_ENV === "production"
 											? (Cookies.get(IEnvironments.PAYSTACK_PK) as string)
-											: "pk_test_4611aa9c08b8fc8025407dbfae5253d0e5796383"
+											: "pk_test_1cfa6a57d59d651f7f19a383620e681aa88afe9a"
 									}
 									metadata={{
 										purpose: PaymentPurposeEnum.CAMPAIGNENDORSE,
