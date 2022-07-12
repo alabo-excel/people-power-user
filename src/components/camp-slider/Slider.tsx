@@ -13,7 +13,7 @@ import { apollo } from "apollo";
 const SwipeToSlide = () => {
 	const [campaigns, setCampaign] = useState<ICampaign[]>([]);
 	// const [promoted, setpromoted] = useState<ICampaign[]>([]);
-	let all = []
+	let all: ICampaign[] = []
 	useQuery(GET_CAMPAIGNS, {
 		client: apollo,
 		onCompleted: (data) => {

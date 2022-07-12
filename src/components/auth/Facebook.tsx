@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import axios from "axios";
 import Cookies from "js-cookie";
 import cookie from "js-cookie";
+// @ts-ignore
 import { FacebookProvider, LoginButton } from 'react-facebook'
 import { IUser } from "types/Applicant.types";
 import { TOKEN_NAME } from "utils/constants";
