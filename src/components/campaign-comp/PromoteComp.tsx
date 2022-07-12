@@ -222,12 +222,12 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 				? (Cookies.get(IEnvironments.PAYSTACK_PK) as string)
 				: "pk_test_1cfa6a57d59d651f7f19a383620e681aa88afe9a",
 		metadata: {
-			purpose: PaymentPurposeEnum.CAMPAIGN_VIEWS,
+			purpose: PaymentPurposeEnum.CAMPAIGNVIEWS,
 			key: campaign?.id,
 			numberOfViews: views,
 			custom_fields: [
 				{
-					display_name: PaymentPurposeEnum.CAMPAIGN_VIEWS,
+					display_name: PaymentPurposeEnum.CAMPAIGNVIEWS,
 					value: campaign?.title,
 					variable_name: "title",
 				},
@@ -238,6 +238,7 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 	const initializePayment = usePaystackPayment(paystack_config);
 	const router = useRouter()
 	const onSuccess = async () => {
+		console.log(paystack_config)
 		router.push("/mycamp")
 	};
 	const onClose = () => {
@@ -298,12 +299,12 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 											: "pk_test_1cfa6a57d59d651f7f19a383620e681aa88afe9a"
 									}
 									metadata={{
-										purpose: PaymentPurposeEnum.CAMPAIGN,
+										purpose: PaymentPurposeEnum.CAMPAIGNVIEWS,
 										key: campaign?.id,
 										numberOfViews: option.views,
 										custom_fields: [
 											{
-												display_name: PaymentPurposeEnum.CAMPAIGN,
+												display_name: PaymentPurposeEnum.CAMPAIGNVIEWS,
 												value: campaign?.title,
 												variable_name: "title",
 											},
@@ -401,6 +402,7 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 	const initializePayment = usePaystackPayment(paystack_config);
 	const router = useRouter()
 	const onSuccess = async () => {
+		console.log(paystack_config)
 		router.push("/mycamp");
 	};
 	const onClose = () => {

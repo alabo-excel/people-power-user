@@ -10,15 +10,15 @@ const NoticeList = (props): JSX.Element => {
 
 	return (
 			<div className="bg-white w-72  absolute top-[82px] right-[84px] rounded-xl shadow-xl p-1">
-        <ul className="p-2 h-[400px] overflow-auto">
+        <ul className="p-2 overflow-auto">
           {props.notification.slice(0, 6).map((notice, i) => (
-            <li className="w-[14rem] flex border-b-2 border-zinc-800 mt-2 justify-between" key={i}>
+            <li className="flex border-b border-gray-200 mt-2" key={i}>
             <img
               src={user?.image}
               alt=""
-              className="image rounded-circle border border-3 h-[50px] w-[50px]"
+              className="image rounded-circle border border-gray-200 h-[30px] w-[35px] mr-2"
             />
-              <div className="w-40 break-words">{notice.message}</div>
+              <div className="text-sm">{notice.message}</div>
               </li>
           ))}
         </ul>

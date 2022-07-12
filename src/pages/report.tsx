@@ -24,16 +24,17 @@ const report = () => {
     const [loading, setLoading] = useState(false);
     const router = useRouter();
     const { query } = useRouter();
-    const [report, setReport] = useState({})
+    const [report, setReport] = useState("")
     const [message, setMessage] = useState("")
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             setLoading(true);
+
             const { data } = await axios({
                 method: 'post',
-                url: 'https://people-power-api.herokuapp.com/api/report',
+                url: 'https://pow-report.herokuapp.com/report',
                 data: {
                     campaignSlug: query.page,
                     reportType: report,
@@ -41,7 +42,7 @@ const report = () => {
                 }
             });
             console.log(data)
-            setLoading(false);
+
             router.push(`/campaigns/${query.page}`);
         } catch (error) {
             console.log(error);
@@ -57,7 +58,7 @@ const report = () => {
                         <div className="text-xl">Hold on while we Process your request</div>
                         <div className="text-base">Ensure your internet is stable</div>
                     </div>
-                    <Link href={'/campaigns/'+query.page}>
+                    <Link href={'/campaigns/' + query.page}>
                         <button className="px-12 bg-warning p-2 my-3 rounded-md">
                             Go back
                         </button>
@@ -71,35 +72,35 @@ const report = () => {
                     <div className="mx-10 my-4">
                         <form onSubmit={handleSubmit}>
                             <div className="flex">
-                                <input type="radio" className="m-1" value="Deceptive and fraudulent" onClick={(e) => { setReport({ ...report, Deceptive: e.target.value }) }} />
+                                <input type="checkbox" className="m-1" value="Deceptive and fraudulent" onClick={(e) => { setReport(e.target.value) }} />
                                 <div className="px-2">Deceptive and fraudulent</div>
                             </div>
                             <div className="flex">
-                                <input type="radio" className="m-1" value="Breaches human rights" onClick={(e) => setReport({ ...report, Breaches: e.target.value })} />
+                                <input type="checkbox" className="m-1" value="Breaches human rights" onClick={(e) => setReport(e.target.value)} />
                                 <div className="px-2">Breaches human rights</div>
                             </div>
                             <div className="flex">
-                                <input type="radio" className="m-1" value="Guilty of hate speech" onClick={(e) => setReport({ ...report, Guilty: e.target.value })} />
+                                <input type="checkbox" className="m-1" value="Guilty of hate speech" onClick={(e) => setReport(e.target.value)} />
                                 <div className="px-2">Guilty of hate speech</div>
                             </div>
                             <div className="flex">
-                                <input type="radio" className="m-1" value="Obscene image" onClick={(e) => setReport({ ...report, Obscene: e.target.value })} />
+                                <input type="checkbox" className="m-1" value="Obscene image" onClick={(e) => setReport(e.target.value)} />
                                 <div className="px-2">Obscene image</div>
                             </div>
                             <div className="flex">
-                                <input type="radio" className="m-1" value="Harmful to children" onClick={(e) => setReport({ ...report, Harmful: e.target.value })} />
+                                <input type="checkbox" className="m-1" value="Harmful to children" onClick={(e) => setReport(e.target.value)} />
                                 <div className="px-2">Harmful to children</div>
                             </div>
                             <div className="flex">
-                                <input type="radio" className="m-1" value="Incites violence, sucide or harm" onClick={(e) => setReport({ ...report, Incites: e.target.value })} />
+                                <input type="checkbox" className="m-1" value="Incites violence, sucide or harm" onClick={(e) => setReport(e.target.value)} />
                                 <div className="px-2">Incites violence, sucide or harm</div>
                             </div>
                             <div className="flex">
-                                <input type="radio" className="m-1" value="Encourages racism" onClick={(e) => setReport({ ...report, Encourages: e.target.value })} />
+                                <input type="checkbox" className="m-1" value="Encourages racism" onClick={(e) => setReport(e.target.value)} />
                                 <div className="px-2">Encourages racism</div>
                             </div>
                             <div className="flex">
-                                <input type="radio" className="m-1" value="Impersonation" onClick={(e) => setReport({ ...report, Impersonation: e.target.value })} />
+                                <input type="checkbox" className="m-1" value="Impersonation" onClick={(e) => setReport(e.target.value)} />
                                 <div className="px-2">Impersonation</div>
                             </div>
                             <div>

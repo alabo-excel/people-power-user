@@ -13,20 +13,22 @@ import { apollo } from "apollo";
 const SwipeToSlide = () => {
 	const [campaigns, setCampaign] = useState<ICampaign[]>([]);
 	// const [promoted, setpromoted] = useState<ICampaign[]>([]);
-
+	let all = []
 	useQuery(GET_CAMPAIGNS, {
 		client: apollo,
 		onCompleted: (data) => {
-			data.getCampaigns.map((promoted) => {
+			data.getCampaigns.map((promoted: any) => {
 				if (promoted.promoted === true) {
-					setCampaign([...campaigns, promoted])
+					// console.log(promoted)
+					all.push(promoted)
 				}
 			})
+			// console.log(all)
+			setCampaign(all)
 		},
 		onError: (err) => console.log(err),
 	});
-	// console.log(campaigns)
-	
+
 	const [showModal, setShowModal] = React.useState(false);
 	const [position, setPosition] = React.useState(0);
 
