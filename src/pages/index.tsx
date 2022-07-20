@@ -42,6 +42,7 @@ export const GET_CAMPAIGNS = gql`
 			createdAt
 			excerpt
 			likes
+			views
 			author {
 				id
 				firstName

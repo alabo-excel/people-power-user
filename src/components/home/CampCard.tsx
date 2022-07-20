@@ -7,12 +7,13 @@ import { truncateWord } from "utils";
 const CampaignCard = ({ camp }: { camp: ICampaign }): JSX.Element => {
 	return (
 		<Wrapper>
-			<div className="card  overflow-hidden">
-				<Link href={`/campaigns/${camp?.slug}`}>
-					<a className="text-decoration-none link-dark">
-						<img src={camp?.image} className="card-image" alt={camp?.title} />
-						<div className="card-body ">
-							<div className="flex">
+			<div className="shadow-md overflow-hidden rounded-md">
+				{/* <Link href={`/campaigns/${camp?.slug}`}> */}
+				<a className="text-decoration-none link-dark">
+					<img src={camp?.image} className="card-image" alt={camp?.title} />
+					<div className="card-body ">
+						<Link href={`/user?page=${camp?.author.id}`}>
+							<div className="flex cursor-pointer">
 								{camp?.author.image === null ? (
 									<img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
 								) : (
@@ -20,21 +21,23 @@ const CampaignCard = ({ camp }: { camp: ICampaign }): JSX.Element => {
 								)}
 								<p className="pl-2 mt-2">{camp?.author.firstName} {camp?.author.lastName}</p>
 							</div>
-							<p className="card-title fs-5 fw-bold capitalize">
-								{camp?.title?.length > 30
-									? `${camp?.title?.slice(0, 30)}...`
-									: camp?.title}
-							</p>
-							<p className="card-text  ">{truncateWord(camp?.excerpt)}</p>
-
-							<p className=" fst-italic">
-								<i className="fa fa-users mr-3"></i>
-								{Number(camp?.endorsements?.length) + 1} Supporters
-							</p>
+						</Link>
+						<p className="card-title fs-5 fw-bold capitalize">
+							{camp?.title?.length > 30
+								? `${camp?.title?.slice(0, 30)}...`
+								: camp?.title}
+						</p>
+						<p className="card-text  ">{truncateWord(camp?.excerpt)}</p>
+						<p className=" fst-italic">
+							<i className="fa fa-users mr-3"></i>
+							{Number(camp?.views?.length) + 1} Veiws
+						</p>
+						<Link href={`/campaigns/${camp?.slug}`}>
 							<button className="btn btn-warning">Read More</button>
-						</div>
-					</a>
-				</Link>
+						</Link>
+					</div>
+				</a>
+				{/* </Link> */}
 			</div>
 		</Wrapper>
 	);

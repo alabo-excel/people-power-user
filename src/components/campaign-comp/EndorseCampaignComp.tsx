@@ -7,39 +7,54 @@ import { Loader } from "rsuite";
 import { ICampaign } from "types/Applicant.types";
 import { useRouter } from 'next/router'
 import Link from "next/link";
+import { apollo } from "apollo";
+import axios from "axios";
 
-const CREATE_ENDORSEMENT = gql`
-	mutation CreateEndorsement($input: EndorsementInput) {
-		createEndorsement(input: $input) {
-			id
-			body
-		}
-	}
-`;
+// const CREATE_ENDORSEMENT = gql`
+// 	mutation CreateEndorsement($input: EndorsementInput) {
+// 		createEndorsement(input: $input) {
+// 			id
+// 			body
+// 		}
+// 	}
+// `;
 
 const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 	const [body, setBody] = useState("");
 	const router = useRouter()
+	const [id, setId] = useState(camp.id);
 
 	const user = useRecoilValue(UserAtom);
-	console.log(user)
-	const [addEndorsement, { loading, error: endorseError }] =
-		useMutation(CREATE_ENDORSEMENT);
+	let loading = false
+
+	// const [addEndorsement, { loading, error: endorseError }] = useMutation(CREATE_ENDORSEMENT);
 
 	const handleSubmit = async () => {
-		if (!body) return;
-		try {
-			const { data } = await addEndorsement({
-				variables: { input: { body, campaign: camp.id } },
+		axios.post('/endorsement', {
+			body: body,
+			campaign: id,
+		})
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
 			});
-			console.log(data.createEndorsement);
-			router.push(`/campaigns/promote?slug=${camp.slug}`)
-		} catch (error) {
-			console.log(error);
-			if (endorseError) {
-				endorseError?.graphQLErrors?.map((err) => alert(err));
-			}
-		}
+
+		// if (!body) return;
+		// try {
+		// 	const { data } = await addEndorsement({
+		// 		client: apollo,
+		// 		variables: { input: { body, campaign: id } },
+		// 	});
+		// 	console.log(data.createEndorsement);
+		// 	router.push(`/campaigns/promote?slug=${camp.slug}`)
+		// } catch (error) {
+		// 	console.log(error);
+		// 	if (endorseError) {
+		// 		endorseError?.graphQLErrors?.map((err) => alert(err));
+		// 	}
+		// }
 	};
 
 	return (
@@ -63,7 +78,7 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 					<ReactMde
 						toolbarCommands={[]}
 						value={body}
-						onChange={(txt) => setBody(txt)}
+						onChange={(txt) => { setBody(txt) }}
 					/>
 					<div className="d-flex align-items-center justify-content-between">
 						<button

@@ -31,7 +31,6 @@ const report = () => {
         e.preventDefault();
         try {
             setLoading(true);
-
             const { data } = await axios({
                 method: 'post',
                 url: 'https://pow-report.herokuapp.com/report',

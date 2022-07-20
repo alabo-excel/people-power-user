@@ -56,6 +56,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 		},
 		onError: (err) => console.log(err),
 	});
+	console.log(endorsements)
 
 	const handleLike = async () => {
 		// io.emit("likeCampaign", { id: camp?.id });
@@ -94,7 +95,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 	return (
 		<Fragment>
 			<Head>
-				<title>{camp?.title}</title>
+				<title>Campaign || {camp?.title}</title>
 				<meta name="description" content={camp?.body} />
 			</Head>
 			<FrontLayout>
@@ -146,7 +147,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 									</div>
 									<ReactMarkdown className="fs-5">{camp?.body}</ReactMarkdown>
 									<Link href={`/report?page=${camp?.slug}`}>
-										<div className="text-red-500">Report Abuse</div>
+										<div className="text-red-500 cursor-pointer">Report Abuse</div>
 									</Link>
 
 
@@ -203,17 +204,26 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 											<Endorsements endorsement={endorsement} key={i} />
 										))}
 									</div>
-									{user && user?.id !== camp?.author?.id && (
+
+									{endorsements?.length >= 1 ? (
+										endorsements?.map((endorse) => {
+											endorse.id === user?.id ? (<div>
+												<Link href={`/promote?slug=${camp.slug}`}>
+													<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold">
+														Promote
+													</a>
+												</Link></div>) : (
+												<div>
+													<EndorseCampaignComp camp={camp} />
+												</div>
+											)
+										})
+									) : (
 										<div>
 											<EndorseCampaignComp camp={camp} />
-											{/* <button
-												onClick={() => setShowEndorsement(true)}
-												className="btn m-0 my-4 btn-warning text-white fw-bold px-4 py-2 rounded-pill"
-											>
-												Endorse Campaign
-											</button> */}
 										</div>
 									)}
+
 									{endorsements && endorsements?.length > 5 && (
 										<button className="btn btn-warning text-white fw-bold w-100 py-2">
 											More reasons for endorsing

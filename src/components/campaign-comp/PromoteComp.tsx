@@ -15,6 +15,7 @@ import { PaymentPurposeEnum } from "types/payment.interface";
 import { IEnvironments } from "utils/constants";
 import { checkFX, formateMoney } from "utils/formateMoney";
 import Link from "next/link";
+import axios from "axios";
 
 export const GET_CAMPAIGN = gql`
 	query ($slug: String) {
@@ -59,89 +60,104 @@ const PromoteComp = (): JSX.Element => {
 		return initialEndorse;
 	}, [query]);
 
-	if (loading) return (
-		<div className="my-10 w-full text-center">
-			<img className="mx-auto" src="/images/logo.svg" alt="" />
-			<div className="my-4">
-				<div className="text-xl">Hold on while we Process your request</div>
-				<div className="text-base">Ensure your internet is stable</div>
-			</div>
-			<Link href="/">
-				<button className="px-12 bg-warning p-2 my-3 rounded-md">
-					Go back
-				</button>
-			</Link>
-		</div>
-	);
-	if (!view && !endorse) {
-		return (
-			<FrontLayout>
-				<Wrapper className="container">
-					<PromoteModalComp show={showModalClose} onHide={() => setShowModalClose(false)} />
-					<ChoosePromotion show={showModal} onHide={() => setShowModal(false)} />
-					<div className="inner-wrapper">
-						<div>
-							<div className="card">
-								<div className="card-img">
-									<img src={campaign?.image} alt="" />
+	useEffect(() => {
+		axios.get('/transaction')
+			.then(function (response) {
+				console.log(response);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	}, [])
+	// if (loading) return (
+	// 	<div className="my-10 w-full text-center">
+	// 		<Image className="mx-auto" src="/images/logo.svg" alt="" />
+	// 		<div className="my-4">
+	// 			<div className="text-xl">Hold on while we Process your request</div>
+	// 			<div className="text-base">Ensure your internet is stable</div>
+	// 		</div>
+	// 		<Link href="/">
+	// 			<button className="px-12 bg-warning p-2 my-3 rounded-md">
+	// 				Go back
+	// 			</button>
+	// 		</Link>
+	// 	</div>
+	// );
+	// if (!view && !endorse) {
+	return (
+		<div>
+			{endorse ? (campaign && <PromoteFormEndorsement campaign={campaign} />) : (
+				view ? (campaign && <PromoteForm campaign={campaign} />) : (
+				<FrontLayout>
+					<Wrapper className="container">
+						<PromoteModalComp show={showModalClose} onHide={() => setShowModalClose(false)} />
+						<ChoosePromotion show={showModal} onHide={() => setShowModal(false)} />
+						<div className="inner-wrapper">
+							<div>
+								<div className="card">
+									<div className="card-Image">
+										<img src={campaign?.image} alt="" />
+									</div>
+									<div className="card-body">
+										<h4 className="fw-bold">{campaign?.title}</h4>
+										<p>
+											<b className="text-primary">Campaign Target</b>:{" "}
+											{campaign?.target}
+										</p>
+									</div>
 								</div>
-								<div className="card-body">
-									<h4 className="fw-bold">{campaign?.title}</h4>
-
+								<div className="promotion mt-5">
 									<p>
-										<b className="text-primary">Campaign Target</b>:{" "}
-										{campaign?.target}
+										Hello {user?.firstName}, let our Community of Supporters know
+										about this campaign for support and more endorsements by
+										promoting it.
 									</p>
-								</div>
-							</div>
-							<div className="promotion mt-5">
-								<p>
-									Hello {user?.firstName}, let our Community of Supporters know
-									about this campaign for support and more endorsements by
-									promoting it.
-								</p>
 
-								<ul className="nav flex-column">
-									<li className="nav-item mb-2 ms-3">
-										Promoting this campaign will help push it to interested
-										supporters who will endorse it and enable you reach your
-										campaign goal.
-									</li>
-									<li className="nav-item mb-2 ms-3">
-										Our community of supporters can also help you promote this
-										campaign and spare in some cash if this campaign is promoted
-										to them.
-									</li>
-									<li className="nav-item mb-2 ms-3">
-										Hit the promote button below to reach our Community of
-										Supporters who are interested in supporting this Campaign.
-									</li>
-								</ul>
+									<ul className="nav flex-column">
+										<li className="nav-item mb-2 ms-3">
+											Promoting this campaign will help push it to interested
+											supporters who will endorse it and enable you reach your
+											campaign goal.
+										</li>
+										<li className="nav-item mb-2 ms-3">
+											Our community of supporters can also help you promote this
+											campaign and spare in some cash if this campaign is promoted
+											to them.
+										</li>
+										<li className="nav-item mb-2 ms-3">
+											Hit the promote button below to reach our Community of
+											Supporters who are interested in supporting this Campaign.
+										</li>
+									</ul>
 
-								<div className="my-5 text-center promote-btn ">
-									<button
-										onClick={() => setShowModal(true)}
-										className="btn btn-warning "
-									>
-										Promote Now
-									</button>
-									<div className="text-center">
-										<a className="btn" onClick={() => setShowModalClose(true)}>
-											I Will Promote later
-										</a>
+									<div className="my-5 text-center promote-btn ">
+										<button
+											onClick={() => setShowModal(true)}
+											className="btn btn-warning "
+										>
+											Promote Now
+										</button>
+										<div className="text-center">
+											<a className="btn" onClick={() => setShowModalClose(true)}>
+												I Will Promote later
+											</a>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</Wrapper>
-			</FrontLayout>
-		);
-	} else if (endorse) {
-		return campaign && <PromoteFormEndorsement campaign={campaign} />
-	} else if (view) {
-		return campaign && <PromoteForm campaign={campaign} />
-	}
+					</Wrapper>
+				</FrontLayout>
+				)
+			)
+			}
+		</div>
+	);
+	// } else if (endorse) {
+	// 	return campaign && <PromoteFormEndorsement campaign={campaign} />
+	// } else if (view) {
+	// 	return campaign && <PromoteForm campaign={campaign} />
+	// }
 };
 
 export default PromoteComp;
@@ -173,7 +189,7 @@ const Wrapper = styled.div`
 			box-shadow: 0px 10px 19px rgba(0, 0, 0, 0.06);
 			border-radius: 15px;
 			border-width: 0;
-			img {
+			Image {
 				width: 100%;
 				height: 226px;
 				object-fit: cover;
@@ -225,6 +241,7 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 			purpose: PaymentPurposeEnum.CAMPAIGNVIEWS,
 			key: campaign?.id,
 			numberOfViews: views,
+			user: user.name,
 			custom_fields: [
 				{
 					display_name: PaymentPurposeEnum.CAMPAIGNVIEWS,
@@ -302,6 +319,7 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 										purpose: PaymentPurposeEnum.CAMPAIGNVIEWS,
 										key: campaign?.id,
 										numberOfViews: option.views,
+										user: user.name,
 										custom_fields: [
 											{
 												display_name: PaymentPurposeEnum.CAMPAIGNVIEWS,
@@ -389,6 +407,7 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 			purpose: PaymentPurposeEnum.CAMPAIGNENDORSE,
 			key: campaign?.id,
 			numberOfEndorsements: views,
+			user: user.name,
 			custom_fields: [
 				{
 					display_name: PaymentPurposeEnum.CAMPAIGNENDORSE,
@@ -466,6 +485,7 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 										purpose: PaymentPurposeEnum.CAMPAIGNENDORSE,
 										key: campaign?.id,
 										numberOfEndorsements: option.endorsements,
+										user: user.name,
 										custom_fields: [
 											{
 												display_name: PaymentPurposeEnum.CAMPAIGNENDORSE,
