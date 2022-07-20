@@ -5,18 +5,23 @@ import { useQuery } from "@apollo/client";
 import { MY_CAMPAIGN } from "apollo/queries/campaignQuery";
 import { apollo } from "apollo";
 import { useState } from "react";
-import { ICampaign } from "types/Applicant.types";
+import { ICampaign, IUser } from "types/Applicant.types";
 import Link from "next/link";
 import axios from 'axios';
 import { useRouter } from "next/router";
 import { sassNull } from 'sass';
+import { useRecoilValue } from "recoil";
+import { UserAtom } from "atoms/UserAtom";
 
 const user = () => {
     const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState<IUser>([])
     const { query } = useRouter();
+    const author = useRecoilValue(UserAtom);
+
 
     useEffect(() => {
+        console.log(author)
         axios.get(`/user/single/${query.page}`)
             .then(function (response) {
                 console.log(response);
@@ -64,7 +69,9 @@ const user = () => {
                         </div>
                     </div>
                     <div className="lg:flex mt-3">
-                        <div className="w-72 mt-3 h-80 lg:mr-4 rounded-md bg-gray-50"></div>
+                        <div className="w-72 mt-3 h-80 lg:mr-4 rounded-md bg-gray-50">
+                            {author?.id === query.page ? (<button className="btn bg-green-500 px-8 p-2 my-3 w-44 mx-auto text-white"> Create Organization</button>) : (<div></div>)}
+                        </div>
                         <div className='w-full'>
                             {campaigns.map((camp) => (
                                 <div className="mt-3 bg-gray-50 w-full rounded-md flex">
