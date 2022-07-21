@@ -69,6 +69,7 @@ const PromoteComp = (): JSX.Element => {
 				console.log(error);
 			});
 	}, [])
+	
 	// if (loading) return (
 	// 	<div className="my-10 w-full text-center">
 	// 		<Image className="mx-auto" src="/images/logo.svg" alt="" />

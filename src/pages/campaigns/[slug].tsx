@@ -40,28 +40,28 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 	camp: ICampaign;
 }): JSX.Element => {
 
-	const [endorsements, setEndorsements] = useState<IEndorsement[]>();
+	const [endorsements, setEndorsements] = useState<IEndorsement[]>([]);
 	const [isLiked, setIsLiked] = useState(false);
 	const [showEndorsement, setShowEndorsement] = useState(false);
 	const [showLogin, setShowLogin] = useState(false);
 	const { query } = useRouter();
 	const user = useRecoilValue(UserAtom);
 
-	// console.log(user)
-
 	useQuery(GET_ENDORSEMENTS_BY_CAMPAIGN, {
 		variables: { campaign_id: camp?.id },
 		onCompleted: (data) => {
 			setEndorsements(data.getEndorsementsByCampaign);
+
 		},
 		onError: (err) => console.log(err),
 	});
-	console.log(endorsements)
 
 	const handleLike = async () => {
 		// io.emit("likeCampaign", { id: camp?.id });
 		console.log("handlike");
 	};
+
+	console.log(endorsements)
 
 	const viewCamp = async () => {
 		if (!user) return
@@ -204,25 +204,34 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 											<Endorsements endorsement={endorsement} key={i} />
 										))}
 									</div>
-
-									{endorsements?.length >= 1 ? (
-										endorsements?.map((endorse) => {
-											endorse.id === user?.id ? (<div>
+									{endorsements.length >= 1 ? (endorsements.map((endorse) => (
+										user.id === endorse.author.id ? (
+											<div>
 												<Link href={`/promote?slug=${camp.slug}`}>
 													<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold">
 														Promote
 													</a>
-												</Link></div>) : (
-												<div>
-													<EndorseCampaignComp camp={camp} />
-												</div>
-											)
-										})
-									) : (
+												</Link>
+											</div>) : (null)
+									))) : (
 										<div>
 											<EndorseCampaignComp camp={camp} />
 										</div>
 									)}
+
+									{/* {endorsements.map((endorse) => {
+										endorse.id === user?.id ? (
+											<div>
+												<Link href={`/promote?slug=${camp.slug}`}>
+													<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold">
+														Promote
+													</a>
+												</Link>
+											</div>) : (
+											<div>
+												<EndorseCampaignComp camp={camp} />
+											</div>)
+									})} */}
 
 									{endorsements && endorsements?.length > 5 && (
 										<button className="btn btn-warning text-white fw-bold w-100 py-2">

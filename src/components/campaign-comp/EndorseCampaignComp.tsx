@@ -22,7 +22,7 @@ import axios from "axios";
 const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 	const [body, setBody] = useState("");
 	const router = useRouter()
-	const [id, setId] = useState(camp.id);
+	const [id, setId] = useState(camp?.id);
 
 	const user = useRecoilValue(UserAtom);
 	let loading = false
@@ -30,12 +30,14 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 	// const [addEndorsement, { loading, error: endorseError }] = useMutation(CREATE_ENDORSEMENT);
 
 	const handleSubmit = async () => {
+		loading = true
 		axios.post('/endorsement', {
 			body: body,
 			campaign: id,
 		})
 			.then(function (response) {
 				console.log(response);
+				router.push(`/promote?slug=${camp.slug}`)
 			})
 			.catch(function (error) {
 				console.log(error);

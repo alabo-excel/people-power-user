@@ -13,30 +13,30 @@ const Endorsements = ({
 	endorsement: IEndorsement;
 }): JSX.Element => {
 	const user = useRecoilValue(UserAtom);
-	const [isLiked, setIsLiked] = useState(false);
+	// const [isLiked, setIsLiked] = useState(false);
 
-	const handleLike = async () => {
-		if (!user) {
-			return alert("Please login to continue");
-		}
-		try {
-			const { data } = await axios.post("/endorsement/like", {
-				id: endorsement?.id,
-			});
-			setIsLiked(data);
-		} catch (error) {
-			console.log(error);
-		}
-		// setIsLiked(true);
-	};
+	// const handleLike = async () => {
+	// 	if (!user) {
+	// 		return alert("Please login to continue");
+	// 	}
+	// 	try {
+	// 		const { data } = await axios.post("/endorsement/like", {
+	// 			id: endorsement?.id,
+	// 		});
+	// 		setIsLiked(data);
+	// 	} catch (error) {
+	// 		console.log(error);
+	// 	}
+	// 	// setIsLiked(true);
+	// };
 
-	useEffect(() => {
-		if (endorsement?.likes?.includes(user?.id)) {
-			setIsLiked(true);
-		} else {
-			setIsLiked(false);
-		}
-	}, [endorsement, user]);
+	// useEffect(() => {
+	// 	if (endorsement?.likes?.includes(user?.id)) {
+	// 		setIsLiked(true);
+	// 	} else {
+	// 		setIsLiked(false);
+	// 	}
+	// }, [endorsement, user]);
 
 	return (
 		<Wrapper>
@@ -55,7 +55,7 @@ const Endorsements = ({
 				<div className="bottom">
 					<ReactMarkdown>{endorsement?.body}</ReactMarkdown>
 				</div>
-				<hr className="" />
+				{/* <hr className="" />
 				<div className="d-flex align-items-center  ">
 					<a
 						className={`btn rounded-circle me-2 like-btn ${
@@ -69,7 +69,7 @@ const Endorsements = ({
 						{endorsement?.likes?.length} Like
 						{endorsement?.likes?.length > 1 && "s"}
 					</span>
-				</div>
+				</div> */}
 			</div>
 		</Wrapper>
 	);
