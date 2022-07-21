@@ -97,8 +97,8 @@ const SingleRow = ({ camp }: { camp: ICampaign }) => {
 					<a className="btn pl-2">Edit</a>
 				</Link>
 
-				<Link href={`/updates?page=${camp?.slug}`}>
-					<a className="btn pl-2">Update</a>
+				<Link href={`/updates?page=${camp?.id}?slug=${camp?.slug}`}>
+					<a className="btn pl-2">Add Updates</a>
 				</Link>
 			</td>
 

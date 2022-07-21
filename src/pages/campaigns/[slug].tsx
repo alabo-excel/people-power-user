@@ -46,6 +46,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 	const [showLogin, setShowLogin] = useState(false);
 	const { query } = useRouter();
 	const user = useRecoilValue(UserAtom);
+	const [update, setUpdate] = useState([])
 
 	useQuery(GET_ENDORSEMENTS_BY_CAMPAIGN, {
 		variables: { campaign_id: camp?.id },
@@ -73,6 +74,15 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 	}
 
 	useEffect(() => {
+		axios.get(`/campaign/updates/${camp?.id}`)
+			.then(function (response) {
+				console.log(response);
+				setUpdate(response.data)
+			})
+			.catch(function (error) {
+				console.log(error);
+			})
+
 		if (camp?.likes?.includes(user?.id)) {
 			setIsLiked(true);
 		} else {
@@ -149,8 +159,9 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 									<Link href={`/report?page=${camp?.slug}`}>
 										<div className="text-red-500 cursor-pointer">Report Abuse</div>
 									</Link>
-
-
+									{update.length >= 1 ? (update.map((item) => (
+										<div>{item}</div>
+									))) : (null)}
 									{user?.id === camp?.author?.id && camp?.promoted !== true ? (
 										<button
 											onClick={() =>

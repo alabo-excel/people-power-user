@@ -30,7 +30,7 @@ const CampaignCard = ({ camp }: { camp: ICampaign }): JSX.Element => {
 						<p className="card-text  ">{truncateWord(camp?.excerpt)}</p>
 						<p className=" fst-italic">
 							<i className="fa fa-users mr-3"></i>
-							{Number(camp?.views?.length) + 1} Veiws
+							{(camp?.endorsements?.length) + 1} Supporters
 						</p>
 						<Link href={`/campaigns/${camp?.slug}`}>
 							<button className="btn btn-warning">Read More</button>

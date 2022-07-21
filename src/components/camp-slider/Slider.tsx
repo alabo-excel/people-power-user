@@ -123,7 +123,7 @@ const SwipeToSlide = () => {
 									</small>
 								</div>
 								<div>
-									{camp.author.id === user.id ? (
+									{camp.author.id === user?.id ? (
 										<div className="text-center w-full">
 											<Link href={`/promote?slug=${camp.slug}`}>
 												<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold">

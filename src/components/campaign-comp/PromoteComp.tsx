@@ -42,6 +42,7 @@ const PromoteComp = (): JSX.Element => {
 	const { query } = useRouter();
 	const [showModal, setShowModal] = useState(false);
 	const [showModalClose, setShowModalClose] = useState(false);
+	const [transactions, setTransactions] = useState([]);
 
 	const { loading } = useQuery(GET_CAMPAIGN, {
 		variables: { slug: query.slug },
@@ -64,12 +65,13 @@ const PromoteComp = (): JSX.Element => {
 		axios.get('/transaction')
 			.then(function (response) {
 				console.log(response.data);
+				setTransactions(response.data)
 			})
 			.catch(function (error) {
 				console.log(error);
 			});
 	}, [])
-	
+
 	// if (loading) return (
 	// 	<div className="my-10 w-full text-center">
 	// 		<Image className="mx-auto" src="/images/logo.svg" alt="" />
@@ -89,66 +91,70 @@ const PromoteComp = (): JSX.Element => {
 		<div>
 			{endorse ? (campaign && <PromoteFormEndorsement campaign={campaign} />) : (
 				view ? (campaign && <PromoteForm campaign={campaign} />) : (
-				<FrontLayout>
-					<Wrapper className="container">
-						<PromoteModalComp show={showModalClose} onHide={() => setShowModalClose(false)} />
-						<ChoosePromotion show={showModal} onHide={() => setShowModal(false)} />
-						<div className="inner-wrapper">
-							<div>
-								<div className="card">
-									<div className="card-Image">
-										<img src={campaign?.image} alt="" />
+					<FrontLayout>
+						<Wrapper className="container">
+							<PromoteModalComp show={showModalClose} onHide={() => setShowModalClose(false)} />
+							<ChoosePromotion show={showModal} onHide={() => setShowModal(false)} />
+							<div className="inner-wrapper">
+								<div>
+									<div className="card">
+										<div className="card-Image">
+											<img src={campaign?.image} alt="" />
+										</div>
+										<div className="card-body">
+											<h4 className="fw-bold">{campaign?.title}</h4>
+											<p>
+												<b className="text-primary">Campaign Target</b>:{" "}
+												{campaign?.target}
+											</p>
+										</div>
 									</div>
-									<div className="card-body">
-										<h4 className="fw-bold">{campaign?.title}</h4>
+									<div className="promotion mt-5">
 										<p>
-											<b className="text-primary">Campaign Target</b>:{" "}
-											{campaign?.target}
+											Hello {user?.firstName}, let our Community of Supporters know
+											about this campaign for support and more endorsements by
+											promoting it.
 										</p>
-									</div>
-								</div>
-								<div className="promotion mt-5">
-									<p>
-										Hello {user?.firstName}, let our Community of Supporters know
-										about this campaign for support and more endorsements by
-										promoting it.
-									</p>
 
-									<ul className="nav flex-column">
-										<li className="nav-item mb-2 ms-3">
-											Promoting this campaign will help push it to interested
-											supporters who will endorse it and enable you reach your
-											campaign goal.
-										</li>
-										<li className="nav-item mb-2 ms-3">
-											Our community of supporters can also help you promote this
-											campaign and spare in some cash if this campaign is promoted
-											to them.
-										</li>
-										<li className="nav-item mb-2 ms-3">
-											Hit the promote button below to reach our Community of
-											Supporters who are interested in supporting this Campaign.
-										</li>
-									</ul>
-
-									<div className="my-5 text-center promote-btn ">
-										<button
-											onClick={() => setShowModal(true)}
-											className="btn btn-warning "
-										>
-											Promote Now
-										</button>
-										<div className="text-center">
-											<a className="btn" onClick={() => setShowModalClose(true)}>
-												I Will Promote later
-											</a>
+										<ul className="nav flex-column">
+											<li className="nav-item mb-2 ms-3">
+												Promoting this campaign will help push it to interested
+												supporters who will endorse it and enable you reach your
+												campaign goal.
+											</li>
+											<li className="nav-item mb-2 ms-3">
+												Our community of supporters can also help you promote this
+												campaign and spare in some cash if this campaign is promoted
+												to them.
+											</li>
+											<li className="nav-item mb-2 ms-3">
+												Hit the promote button below to reach our Community of
+												Supporters who are interested in supporting this Campaign.
+											</li>
+										</ul>
+										<div>
+											{transactions?.length >1 ? (transactions.slice(0,6).map((item) => (
+												<div className="bg-gray-100 my-2 p-2">{item?.purpose}</div>
+											))):(null)}
+										</div>
+										<div className="my-5 text-center promote-btn ">
+											<button
+												onClick={() => setShowModal(true)}
+												className="btn btn-warning "
+											>
+												Promote Now
+											</button>
+											<div className="text-center">
+												<a className="btn" onClick={() => setShowModalClose(true)}>
+													I Will Promote later
+												</a>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</div>
-					</Wrapper>
-				</FrontLayout>
+						</Wrapper>
+					</FrontLayout>
 				)
 			)
 			}
@@ -242,7 +248,7 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 			purpose: PaymentPurposeEnum.CAMPAIGNVIEWS,
 			key: campaign?.id,
 			numberOfViews: views,
-			user: user.name,
+			name: user.name,
 			custom_fields: [
 				{
 					display_name: PaymentPurposeEnum.CAMPAIGNVIEWS,
@@ -320,7 +326,7 @@ const PromoteForm = ({ campaign }: { campaign: ICampaign }) => {
 										purpose: PaymentPurposeEnum.CAMPAIGNVIEWS,
 										key: campaign?.id,
 										numberOfViews: option.views,
-										user: user.name,
+										name: user.name,
 										custom_fields: [
 											{
 												display_name: PaymentPurposeEnum.CAMPAIGNVIEWS,
@@ -408,7 +414,7 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 			purpose: PaymentPurposeEnum.CAMPAIGNENDORSE,
 			key: campaign?.id,
 			numberOfEndorsements: views,
-			user: user.name,
+			name: user.name,
 			custom_fields: [
 				{
 					display_name: PaymentPurposeEnum.CAMPAIGNENDORSE,
@@ -486,7 +492,7 @@ const PromoteFormEndorsement = ({ campaign }: { campaign: ICampaign }) => {
 										purpose: PaymentPurposeEnum.CAMPAIGNENDORSE,
 										key: campaign?.id,
 										numberOfEndorsements: option.endorsements,
-										user: user.name,
+										name: user.name,
 										custom_fields: [
 											{
 												display_name: PaymentPurposeEnum.CAMPAIGNENDORSE,

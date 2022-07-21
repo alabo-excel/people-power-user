@@ -23,14 +23,13 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 	const [body, setBody] = useState("");
 	const router = useRouter()
 	const [id, setId] = useState(camp?.id);
-
+	const [loading, setLoading] = useState(false)
 	const user = useRecoilValue(UserAtom);
-	let loading = false
 
 	// const [addEndorsement, { loading, error: endorseError }] = useMutation(CREATE_ENDORSEMENT);
 
 	const handleSubmit = async () => {
-		loading = true
+		setLoading(true)
 		axios.post('/endorsement', {
 			body: body,
 			campaign: id,

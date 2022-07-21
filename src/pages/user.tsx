@@ -62,20 +62,22 @@ const user = () => {
                             </div>
                         </div>
                         <div className='mt-16 px-10'>
-                            <div className="text-lg font-bold ">{user?.name}</div>
+                            <div className="flex"><div className="text-lg font-bold ">{user?.name}</div> <div className="pt-1 ml-2"> {user?.city}, {user?.country}</div> </div>
                             <div className="text-sm font-thin">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Assumenda ab neque dolore quae aspernatur placeat reprehenderit esse eos ipsa id. Laboriosam quae eos nobis facilis nesciunt nam temporibus ab a.
+                                {user?.description}
                             </div>
-                            <div className="text-lg font-black text-gray-900">3000 followers</div>
+                            <div className="text-lg font-black text-gray-900 flex ">{user?.followersCount} Followers
+                                <div className="text-lg font-black text-gray-900 ml-2">
+                                    Following {user?.followingCount} </div> </div>
                             {author?.id === query.page ? (
                                 <div className="font-black text-lg">
                                     <Link href={`mycamp/profile`}>
-                                        <button className="bg-transparent p-2 text-warning">Edit</button>
+                                        <button className="bg-transparent p-2 text-warning"> <span>&#x270E;</span> Edit</button>
                                     </Link>
                                 </div>
                             ) : (
                                 <div>
-                                    <button className="bg-transparent p-2 text-warning">Follow</button>
+                                    <button className="bg-transparent p-2 text-warning"> <span>&#10010;</span> Follow</button>
                                 </div>
                             )}
                         </div>
@@ -91,6 +93,11 @@ const user = () => {
                         ) : (<div></div>)}
                     </div>
                     <Slider />
+                    <div className="text-center text-lg p-3">
+                        <Link href={`/m`}>
+                            <button className="bg-warning w-44 p-2 text-white rounded-full"> Start Cmapaign</button>
+                        </Link>
+                    </div>
                     <div className="lg:flex mt-3">
                         <div className="w-72 mt-3 h-80 lg:mr-4 rounded-md bg-gray-50">
                             {author?.id === query.page ? (
@@ -108,19 +115,57 @@ const user = () => {
                             </div>
                         </div>) : (<div className='w-full'>
                             {campaigns.map((camp) => (
-                                <div className="mt-3 bg-gray-50 w-full rounded-md flex">
-                                    <div className="80 mr-4">
-                                        <img className="w-96" src={camp.image} alt="" />
+                                <div className="mt-3 bg-gray-50 w-full rounded-md flex relative">
+                                    <div className='absolute right-2 top-2'>
+                                        <div className="dropdown">
+                                            <a className="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                            </a>
+
+                                            <ul className="dropdown-menu">
+                                                <li>
+                                                    <Link href={`/promote?slug=${camp?.slug}`}>
+                                                        <a className="btn pl-2">{camp?.promoted ? "Upgrade" : "Promote"}</a>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href={`/editcamp?page=${camp?.slug}`}>
+                                                        <a className="btn pl-2">Edit</a>
+                                                    </Link>
+                                                </li>
+                                                <li>
+                                                    <Link href={`/updates?page=${camp?.id}/${camp?.slug}`}>
+                                                        <a className="btn pl-2">Add Updates</a>
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
-                                    <div className="w-full">
+                                    <div className="w-96 mr-4">
+                                        <img className="w-96 h-full" src={camp.image} alt="" />
+                                    </div>
+                                    <div className="w-full my-auto">
                                         <div className="uppercase text-lg font-bold">{camp.title}</div>
                                         <div className="text-sm">{camp.excerpt}</div>
                                         <div className="flex justify-between mr-10">
-                                            <div className="text-gray-900 text-xs"> Created At {camp.createdAt.substring(0, 10)}</div>
-                                            <div className="text-gray-900 text-xs">Created By { } Alabo Excel</div>
+                                            <div>
+                                                <div className="text-gray-900 text-xs"> Created At {camp.createdAt.substring(0, 10)}</div>
+                                                {/* <div className="text-gray-900 text-xs">Created By { } Alabo Excel</div> */}
+                                            </div>
+                                            {/* <div className="flex cursor-pointer">
+                                                {camp?.author.image === null ? (
+                                                    <img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
+                                                ) : (
+                                                    <img className="w-8 h-8 " src={camp?.author.image} alt="" />
+                                                )}
+                                                <p className="pl-2 mt-2">{user?.name} </p>
+                                            </div> */}
+                                            <p className="fst-italic">
+                                                <i className="fa fa-users mr-3"></i>
+                                                {(camp?.endorsements?.length) + 1} Supporters
+                                            </p>
                                         </div>
                                         <Link href={`/campaigns/${camp?.slug}`}>
-                                            <button className="btn btn-warning my-4">Read More</button>
+                                            <button className="btn btn-warning mt-2">Read More</button>
                                         </Link>
                                     </div>
                                 </div>
