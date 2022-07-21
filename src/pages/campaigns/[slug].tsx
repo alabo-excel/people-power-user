@@ -207,9 +207,10 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 									{endorsements.length >= 1 ? (endorsements.map((endorse) => (
 										user.id === endorse.author.id ? (
 											<div>
+												<div>Thank you {user.firstName} for endorsing this campaign. Let's now make this campaign get to other supporters on Peoples Power by promoting it.</div>
 												<Link href={`/promote?slug=${camp.slug}`}>
-													<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold">
-														Promote
+													<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold my-3 text-center mx-auto">
+														Promote Campaign
 													</a>
 												</Link>
 											</div>) : (null)

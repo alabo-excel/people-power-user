@@ -34,7 +34,7 @@ const UserMenu = (): JSX.Element => {
 				<ul className="dropdown-menu dropdown-menu-dark bg-primary dropdown-menu-start">
 					<li className="dropdown-item">
 						<Link href="/mycamp/profile">
-							<a className="text-decoration-none text-light c-hand">Profile</a>
+							<a className="text-decoration-none text-light c-hand">Settings</a>
 						</Link>
 					</li>
 					{user?.accountType === AccountTypeEnum.Staff && (

@@ -9,10 +9,14 @@ import { ICampaign } from "types/Applicant.types";
 import * as timeago from "timeago.js";
 import Link from "next/link";
 import { apollo } from "apollo";
+import { UserAtom } from "atoms/UserAtom";
+import { useRecoilValue } from "recoil";
 
 const SwipeToSlide = () => {
 	const [campaigns, setCampaign] = useState<ICampaign[]>([]);
 	// const [promoted, setpromoted] = useState<ICampaign[]>([]);
+	const user = useRecoilValue(UserAtom);
+
 	let all: ICampaign[] = []
 	useQuery(GET_CAMPAIGNS, {
 		client: apollo,
@@ -117,6 +121,23 @@ const SwipeToSlide = () => {
 										</span>
 										{/* <em>{timeago.format(camp?.createdAt)}</em> */}
 									</small>
+								</div>
+								<div>
+									{camp.author.id === user.id ? (
+										<div className="text-center w-full">
+											<Link href={`/promote?slug=${camp.slug}`}>
+												<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold">
+													Promote
+												</a>
+											</Link>
+										</div>
+									) : (<div className="text-center w-full">
+										<Link href={`/campaigns/${camp.slug}`}>
+												<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold">
+													Endorse
+												</a>
+										</Link>
+									</div>)}
 								</div>
 							</div>
 

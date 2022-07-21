@@ -21,6 +21,12 @@ const Header = (): JSX.Element => {
 	const token = cookie.get(TOKEN_NAME);
 	const [notification, setNotification] = useState([])
 
+	const navItems = (loggedIn: boolean) => [
+		{ title: "Start Campaign", link: "startcamp" },
+		{ title: "My Profile", link: loggedIn ? `user?page=${user.id}` : "auth" },
+		{ title: "Explore", link: "campaigns" },
+	];
+	
 	const io = socketIOClient(WS_URI as string, {
 		extraHeaders: { Authorization: token || "" },
 	})
@@ -29,7 +35,7 @@ const Header = (): JSX.Element => {
 		setNotification(msg)
 	})
 
-    // console.log(notification)
+	// console.log(notification)
 
 	return (
 		<header>
@@ -146,9 +152,3 @@ const Header = (): JSX.Element => {
 };
 
 export default Header;
-
-const navItems = (loggedIn: boolean) => [
-	{ title: "Start Campaign", link: "startcamp" },
-	{ title: "My Campaign", link: loggedIn ? "mycamp" : "auth" },
-	{ title: "Explore", link: "campaigns" },
-];
