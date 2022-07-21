@@ -74,7 +74,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 	}
 
 	useEffect(() => {
-		axios.get(`/campaign/updates/${camp?.id}`)
+		axios.get(`/campaign/update/${camp?.id}`)
 			.then(function (response) {
 				console.log(response);
 				setUpdate(response.data)
