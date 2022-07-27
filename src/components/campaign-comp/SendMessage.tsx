@@ -6,7 +6,7 @@ import styled from "styled-components";
 import { ICampaign } from "types/Applicant.types";
 interface Props {
   show: boolean;
-  onHide: boolean
+  onHide?: boolean
   submit: (event: any) => void;
 
 }
@@ -17,7 +17,7 @@ const sendMsgModel = (props: Props): JSX.Element => {
   return (
     <Wrapper className='modal-container'>
       
-      <Modal show={props.show} onHide={props.onHide} backdrop={true}>
+      <Modal show={props.show} backdrop={true}>
             <Modal.Header closeButton></Modal.Header>
             <Modal.Body>
             <div>
@@ -30,14 +30,14 @@ const sendMsgModel = (props: Props): JSX.Element => {
             <div>
               <label htmlFor="" className="text-lg font-bold">Message</label>
               <br />
-              <textarea className="w-[310px] form-textarea rounded-xl" name="" id="" cols="10" rows="8"></textarea>
+              <textarea className="w-[310px] form-textarea rounded-xl" name="" id="" ></textarea>
             </div>
             </div>
             </Modal.Body>
             <Modal.Footer>
               <Button
                 className='btn btn-warning'
-                onClick={() => submit}
+                // onClick={() => submit}
                 variant='primary'>
                 Submit Now
               </Button>

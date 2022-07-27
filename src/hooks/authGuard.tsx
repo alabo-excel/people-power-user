@@ -28,6 +28,8 @@ const authGuard = (
 	const MyComp = ({ children, ...props }: IProps) => {
 		const setCampaign = useSetRecoilState(UserCampaignAtom);
 
+		console.log(props)
+		
 		useQuery(MY_CAMPAIGN, {
 			client: apollo,
 			onCompleted: (data) => {

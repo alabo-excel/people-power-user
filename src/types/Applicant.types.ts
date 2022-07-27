@@ -47,6 +47,9 @@ export interface IUser extends Document {
 	country: string;
 	state: string;
 	city: string;
+	followersCount:string;
+	followingCount: string;
+	description: string;
 }
 
 export interface IApplicant extends Document {

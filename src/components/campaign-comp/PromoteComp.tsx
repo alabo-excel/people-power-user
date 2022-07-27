@@ -35,6 +35,10 @@ export enum CurrencyListEnum {
 	ZAR = "ZAR",
 	USD = "USD",
 }
+export interface ITransactions {
+	purpose: string;
+	length: number;
+}
 
 const PromoteComp = (): JSX.Element => {
 	const user = useRecoilValue(UserAtom);
@@ -42,7 +46,7 @@ const PromoteComp = (): JSX.Element => {
 	const { query } = useRouter();
 	const [showModal, setShowModal] = useState(false);
 	const [showModalClose, setShowModalClose] = useState(false);
-	const [transactions, setTransactions] = useState([]);
+	const [transactions, setTransactions] = useState<ITransactions[]>([]);
 
 	const { loading } = useQuery(GET_CAMPAIGN, {
 		variables: { slug: query.slug },
@@ -57,7 +61,7 @@ const PromoteComp = (): JSX.Element => {
 
 	const endorse = useMemo(() => {
 		const initialEndorse = Boolean(query?.endorse);
-		console.log(initialEndorse)
+		// console.log(initialEndorse)
 		return initialEndorse;
 	}, [query]);
 
@@ -133,7 +137,7 @@ const PromoteComp = (): JSX.Element => {
 											</li>
 										</ul>
 										<div>
-											{transactions?.length >1 ? (transactions.slice(0,6).map((item) => (
+											{transactions && transactions?.length >1 ? (transactions.slice(0,6).map((item : any) => (
 												<div className="bg-gray-100 my-2 p-2">{item?.purpose}</div>
 											))):(null)}
 										</div>

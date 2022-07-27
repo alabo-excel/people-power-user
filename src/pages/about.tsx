@@ -141,8 +141,215 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 							</div>
 						</div>
 					</div>
+					<section className="my-8">
+						<div className="what-we-do-txt bg-light h-100 px-4 py-3 my-2 lg:mx-32">
+							<div className=" text-secondary fw-bold text-4xl my-2">Join our team</div>
+							<div className="text-base">If you’re passionate and ready to dive in, we’d love to meet you.</div>
+						</div>
+						<details className="mb-3 lg:w-1/2 mx-auto">
+							<summary className="header summary bg-light rounded-top rounded-0 rounded-3 py-2 align-items-center px-1 d-flex justify-content-between">
+								<div>
+									<p className="text-secondary fw-bold mb-1 p-0 fs-5">
+										Content Writer
+									</p>
+								</div>
+								<i className="fas fa-chevron-down fa-rotate-180 me-1 fa-2x text-secondary"></i>
+							</summary>
+							<div className="content-body animate__animated animate__fadeIn bg-white rounded-bottom py-2">
+								<div className="container">
+									<div className="w-75">
+										<h4 className="mb-3 p-0 text-muted fw-bold">
+											Apply to work with us as content writer.
+										</h4>
+										<p className="mb-4">
+											lorem
+										</p>
+										<button className="btn btn-warning text-white px-4 py-2 rounded-pill fw-bold">
+											Apply Now
+										</button>
+									</div>
+								</div>
+							</div>
+						</details>
+						<details className="mb-3 lg:w-1/2 mx-auto">
+							<summary className="header summary bg-light rounded-top rounded-0 rounded-3 py-2 align-items-center px-1 d-flex justify-content-between">
+								<div>
+									<p className="text-secondary fw-bold mb-1 p-0 fs-5">
+										Journalist
+									</p>
+								</div>
+								<i className="fas fa-chevron-down fa-rotate-180 me-1 fa-2x text-secondary"></i>
+							</summary>
+							<div className="content-body animate__animated animate__fadeIn bg-white rounded-bottom py-2">
+								<div className="container">
+									<div className="w-75">
+										<h4 className="mb-3 p-0 text-muted fw-bold">
+											Apply to work with us as content writer.
+										</h4>
+										<p className="mb-4">
+											lorem
+										</p>
+										<button className="btn btn-warning text-white px-4 py-2 rounded-pill fw-bold">
+											Apply Now
+										</button>
+									</div>
+								</div>
+							</div>
+						</details>
+						<details className="mb-3 lg:w-1/2 mx-auto">
+							<summary className="header summary bg-light rounded-top rounded-0 rounded-3 py-2 align-items-center px-1 d-flex justify-content-between">
+								<div>
+									<p className="text-secondary fw-bold mb-1 p-0 fs-5">
+										Designer
+									</p>
+								</div>
+								<i className="fas fa-chevron-down fa-rotate-180 me-1 fa-2x text-secondary"></i>
+							</summary>
+							<div className="content-body animate__animated animate__fadeIn bg-white rounded-bottom py-2">
+								<div className="container">
+									<div className="w-75">
+										<h4 className="mb-3 p-0 text-muted fw-bold">
+											Apply to work with us as content writer.
+										</h4>
+										<p className="mb-4">
+											lorem
+										</p>
+										<button className="btn btn-warning text-white px-4 py-2 rounded-pill fw-bold">
+											Apply Now
+										</button>
+									</div>
+								</div>
+							</div>
+						</details>
+						<details className="mb-3 lg:w-1/2 mx-auto">
+							<summary className="header summary bg-light rounded-top rounded-0 rounded-3 py-2 align-items-center px-1 d-flex justify-content-between">
+								<div>
+									<p className="text-secondary fw-bold mb-1 p-0 fs-5">
+										News Editor
+									</p>
+								</div>
+								<i className="fas fa-chevron-down fa-rotate-180 me-1 fa-2x text-secondary"></i>
+							</summary>
+							<div className="content-body animate__animated animate__fadeIn bg-white rounded-bottom py-2">
+								<div className="container">
+									<div className="w-75">
+										<h4 className="mb-3 p-0 text-muted fw-bold">
+											Apply to work with us as content writer.
+										</h4>
+										<p className="mb-4">
+											lorem
+										</p>
+										<button className="btn btn-warning text-white px-4 py-2 rounded-pill fw-bold">
+											Apply Now
+										</button>
+									</div>
+								</div>
+							</div>
+						</details>
+						<details className="mb-3 lg:w-1/2 mx-auto">
+							<summary className="header summary bg-light rounded-top rounded-0 rounded-3 py-2 align-items-center px-1 d-flex justify-content-between">
+								<div>
+									<p className="text-secondary fw-bold mb-1 p-0 fs-5">
+										Rep
+									</p>
+								</div>
+								<i className="fas fa-chevron-down fa-rotate-180 me-1 fa-2x text-secondary"></i>
+							</summary>
+							<div className="content-body animate__animated animate__fadeIn bg-white rounded-bottom py-2">
+								<div className="container">
+									<div className="w-75">
+										<h4 className="mb-3 p-0 text-muted fw-bold">
+											Apply to work with us as content writer.
+										</h4>
+										<p className="mb-4">
+											lorem
+										</p>
+										<button className="btn btn-warning text-white px-4 py-2 rounded-pill fw-bold">
+											Apply Now
+										</button>
+									</div>
+								</div>
+							</div>
+						</details>
+						<details className="mb-3 lg:w-1/2 mx-auto">
+							<summary className="header summary bg-light rounded-top rounded-0 rounded-3 py-2 align-items-center px-1 d-flex justify-content-between">
+								<div>
+									<p className="text-secondary fw-bold mb-1 p-0 fs-5">
+										Rights Advocate
+									</p>
+								</div>
+								<i className="fas fa-chevron-down fa-rotate-180 me-1 fa-2x text-secondary"></i>
+							</summary>
+							<div className="content-body animate__animated animate__fadeIn bg-white rounded-bottom py-2">
+								<div className="container">
+									<div className="w-75">
+										<h4 className="mb-3 p-0 text-muted fw-bold">
+											Apply to work with us as content writer.
+										</h4>
+										<p className="mb-4">
+											lorem
+										</p>
+										<button className="btn btn-warning text-white px-4 py-2 rounded-pill fw-bold">
+											Apply Now
+										</button>
+									</div>
+								</div>
+							</div>
+						</details>
+						<details className="mb-3 lg:w-1/2 mx-auto">
+							<summary className="header summary bg-light rounded-top rounded-0 rounded-3 py-2 align-items-center px-1 d-flex justify-content-between">
+								<div>
+									<p className="text-secondary fw-bold mb-1 p-0 fs-5">
+										Lawyers
+									</p>
+								</div>
+								<i className="fas fa-chevron-down fa-rotate-180 me-1 fa-2x text-secondary"></i>
+							</summary>
+							<div className="content-body animate__animated animate__fadeIn bg-white rounded-bottom py-2">
+								<div className="container">
+									<div className="w-75">
+										<h4 className="mb-3 p-0 text-muted fw-bold">
+											Apply to work with us as content writer.
+										</h4>
+										<p className="mb-4">
+											lorem
+										</p>
+										<button className="btn btn-warning text-white px-4 py-2 rounded-pill fw-bold">
+											Apply Now
+										</button>
+									</div>
+								</div>
+							</div>
+						</details>
+						<details className="mb-3 lg:w-1/2 mx-auto">
+							<summary className="header summary bg-light rounded-top rounded-0 rounded-3 py-2 align-items-center px-1 d-flex justify-content-between">
+								<div>
+									<p className="text-secondary fw-bold mb-1 p-0 fs-5">
+										Volunteers
+									</p>
+								</div>
+								<i className="fas fa-chevron-down fa-rotate-180 me-1 fa-2x text-secondary"></i>
+							</summary>
+							<div className="content-body animate__animated animate__fadeIn bg-white rounded-bottom py-2">
+								<div className="container">
+									<div className="w-75">
+										<h4 className="mb-3 p-0 text-muted fw-bold">
+											Apply to work with us as content writer.
+										</h4>
+										<p className="mb-4">
+											lorem
+										</p>
+										<button className="btn btn-warning text-white px-4 py-2 rounded-pill fw-bold">
+											Apply Now
+										</button>
+									</div>
+								</div>
+							</div>
+						</details>
+					</section>
+
 					{/* ------------------------------  */}
-					<div className="last-layer py-5">
+					{/* <div className="last-layer py-5">
 						<div className="container _last-layer">
 							<img
 								src="/images/begging-bridge-with-person-who-handed-bread_1150-22948.png"
@@ -170,7 +377,7 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> */}
 				</div>
 			</FrontLayout>
 		</Fragment>

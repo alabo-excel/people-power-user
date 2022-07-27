@@ -16,7 +16,7 @@ import Slider from "../components/camp-slider/Slider"
 
 const user = () => {
     const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
-    const [user, setUser] = useState<IUser>([])
+    const [user, setUser] = useState<IUser>()
     const { query } = useRouter();
     const author = useRecoilValue(UserAtom);
     const [product, setProduct] = useState(false)
@@ -25,9 +25,17 @@ const user = () => {
         console.log(author)
         axios.get(`/user/single/${query.page}`)
             .then(function (response) {
-                console.log(response);
+                // console.log(response);
                 setCampaigns(response.data.campaigns)
                 setUser(response.data.user)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+
+        axios.get('/orgs')
+            .then(function (response) {
+                console.log(response);
             })
             .catch(function (error) {
                 console.log(error);
@@ -87,14 +95,15 @@ const user = () => {
                                     <button className=" bg-transparent p-2 w-44 text-warning">My Activity</button>
                                 </Link>
                                 <button className=" bg-transparent p-2 w-44 text-warning" onClick={() => setProduct(!product)}> Products</button>
-                                <button className=" bg-transparent p-2 w-44 text-warning"> Careers</button>
-
+                                <Link href={'/about'}>
+                                    <button className=" bg-transparent p-2 w-44 text-warning"> Careers</button>
+                                </Link>
                             </div>
                         ) : (<div></div>)}
                     </div>
                     <Slider />
                     <div className="text-center text-lg p-3">
-                        <Link href={`/m`}>
+                        <Link href={`/mycamp`}>
                             <button className="bg-warning w-44 p-2 text-white rounded-full"> Start Cmapaign</button>
                         </Link>
                     </div>
@@ -102,7 +111,9 @@ const user = () => {
                         <div className="w-72 mt-3 h-80 lg:mr-4 rounded-md bg-gray-50">
                             {author?.id === query.page ? (
                                 <div className="text-center font-black text-lg p-3">
-                                    <button className="bg-transparent px-8 w-44 text-warning"> Create Organization</button>
+                                    <Link href={'/create'}>
+                                        <button className="bg-transparent px-8 w-44 text-warning"> Create Organization</button>
+                                    </Link>
                                 </div>
                             ) : (<div></div>)}
                         </div>
