@@ -14,11 +14,11 @@ const updates = () => {
         setLoading(true)
         axios.post('/campaign/update', {
             body: body,
-            campaign: query.page.slice(0,24),
+            campaign: query?.page?.slice(0,24),
         })
             .then(function (response) {
                 console.log(response);
-                router.push(`/campaigns/${query.page.slice(25)}`)
+                router.push(`/campaigns/${query?.page?.slice(25)}`)
                 // setLoading(false)
             })
             .catch(function (error) {

@@ -122,7 +122,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
     //     router.push(`/startcamp?category=${query.category}&&step=preview`);
     // };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e:any) => {
         e.preventDefault();
 
         // if (!user) {

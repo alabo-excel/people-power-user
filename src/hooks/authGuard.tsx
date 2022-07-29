@@ -18,7 +18,7 @@ interface IProps extends AppProps {
 }
 
 const authGuard = (
-	WrappedComponent: NextPage,
+	WrappedComponent: any,
 ): {
 	({ children, ...props }: IProps): JSX.Element;
 	getInitialProps(
@@ -29,7 +29,7 @@ const authGuard = (
 		const setCampaign = useSetRecoilState(UserCampaignAtom);
 
 		console.log(children)
-		
+
 		useQuery(MY_CAMPAIGN, {
 			client: apollo,
 			onCompleted: (data) => {

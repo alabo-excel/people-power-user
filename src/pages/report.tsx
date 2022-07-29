@@ -27,7 +27,7 @@ const report = () => {
     const [report, setReport] = useState("")
     const [message, setMessage] = useState("")
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault();
         try {
             setLoading(true);
@@ -48,6 +48,10 @@ const report = () => {
             setLoading(false);
         }
     };
+    const getValue = (e: any) => {
+        console.log(e.target.value)
+        setReport(e.target.value)
+    }
     return (
         <div>
             {loading ? (<div>
@@ -71,35 +75,35 @@ const report = () => {
                     <div className="mx-10 my-4">
                         <form onSubmit={handleSubmit}>
                             <div className="flex">
-                                <input type="checkbox" className="m-1" value="Deceptive and fraudulent" onClick={(e) => { setReport(e.target.value) }} />
+                                <input type="checkbox" className="m-1" value="Deceptive and fraudulent" onClick={(e) =>  getValue(e) } />
                                 <div className="px-2">Deceptive and fraudulent</div>
                             </div>
                             <div className="flex">
-                                <input type="checkbox" className="m-1" value="Breaches human rights" onClick={(e) => setReport(e.target.value)} />
+                                <input type="checkbox" className="m-1" value="Breaches human rights" onClick={(e) =>  getValue(e) } />
                                 <div className="px-2">Breaches human rights</div>
                             </div>
                             <div className="flex">
-                                <input type="checkbox" className="m-1" value="Guilty of hate speech" onClick={(e) => setReport(e.target.value)} />
+                                <input type="checkbox" className="m-1" value="Guilty of hate speech" onClick={(e) =>  getValue(e) } />
                                 <div className="px-2">Guilty of hate speech</div>
                             </div>
                             <div className="flex">
-                                <input type="checkbox" className="m-1" value="Obscene image" onClick={(e) => setReport(e.target.value)} />
+                                <input type="checkbox" className="m-1" value="Obscene image" onClick={(e) =>  getValue(e) } />
                                 <div className="px-2">Obscene image</div>
                             </div>
                             <div className="flex">
-                                <input type="checkbox" className="m-1" value="Harmful to children" onClick={(e) => setReport(e.target.value)} />
+                                <input type="checkbox" className="m-1" value="Harmful to children" onClick={(e) =>  getValue(e) } />
                                 <div className="px-2">Harmful to children</div>
                             </div>
                             <div className="flex">
-                                <input type="checkbox" className="m-1" value="Incites violence, sucide or harm" onClick={(e) => setReport(e.target.value)} />
+                                <input type="checkbox" className="m-1" value="Incites violence, sucide or harm" onClick={(e) =>  getValue(e) } />
                                 <div className="px-2">Incites violence, sucide or harm</div>
                             </div>
                             <div className="flex">
-                                <input type="checkbox" className="m-1" value="Encourages racism" onClick={(e) => setReport(e.target.value)} />
+                                <input type="checkbox" className="m-1" value="Encourages racism" onClick={(e) =>  getValue(e) } />
                                 <div className="px-2">Encourages racism</div>
                             </div>
                             <div className="flex">
-                                <input type="checkbox" className="m-1" value="Impersonation" onClick={(e) => setReport(e.target.value)} />
+                                <input type="checkbox" className="m-1" value="Impersonation" onClick={(e) =>  getValue(e) } />
                                 <div className="px-2">Impersonation</div>
                             </div>
                             <div>

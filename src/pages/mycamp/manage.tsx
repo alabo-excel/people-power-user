@@ -44,15 +44,28 @@ const GET_CAMPAIGNS = gql`
 `;
 
 interface campaign_id {
-	id: string
+	id: string,
+}
+
+export interface Notification {
+	message: string;
+	createdAt: Date
+}
+
+export interface Reports {
+	reportMessage: string;
+	createdAt: Date
+	reportType: string
+	campaignSlug: string
+	_id: string
 }
 
 const ManageCampaignPage = (): JSX.Element => {
 	const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
 	const [users, setUsers] = useState([])
-	const [reports, setReport] = useState([])
+	const [reports, setReport] = useState<Reports[]>([])
 	const token = cookie.get(TOKEN_NAME);
-	const [notification, setNotification] = useState([])
+	const [notification, setNotification] = useState<Notification[]>([])
 	const router = useRouter();
 
 	const io = socketIOClient(WS_URI as string, {
@@ -86,7 +99,7 @@ const ManageCampaignPage = (): JSX.Element => {
 				console.log(error);
 			})
 	}, [])
-	const resolve = (id) => {
+	const resolve = (id: any) => {
 		axios({
 			method: 'put',
 			url: `https://pow-report.herokuapp.com/report/${id}`,
@@ -105,7 +118,7 @@ const ManageCampaignPage = (): JSX.Element => {
 		onCompleted: (data) => {
 			// console.log(data.getCampaigns)
 			setCampaigns(
-				data.getCampaigns.map(item => ({ ...item, checked: false }))
+				data.getCampaigns.map((item: any) => ({ ...item, checked: false }))
 			);
 		},
 		onError: (error) => console.log(error),
@@ -163,19 +176,21 @@ const ManageCampaignPage = (): JSX.Element => {
 	const handleChangeA = (e: React.ChangeEvent<HTMLInputElement>) => {
 		// Find and update checked Info
 		const camp = campaigns.find(item => item.id.toString() === e.target.id.toString())
-		camp.checked = !camp.checked
+		if (camp != undefined) {
+			camp.checked = !camp?.checked
+		}
 		// setCampaigns(campaigns)
 		console.log(campaigns)
 	};
 
-	const submit = (e) => {
+	const submit = (e: any) => {
 		console.log(e)
 	}
 
 	return (
 		<FrontLayout>
 			<Wrapper className="container">
-				<SendMsgModel show={showModal} onHide={() => setShowModal(false)} submit={submit} />
+				{/* <SendMsgModel show={showModal} onHide={() => setShowModal(false)} submit={submit} /> */}
 				{loading ? (
 					<div className="my-10 w-full text-center">
 						<img className="mx-auto" src="/images/logo.svg" alt="" />
@@ -273,7 +288,7 @@ const ManageCampaignPage = (): JSX.Element => {
 														<img src="/images/logo.svg" className="w-6 h-6 mr-3" alt="" />
 														<div>{notice.message}</div>
 													</div>
-													<div className="text-xs">{notice.createdAt.substring(0, 10)}</div>
+													<div className="text-xs">{notice.createdAt.toDateString()}</div>
 												</div>
 											))}
 										</div>
@@ -316,7 +331,7 @@ const ManageCampaignPage = (): JSX.Element => {
 													<div id={report?.reportMessage.substring(0, 3)} className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 														<div className="accordion-body">
 															{report?.reportMessage}
-															<div>Created At: {report?.createdAt.substring(0, 10)}</div>
+															<div>Created At: {report?.createdAt.toDateString()}</div>
 															<div className="flex mt-2 justify-between tect-xs">
 																<button onClick={() => router.push(`/campaigns/${report?.campaignSlug}`)} className="p-1 text-white bg-warning">View Campaign</button>
 																<button onClick={() => resolve(report?._id)} className="p-1 text-white bg-green-800">Resolve</button>
@@ -362,11 +377,11 @@ const ManageCampaignPage = (): JSX.Element => {
 										<tbody>
 											{campaigns?.map((campaign, i) => (
 												<tr key={i}>
-													<td><Checkbox
+													{/* <td><Checkbox
 														handleChange={handleChangeA}
 														isChecked={i.checked}
 														label={`${campaign.id}`}
-													/></td>
+													/></td> */}
 													<td>
 														<i
 															className={`fas fa-dot-circle me-2 ${campaign?.status === "Pending"

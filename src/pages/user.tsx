@@ -187,7 +187,7 @@ const user = () => {
                                         <div className="text-sm">{camp.excerpt}</div>
                                         <div className="flex justify-between mr-10">
                                             <div>
-                                                <div className="text-gray-900 text-xs"> Created At {camp.createdAt.substring(0, 10)}</div>
+                                                <div className="text-gray-900 text-xs"> Created At {camp.createdAt.toDateString()}</div>
                                                 {/* <div className="text-gray-900 text-xs">Created By { } Alabo Excel</div> */}
                                             </div>
                                             {/* <div className="flex cursor-pointer">

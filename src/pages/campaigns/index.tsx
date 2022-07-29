@@ -80,10 +80,9 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 		router.push('/startcamp')
 	}
 	const changeCategory = (event: React.MouseEvent<HTMLDivElement>): void => {
-		const item: HTMLDivElement = event.currentTarget
-		// const category: string = item.textContent
-		const text = item.lastChild.innerText
 
+		const item: any = event.currentTarget
+		const text = item?.lastChild?.innerText
 		if (text === 'All') {
 			setQueryCampaigns(campaigns)
 			return
