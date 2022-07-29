@@ -8,11 +8,11 @@ import { useState } from "react";
 import { ICampaign, IUser, IOrg } from "types/Applicant.types";
 import Link from "next/link";
 import axios from 'axios';
-import { useRouter } from "next/router";
 import { sassNull } from 'sass';
 import { useRecoilValue } from "recoil";
 import { UserAtom } from "atoms/UserAtom";
 import Slider from "../components/camp-slider/Slider"
+import router, { useRouter } from "next/router";
 
 const user = () => {
     const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
@@ -23,7 +23,7 @@ const user = () => {
     const [product, setProduct] = useState(false)
 
     useEffect(() => {
-        console.log(author)
+        // console.log(author)
         axios.get(`/user/single/${query.page}`)
             .then(function (response) {
                 // console.log(response);
@@ -34,7 +34,7 @@ const user = () => {
                 console.log(error);
             })
 
-        axios.post('/orgs/user-org')
+        axios.post('/orgs/user/orgs')
             .then(function (response) {
                 console.log(response);
                 setOrgs(response.data)
@@ -44,11 +44,13 @@ const user = () => {
             })
     }, [])
 
-    const singleOrg = () => {
-        axios.get(`/orgs/${query.page}`)
+    const singleOrg = (id: string) => {
+        axios.get(`/orgs/${id}`)
             .then(function (response) {
-                setCampaigns(response.data)
+                console.log(response)
+                setCampaigns([])
                 setUser(response.data)
+                router.push(`/user?page=${id}`)
             })
             .catch(function (error) {
                 console.log(error);
@@ -128,16 +130,14 @@ const user = () => {
                                     </Link>
                                     <div>
                                         {orgs.map((org) => (
-                                            <Link href={`/user?page=${org._id}`}>
-                                                <div className="flex cursor-pointer my-2" onClick={() => singleOrg}>
-                                                    {org?.image === "Upload org Image" ? (
-                                                        <img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
-                                                    ) : (
-                                                        <img className="w-8 h-8 rounded-full" src={org?.image} alt="" />
-                                                    )}
-                                                    <p className="pl-2 mt-2 capitalize">{org?.orgName}</p>
-                                                </div>
-                                            </Link>
+                                            <div className="flex cursor-pointer my-2" onClick={() => singleOrg(org?._id)}>
+                                                {org?.image === "Upload org Image" ? (
+                                                    <img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
+                                                ) : (
+                                                    <img className="w-8 h-8 rounded-full" src={org?.image} alt="" />
+                                                )}
+                                                <p className="pl-2 mt-2 capitalize">{org?.orgName}</p>
+                                            </div>
                                         ))}
                                     </div>
                                 </div>
