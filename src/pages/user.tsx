@@ -5,7 +5,7 @@ import { useQuery } from "@apollo/client";
 import { MY_CAMPAIGN } from "apollo/queries/campaignQuery";
 import { apollo } from "apollo";
 import { useState } from "react";
-import { ICampaign, IUser } from "types/Applicant.types";
+import { ICampaign, IUser, IOrg } from "types/Applicant.types";
 import Link from "next/link";
 import axios from 'axios';
 import { useRouter } from "next/router";
@@ -17,6 +17,7 @@ import Slider from "../components/camp-slider/Slider"
 const user = () => {
     const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
     const [user, setUser] = useState<IUser>()
+    const [orgs, setOrgs] = useState<IOrg[]>([])
     const { query } = useRouter();
     const author = useRecoilValue(UserAtom);
     const [product, setProduct] = useState(false)
@@ -33,15 +34,26 @@ const user = () => {
                 console.log(error);
             })
 
-        axios.get('/orgs')
+        axios.post('/orgs/user-org')
             .then(function (response) {
                 console.log(response);
+                setOrgs(response.data)
             })
             .catch(function (error) {
                 console.log(error);
             })
     }, [])
 
+    const singleOrg = () => {
+        axios.get(`/orgs/${query.page}`)
+            .then(function (response) {
+                setCampaigns(response.data)
+                setUser(response.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
     // const { loading } = useQuery(MY_CAMPAIGN, {
     //     client: apollo,
     //     onCompleted: (data) => {
@@ -110,10 +122,24 @@ const user = () => {
                     <div className="lg:flex mt-3">
                         <div className="w-72 mt-3 h-80 lg:mr-4 rounded-md bg-gray-50">
                             {author?.id === query.page ? (
-                                <div className="text-center font-black text-lg p-3">
+                                <div className="text-center font-black text-base p-3">
                                     <Link href={'/create'}>
                                         <button className="bg-transparent px-8 w-44 text-warning"> Create Organization</button>
                                     </Link>
+                                    <div>
+                                        {orgs.map((org) => (
+                                            <Link href={`/user?page=${org._id}`}>
+                                                <div className="flex cursor-pointer my-2" onClick={() => singleOrg}>
+                                                    {org?.image === "Upload org Image" ? (
+                                                        <img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
+                                                    ) : (
+                                                        <img className="w-8 h-8 rounded-full" src={org?.image} alt="" />
+                                                    )}
+                                                    <p className="pl-2 mt-2 capitalize">{org?.orgName}</p>
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
                                 </div>
                             ) : (<div></div>)}
                         </div>
@@ -151,9 +177,11 @@ const user = () => {
                                             </ul>
                                         </div>
                                     </div>
+
                                     <div className="w-96 mr-4">
                                         <img className="w-96 h-full" src={camp.image} alt="" />
                                     </div>
+
                                     <div className="w-full my-auto">
                                         <div className="uppercase text-lg font-bold">{camp.title}</div>
                                         <div className="text-sm">{camp.excerpt}</div>

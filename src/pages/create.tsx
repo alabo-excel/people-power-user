@@ -24,7 +24,7 @@ function create() {
                 method: 'post',
                 url: HTTP_URI + '/orgs',
                 data: {
-                    orgName: orgName,
+                    name: orgName,
                     email: orgEmail,
                     phone: orgPhone,
                     description: orgDes

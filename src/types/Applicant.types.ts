@@ -52,6 +52,25 @@ export interface IUser extends Document {
 	description: string;
 }
 
+export interface IOrg extends Document {
+	author: string;
+	orgName: string;
+	linkedIn: string;
+	facebook: string;
+	image: string;
+	email: string;
+	password: string;
+	phone: string;
+	instagram: string;
+	twitter: string;
+	following: string[];
+	followers: string[];
+	followersCount: number;
+	followingCount: number;
+	country: string;
+	state: string
+}
+
 export interface IApplicant extends Document {
 	name: string;
 	email: string;

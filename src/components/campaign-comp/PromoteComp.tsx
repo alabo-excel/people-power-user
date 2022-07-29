@@ -138,7 +138,7 @@ const PromoteComp = (): JSX.Element => {
 										</ul>
 										<div>
 											{transactions && transactions?.length >1 ? (transactions.slice(0,6).map((item : any) => (
-												<div className="bg-gray-100 my-2 p-2">{item?.purpose}</div>
+												<div className="bg-gray-100 my-2 p-2">{item?.message}</div>
 											))):(null)}
 										</div>
 										<div className="my-5 text-center promote-btn ">
