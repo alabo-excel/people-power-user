@@ -136,7 +136,7 @@ const user = () => {
                                                 ) : (
                                                     <img className="w-8 h-8 rounded-full" src={org?.image} alt="" />
                                                 )}
-                                                <p className="pl-2 mt-2 capitalize">{org?.orgName}</p>
+                                                <p className="pl-2 mt-2 capitalize">{org?.name}</p>
                                             </div>
                                         ))}
                                     </div>
@@ -187,7 +187,7 @@ const user = () => {
                                         <div className="text-sm">{camp.excerpt}</div>
                                         <div className="flex justify-between mr-10">
                                             <div>
-                                                <div className="text-gray-900 text-xs"> Created At {camp.createdAt.toDateString()}</div>
+                                                <div className="text-gray-900 text-xs"> Created At {typeof camp.createdAt}</div>
                                                 {/* <div className="text-gray-900 text-xs">Created By { } Alabo Excel</div> */}
                                             </div>
                                             {/* <div className="flex cursor-pointer">

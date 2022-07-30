@@ -15,6 +15,7 @@ function create() {
     const [orgEmail, setOrgEmail] = useState('')
     const [orgPhone, setOrgPhone] = useState('')
     const [orgDes, setOrgDes] = useState('')
+    const [orgWeb, setOrgWeb] = useState('')
     const[loading, setLoading] = useState(false)
 
     const handleSubmit = async () => {
@@ -27,6 +28,7 @@ function create() {
                     name: orgName,
                     email: orgEmail,
                     phone: orgPhone,
+                    website: orgWeb,
                     description: orgDes
                 }
             });
@@ -52,6 +54,8 @@ function create() {
                     <div className="my-2">
                         <input type="number" required className="p-3 w-full" placeholder="Enter Organizations Phone Number" onChange={(e) => setOrgPhone(e.target.value)} />
                     </div>
+                    <input type="text" required className="p-3 w-full" placeholder="Enter Organizations Website" onChange={(e) => setOrgWeb(e.target.value)} />
+
                     <div className="my-2">
                         <textarea required className="h-20 w-full" placeholder="Enter a Short Description" onChange={(e) => setOrgDes(e.target.value)} ></textarea>
                     </div>

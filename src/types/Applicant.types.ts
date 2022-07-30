@@ -54,7 +54,7 @@ export interface IUser extends Document {
 
 export interface IOrg extends Document {
 	author: string;
-	orgName: string;
+	name: string;
 	linkedIn: string;
 	facebook: string;
 	image: string;
@@ -68,7 +68,9 @@ export interface IOrg extends Document {
 	followersCount: number;
 	followingCount: number;
 	country: string;
-	state: string
+	state: string;
+	city: string;
+	id: string
 }
 
 export interface IApplicant extends Document {
