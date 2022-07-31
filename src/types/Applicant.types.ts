@@ -179,7 +179,7 @@ export interface ICampaign extends Document {
 	slug: string;
 	status: CampaignStatusEnum;
 	author: IUser;
-	createdAt: Date;
+	createdAt: string;
 	updatedAt: Date;
 	addedFrom: string;
 	category: string;

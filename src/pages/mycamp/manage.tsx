@@ -49,12 +49,12 @@ interface campaign_id {
 
 export interface Notification {
 	message: string;
-	createdAt: Date
+	createdAt: string
 }
 
 export interface Reports {
 	reportMessage: string;
-	createdAt: Date
+	createdAt: string
 	reportType: string
 	campaignSlug: string
 	_id: string
@@ -288,7 +288,7 @@ const ManageCampaignPage = (): JSX.Element => {
 														<img src="/images/logo.svg" className="w-6 h-6 mr-3" alt="" />
 														<div>{notice.message}</div>
 													</div>
-													<div className="text-xs">{notice.createdAt.toDateString()}</div>
+													<div className="text-xs">{notice.createdAt.slice(0, 10)}</div>
 												</div>
 											))}
 										</div>
@@ -331,7 +331,7 @@ const ManageCampaignPage = (): JSX.Element => {
 													<div id={report?.reportMessage.substring(0, 3)} className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
 														<div className="accordion-body">
 															{report?.reportMessage}
-															<div>Created At: {report?.createdAt.toDateString()}</div>
+															<div>Created At: {report?.createdAt.slice(0, 10)}</div>
 															<div className="flex mt-2 justify-between tect-xs">
 																<button onClick={() => router.push(`/campaigns/${report?.campaignSlug}`)} className="p-1 text-white bg-warning">View Campaign</button>
 																<button onClick={() => resolve(report?._id)} className="p-1 text-white bg-green-800">Resolve</button>
