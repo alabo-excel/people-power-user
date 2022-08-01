@@ -22,7 +22,7 @@ const Header = (): JSX.Element => {
 	const [notification, setNotification] = useState([])
 
 	const navItems = (loggedIn: boolean) => [
-		{ title: "Start Campaign", link: "startcamp" },
+		{ title: "Home", link: "startcamp" },
 		{ title: "My Profile", link: loggedIn ? `user?page=${user.id}` : "auth" },
 		{ title: "Explore", link: "campaigns" },
 	];

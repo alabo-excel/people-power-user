@@ -77,7 +77,7 @@ const addadmin = () => {
                                         </div>
                                         <button className="p-2 border borger-warning w-44 mx-1">N35, 000/Monthly</button>
                                     </div>
-                                    <div className="flex my-1 justify-between">
+                                    <div className="flex my-3 justify-between">
                                         <div className="my-auto mx-3">
                                             <input type="checkbox" className="p-4" />
                                         </div>

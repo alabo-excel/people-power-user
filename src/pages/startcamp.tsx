@@ -51,12 +51,12 @@ const StartCampPage = (): JSX.Element => {
 						<div>
 							<div className="text-3xl font-bold text-center">Select Account to Start Campaign From</div>
 							<div className="flex justify-evenly text-center my-32">
-								<div className="w-80 pointer-cursor" onClick={() => setAccount("user")}>
+								<div className="w-80 cursor-pointer" onClick={() => setAccount("user")}>
 									<img src="/images/logo.svg" className="w-16 h-16 mx-auto" alt="" />
 									<div className="text-base my-3 capitalize">{user?.name}</div>
 								</div>
 								{orgs.map(org => (
-									<div className="w-80 pointer-cursor" onClick={() => {setAccount("org"), singleOrg(org._id)}}>
+									<div className="w-80 cursor-pointer" onClick={() => {setAccount("org"), singleOrg(org._id)}}>
 										<img src="/images/logo.svg" className="w-16 h-16 mx-auto" alt="" />
 										<div className="text-base my-3 capitalize">{org?.name}</div>
 									</div>
