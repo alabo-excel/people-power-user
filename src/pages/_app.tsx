@@ -43,7 +43,7 @@ Router.events.on("routeChangeStart", () => {
 Router.events.on("routeChangeComplete", () => Nprogress.done());
 Router.events.on("routeChangeError", () => Nprogress.done());
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+function MyApp({ Component, pageProps }: any): JSX.Element {
 	const client = useApollo(pageProps.apollo);
 
 	return (
@@ -67,13 +67,13 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 				<Script src="../scripts/wisernotify.js"></Script>
 			</Head>
 			<ApolloProvider client={client}>
-				{/* <RecoilRoot> */}
+				<RecoilRoot>
 					<ThemeProvider theme={theme}>
 						<Layout>
 							<Component {...pageProps} />
 						</Layout>
 					</ThemeProvider>
-				{/* </RecoilRoot> */}
+				</RecoilRoot>
 			</ApolloProvider>
 		</Fragment>
 	);
