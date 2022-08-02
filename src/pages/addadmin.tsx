@@ -1,9 +1,67 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import FrontLayout from "layout/FrontLayout";
 import Head from "next/head";
+import axios from 'axios';
+import router, { useRouter } from "next/router";
+import { IUser } from "types/Applicant.types";
 
 const addadmin = () => {
     const [admin, setAdmin] = useState(true)
+    const [users, setUsers] = useState<IUser[]>([])
+    const [searched, setsearched] = useState<IUser[]>([])
+    const { query } = useRouter();
+    const [role, setRole] = useState("")
+    const [adminTag, setAdminTag] = useState(false)
+    const [editor, setEditor] = useState(false)
+    const [id, setId] = useState("")
+
+
+    useEffect(() => {
+        axios.get(`/user`)
+            .then(function (response) {
+                console.log(response);
+                setUsers(response.data)
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }, [])
+
+    const addAdmin = () => {
+        axios.post('/orgs/operator', {
+            userId: id,
+            role: role,
+            orgId: query.page
+        })
+            .then(function (response) {
+                console.log(response);
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+    const setvalue = () => {
+        if (editor === true) {
+            setRole("editor")
+            console.log(role)
+        } else if (adminTag === true) {
+            setRole("admin")
+            console.log(role)
+        } else {
+            setRole("")
+            console.log(role)
+        }
+    }
+
+    const search = (e: any) => {
+        users.map((user) => {
+            if (user.firstName === e.target.value) {
+                setsearched([...searched, user])
+                console.log(searched)
+            }
+        })
+    }
 
     return (
         <FrontLayout >
@@ -27,12 +85,18 @@ const addadmin = () => {
                             <div className="mt-20 w-2/3 mx-auto">
                                 <div className="text-center text-3xl font-bold">Add an Admin</div>
                                 <div className="text-lg my-1">Add Page admin</div>
-                                <input type="text" className="p-3 rounded-md border border-gray w-full" placeholder="Type here to search for a user to assign role" />
+                                <input type="text" className="p-3 rounded-md border border-gray w-full" onChange={(e) => search(e)} placeholder="Type here to search for a user to assign role" />
+                                <div>
+                                    {searched.map((search) => (
+                                        <div className="p-3 bg-gray-100 text-base mb-1" onClick={() => setId(search.id)}>{search.firstName} {search.lastName}</div>
+                                    ))}
+                                </div>
                                 <div className="text-lg mt-4">Assign an admin role</div>
                                 <div>
+
                                     <div className="flex my-1">
                                         <div className="my-auto mx-3">
-                                            <input type="checkbox" className="p-4" />
+                                            <input type="checkbox" className="p-4" value="admin" onChange={() => { setvalue(), setAdminTag(!adminTag) }} />
                                         </div>
                                         <div className="my-auto">
                                             <div className="text-lg font-bold">Admin</div>
@@ -41,7 +105,7 @@ const addadmin = () => {
                                     </div>
                                     <div className="flex my-1">
                                         <div className="my-auto mx-3">
-                                            <input type="checkbox" className="p-4" />
+                                            <input type="checkbox" className="p-4" value="editor" onChange={() => { setvalue(), setEditor(!editor) }} />
                                         </div>
                                         <div className="my-auto">
                                             <div className="text-lg font-bold">Editor</div>
@@ -50,7 +114,7 @@ const addadmin = () => {
                                     </div>
                                 </div>
                                 <div className="text-center my-4">
-                                    <button className="p-2 bg-warning w-40 text-white">Assign</button>
+                                    <button onClick={() => addAdmin} className="p-2 bg-warning w-40 text-white">Assign</button>
                                 </div>
                             </div>
                         ) : (

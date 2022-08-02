@@ -20,7 +20,7 @@ const CampaignNotificationComp = (): JSX.Element => {
 	});
 
 	// useEffect(() => {
-	// 	io.on(CampaignMessage.All, (data) => setNotices((old) => [...old, data]));
+	// 	io.on(CampaignMessage.All, (data) => setNotices((old) => [old, data]));
 	// }, []);
 
 	return (

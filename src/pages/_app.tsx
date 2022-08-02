@@ -67,13 +67,13 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
 				<Script src="../scripts/wisernotify.js"></Script>
 			</Head>
 			<ApolloProvider client={client}>
-				<RecoilRoot>
+				{/* <RecoilRoot> */}
 					<ThemeProvider theme={theme}>
 						<Layout>
 							<Component {...pageProps} />
 						</Layout>
 					</ThemeProvider>
-				</RecoilRoot>
+				{/* </RecoilRoot> */}
 			</ApolloProvider>
 		</Fragment>
 	);

@@ -21,6 +21,7 @@ const user = () => {
     const { query } = useRouter();
     const author = useRecoilValue(UserAtom);
     const [product, setProduct] = useState(false)
+    const [organization, setOrganization] = useState(false)
 
     useEffect(() => {
         // console.log(author)
@@ -51,6 +52,7 @@ const user = () => {
                 setCampaigns([])
                 setUser(response.data)
                 router.push(`/user?page=${id}`)
+                setOrganization(true)
             })
             .catch(function (error) {
                 console.log(error);
@@ -123,6 +125,35 @@ const user = () => {
                     </div>
                     <div className="lg:flex mt-3">
                         <div className="w-72 mt-3 h-80 lg:mr-4 rounded-md bg-gray-50">
+                            {organization === true ? (
+                                <div className="text-center font-black text-base p-3">
+                                    <Link href={`/addadmin?page=${query.page}`}>
+                                        <button className="bg-transparent px-8 w-44 text-warning"> Add Admin</button>
+                                    </Link>
+                                    <div className="flex cursor-pointer my-2" onClick={() => {router.push(`/user?page=${author?.id}`), setOrganization(false) }}>
+                                        {user?.image === "Upload org Image" ? (
+                                            <img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
+                                        ) : (
+                                            <img className="w-8 h-8 rounded-full" src={author?.image} alt="" />
+                                        )}
+                                        <p className="pl-2 mt-2 capitalize">{author?.name}</p>
+                                    </div>
+                                    <div>
+                                        {orgs.map((org) => (
+                                            <div className="flex cursor-pointer my-2" onClick={() => singleOrg(org?._id)}>
+                                                {org?.image === "Upload org Image" ? (
+                                                    <img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
+                                                ) : (
+                                                    <img className="w-8 h-8 rounded-full" src={org?.image} alt="" />
+                                                )}
+                                                <p className="pl-2 mt-2 capitalize">{org?.name}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            ) : (
+                                <div></div>
+                            )}
                             {author?.id === query.page ? (
                                 <div className="text-center font-black text-base p-3">
                                     <Link href={'/create'}>
