@@ -1,3 +1,4 @@
+import React from "react";
 import axios from "axios";
 import ChangePassword from "components/auth/ChangePassword";
 import ForgotPassword from "components/auth/ForgotPassword";
@@ -7,7 +8,6 @@ import VerifyToken from "components/auth/VerifyToken";
 import AuthLayout from "layout/AuthLayout";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
-import React from "react";
 
 enum QueryOptions {
 	VERIFY_TOKEN = "verify token",

@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { MY_CAMPAIGN } from "apollo/queries/campaignQuery";
 import { UserAtom } from "atoms/UserAtom";
@@ -11,7 +12,6 @@ import FrontLayout from "layout/FrontLayout";
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import { ICampaign } from "types/Applicant.types";
 import { apollo } from "apollo";
