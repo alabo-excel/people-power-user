@@ -43,7 +43,7 @@ Router.events.on("routeChangeStart", () => {
 Router.events.on("routeChangeComplete", () => Nprogress.done());
 Router.events.on("routeChangeError", () => Nprogress.done());
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: any): JSX.Element {
 	const client = useApollo(pageProps.apollo);
 
 	return (
