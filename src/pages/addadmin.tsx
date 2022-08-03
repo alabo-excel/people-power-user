@@ -114,7 +114,7 @@ const addadmin = () => {
                                     </div>
                                 </div>
                                 <div className="text-center my-4">
-                                    <button onClick={() => addAdmin} className="p-2 bg-warning w-40 text-white">Assign</button>
+                                    <button onClick={() => addAdmin()} className="p-2 bg-warning w-40 text-white">Assign</button>
                                 </div>
                             </div>
                         ) : (
