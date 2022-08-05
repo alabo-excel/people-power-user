@@ -11,7 +11,7 @@ const CampaignCard = ({ camp }: { camp: ICampaign }): JSX.Element => {
 				{/* <Link href={`/campaigns/${camp?.slug}`}> */}
 				<a className="text-decoration-none link-dark">
 					<img src={camp?.image} className="card-image" alt={camp?.title} />
-					<div className="card-body ">
+					<div className="card-body p-3">
 						<Link href={`/user?page=${camp?.author.id}`}>
 							<div className="flex cursor-pointer">
 								{camp?.author.image === null ? (
