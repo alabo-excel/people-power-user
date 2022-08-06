@@ -48,7 +48,7 @@ export const SignupCom = ({
 	const [info, setInfo] = useState({
 		email: "",
 		password: "",
-		password2: "",
+		// password2: "",
 		name: "",
 	});
 	const [passwordShown, setPasswordShown] = useState(false);
@@ -67,7 +67,7 @@ export const SignupCom = ({
 	const handleLogin = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!info.email || !info.password) return;
-		if (info.password !== info.password2) return alert("Passwords must match");
+		// if (info.password !== info.password2) return alert("Passwords must match");
 		setLoading(true);
 		try {
 			const { data } = await axios.post("/auth/register", info);
