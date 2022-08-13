@@ -38,7 +38,7 @@ const sendMsgModel = (props: Props): JSX.Element => {
               <Button
                 className='btn btn-warning'
                 // onClick={() => submit}
-                variant='primary'>
+                >
                 Submit Now
               </Button>
             </Modal.Footer>

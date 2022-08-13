@@ -32,11 +32,11 @@ const PromoteModalComp = ({show,onHide}:{show:boolean,onHide():void}): JSX.Eleme
                 onClick={() =>
                   router.push(`/promote?slug=${query?.slug}&view=true`)
                 }
-                variant='primary'>
+                >
                 Promote Now
               </Button>
 
-              <Button variant='secondary' onClick={()=>router.push(`/campaigns/share?slug=${query?.slug}`)}>
+              <Button  onClick={()=>router.push(`/campaigns/share?slug=${query?.slug}`)}>
                 Not now
               </Button>
             </Modal.Footer>
