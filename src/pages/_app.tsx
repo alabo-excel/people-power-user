@@ -2,7 +2,7 @@ import "styles/index.scss";
 import "animate.css";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "react-mde/lib/styles/css/react-mde-all.css";
-
+import 'rsuite/dist/rsuite.min.css';
 import "styles/style.scss";
 import Head from "next/head";
 import Router from "next/router";
@@ -19,7 +19,7 @@ import { HTTP_URI, TOKEN_NAME, WS_URI } from "utils/constants";
 import cookie from "js-cookie";
 import { ThemeProvider } from "styled-components";
 import { theme } from "utils/theme";
-import socketIOClient from "socket.io-client";
+// import socketIOClient from "socket.io-client";
 import { getIP } from "utils";
 import Cookies from "js-cookie";
 import Script from 'next/script'
@@ -29,9 +29,9 @@ if (process.browser) {
 }
 const token = cookie.get(TOKEN_NAME);
 
-export const io = socketIOClient(WS_URI as string, {
-	extraHeaders: { Authorization: token || "" },
-});
+// export const io = socketIOClient(WS_URI as string, {
+// 	extraHeaders: { Authorization: token || "" },
+// });
 
 axios.defaults.baseURL = HTTP_URI;
 axios.defaults.withCredentials = true;

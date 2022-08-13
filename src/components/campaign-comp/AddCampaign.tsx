@@ -10,6 +10,7 @@ import styled from "styled-components";
 import { ICampaign } from "types/Applicant.types";
 import PromoteComp from "./PromoteComp";
 import ShareChampaign from "./ShareChampaign";
+import Link from "next/link";
 
 interface IFile {
 	file: string;
@@ -36,7 +37,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 		title: "",
 		aim: "",
 		target: "",
-		body: "Type the issues that you want to be addressed...",
+		body: "",
 	});
 
 	useEffect(() => {
@@ -80,8 +81,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 			alert("Image upload is empty");
 			return false;
 		}
-
-		// localStorage.setItem("filePreview", JSON.stringify(filePreview));
+		localStorage.setItem("filePreview", JSON.stringify(filePreview));
 
 		const payload = {
 			...camp,
@@ -137,7 +137,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 
 								<div className="upload-pic flex-column d-flex align-items-center  justify-content-center border-green mb-4">
 									{filePreview?.type === "image" && (
-										<img src={filePreview.file} width="500" />
+										<img src={filePreview.file} width="500" height="500" className="h-80" />
 									)}
 									{filePreview?.type === "video" && (
 										<video
@@ -166,7 +166,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 											onClick={() => uploadRef.current?.click()}
 											type="button"
 										>
-											{filePreview?.name || "Upload Image"}
+											{filePreview?.name || "Upload Image/Video"}
 										</button>
 									</div>
 								</div>
@@ -187,7 +187,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 								</div>
 								<div className="target mb-4">
 									<textarea
-										placeholder="Who are you addressing this campaign to ? (e.g. Commissioner of Police Rivers) "
+										placeholder="Who are you addressing this campaign to ? (e.g. President, Prime Minister, Governor, Senator, Rep etc) "
 										className="form-control border-green"
 										onChange={(e) =>
 											setCamp({
@@ -199,6 +199,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 										value={camp.target}
 									></textarea>
 								</div>
+								<div className="text-base mb-2">Type the issues that you want to be addressed...</div>
 								<div className="body mb-4 border-green">
 									<ReactMde
 										value={camp.body}
@@ -212,19 +213,20 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 										}
 									/>
 								</div>
-								<div className="btn-holder d-flex justify-content-end">
-									<button
-										type="reset"
-										className="btn btn-outline-warning px-4 py-2 me-2"
-									>
-										Save as draft
-									</button>
+								<div className="btn-holder d-flex justify-content-center">
+									<Link href="/campaigns">
+										<button
+											className="btn btn-outline-warning px-4 py-2 me-2"
+										>
+											Save
+										</button>
+									</Link>
 
 									<button
 										type="submit"
 										className="btn ml-4 btn-warning text-light px-4 py-2 font-weight-bold"
 									>
-										Save and preview
+										Preview and Launch
 									</button>
 								</div>
 							</form>

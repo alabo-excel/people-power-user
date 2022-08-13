@@ -12,7 +12,7 @@ import SendMsgModel from "../../components/campaign-comp/SendMessage";
 import { useRouter } from "next/router";
 
 
-import socketIOClient from "socket.io-client";
+// import socketIOClient from "socket.io-client";
 import { TOKEN_NAME, WS_URI } from "../../utils/constants";
 import cookie from "js-cookie";
 
@@ -68,13 +68,13 @@ const ManageCampaignPage = (): JSX.Element => {
 	const [notification, setNotification] = useState<Notification[]>([])
 	const router = useRouter();
 
-	const io = socketIOClient(WS_URI as string, {
-		extraHeaders: { Authorization: token || "" },
-	})
+	// const io = socketIOClient(WS_URI as string, {
+	// 	extraHeaders: { Authorization: token || "" },
+	// })
 
-	io.on('get-campaigns', msg => {
-		setNotification(msg)
-	})
+	// io.on('get-campaigns', msg => {
+	// 	setNotification(msg)
+	// })
 	// console.log(notification)
 
 	useEffect(() => {

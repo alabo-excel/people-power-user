@@ -5,7 +5,7 @@ import {
 	NormalizedCacheObject,
 	split,
 } from "@apollo/client";
-import { WebSocketLink } from "@apollo/client/link/ws";
+// import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
 import fetch from "isomorphic-unfetch";
 import jscookie from "js-cookie";
@@ -52,22 +52,22 @@ const createLink = (initialState: any, token: string) => {
 		},
 	});
 
-	const wsLink: any = process.browser
-		? new WebSocketLink({
-			uri: `${WS_URI}/api/v1/graphql`,
-			options: {
-				reconnect: true,
-				lazy: true,
-				timeout: 20000,
+	// const wsLink: any = process.browser
+	// 	? new WebSocketLink({
+	// 		uri: `${WS_URI}/api/v1/graphql`,
+	// 		options: {
+	// 			reconnect: true,
+	// 			lazy: true,
+	// 			timeout: 20000,
 
-				connectionParams: () => ({
-					header: {
-						Authorization: cookie || " ",
-					},
-				}),
-			},
-		})
-		: null;
+	// 			connectionParams: () => ({
+	// 				header: {
+	// 					Authorization: cookie || " ",
+	// 				},
+	// 			}),
+	// 		},
+	// 	})
+	// 	: null;
 
 	const link = process.browser
 		? split(
@@ -78,7 +78,7 @@ const createLink = (initialState: any, token: string) => {
 					definition.operation === "subscription"
 				);
 			},
-			wsLink,
+			// wsLink,
 			httpLink,
 		)
 		: httpLink;

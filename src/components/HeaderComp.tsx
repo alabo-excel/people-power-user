@@ -6,7 +6,7 @@ import React, { useState } from "react";
 import { useRecoilValue } from "recoil";
 import UserMenu from "./user-profile/UserMenu";
 
-import socketIOClient from "socket.io-client";
+// import socketIOClient from "socket.io-client";
 import { TOKEN_NAME, WS_URI } from "../utils/constants";
 import cookie from "js-cookie";
 
@@ -22,18 +22,18 @@ const Header = (): JSX.Element => {
 	const [notification, setNotification] = useState([])
 
 	const navItems = (loggedIn: boolean) => [
-		{ title: "Home", link: "startcamp" },
+		{ title: "Start Campaign", link: "startcamp" },
 		{ title: "My Profile", link: loggedIn ? `user?page=${user.id}` : "auth" },
 		{ title: "Explore", link: "campaigns" },
 	];
 	
-	const io = socketIOClient(WS_URI as string, {
-		extraHeaders: { Authorization: token || "" },
-	})
+	// const io = socketIOClient(WS_URI as string, {
+	// 	extraHeaders: { Authorization: token || "" },
+	// })
 
-	io.on('get-campaigns', msg => {
-		setNotification(msg)
-	})
+	// io.on('get-campaigns', msg => {
+	// 	setNotification(msg)
+	// })
 
 	// console.log(notification)
 

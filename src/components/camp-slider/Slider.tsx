@@ -99,7 +99,7 @@ const SwipeToSlide = () => {
 							<div className="py-2 relative" >
 								{!camp.promoted ? (
 									<Link href={`/promote?slug=${camp.slug}`}>
-										<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold">
+										<a className="btn border-warning btn-sm  rounded-pill px-3 fw-bold">
 											Promote
 										</a>
 									</Link>
@@ -113,7 +113,7 @@ const SwipeToSlide = () => {
 
 									<small className="mt-10 pt-0 break-all">
 										<span className="text-xs">{camp?.excerpt.substring(0, 100)}
-											<button type="button" className="text-xs" onClick={() => {
+											<button type="button" className="text-xs text-warning" onClick={() => {
 												setShowModal(true)
 												setPosition(i)
 											}}>   ...view more
@@ -126,16 +126,16 @@ const SwipeToSlide = () => {
 									{camp.author.id === user?.id ? (
 										<div className="text-center w-full">
 											<Link href={`/promote?slug=${camp.slug}`}>
-												<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold">
+												<a className="btn border-warning btn-sm  rounded-pill px-3 fw-bold">
 													Promote
 												</a>
 											</Link>
 										</div>
 									) : (<div className="text-center w-full">
 										<Link href={`/campaigns/${camp.slug}`}>
-												<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold">
-													Endorse
-												</a>
+											<a className="btn border-warning btn-sm  rounded-pill px-3 fw-bold">
+												Endorse
+											</a>
 										</Link>
 									</div>)}
 								</div>

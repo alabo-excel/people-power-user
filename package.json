@@ -50,7 +50,7 @@
     "recoil": "^0.7.4",
     "rehype-raw": "^5.1.0",
     "remove": "^0.1.5",
-    "rsuite": "^4.10.2",
+    "rsuite": "^5.16.5",
     "sass": "^1.32.12",
     "slick-carousel": "^1.8.1",
     "socket.io-client": "^4.1.2",

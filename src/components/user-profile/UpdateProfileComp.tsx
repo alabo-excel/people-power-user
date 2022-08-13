@@ -8,6 +8,7 @@ import { IUser } from "types/Applicant.types";
 const UpdateProfileComp = (): JSX.Element => {
 	const user = useRecoilValue(UserAtom);
 	const [loading, setLoading] = useState(false);
+	const [description, setDescription] = useState("")
 	const [info, setInfo] = useState<Partial<IUser>>(user);
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -81,22 +82,23 @@ const UpdateProfileComp = (): JSX.Element => {
 					/>
 				</div>
 			</div>
-			{/* <div className="row mb-3 row-cols-1">
+			<div className="row mb-3 row-cols-1">
 				<div className="col">
 					<label className="form-label fw-bold" htmlFor="bio">
-						Bio/ About
+						Bio/Description
 					</label>
 					<textarea
-						name="bio"
+						name="description"
 						className="form-control"
-						// value={info?.bio}
 						onChange={handleChange}
 						disabled
 						cols={30}
 						rows={10}
+						value={info?.description}
 					></textarea>
 				</div>
-			</div> */}
+			</div>
+
 			{/* <div className="row g-md-4 mb-3 row-cols-1 g-2 row-cols-md-2">
 				<div className="col">
 					<label className="form-label fw-bold" htmlFor="language">
@@ -130,7 +132,6 @@ const UpdateProfileComp = (): JSX.Element => {
 						type="text"
 						className="form-control"
 						placeholder={user?.country}
-						disabled
 					/>
 				</div>
 
