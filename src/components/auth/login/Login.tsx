@@ -4,8 +4,11 @@ import Link from "next/link";
 import React from "react";
 import LoginComp from "./LoginComp";
 import { useRouter } from 'next/router'
+import { UserAtom } from "atoms/UserAtom";
+import { useRecoilValue } from "recoil";
 
 const LoginPage = (): JSX.Element => {
+	const user = useRecoilValue(UserAtom);
 
 	const router = useRouter()
 	return (
@@ -25,7 +28,7 @@ const LoginPage = (): JSX.Element => {
 						Sign in with your social media accounts for easy syncing and more
 						secure privacy.
 					</p>
-					<LoginComp onSuccess={() => (window.location.href = "/mycamp")} />
+					<LoginComp onSuccess={() => (window.location.href = `/user?page=${user?.id}`)} />
 					<Link href="/auth?mode=forgot password">
 						<a className="text-decoration-none text-center d-block">
 							Forgot Password

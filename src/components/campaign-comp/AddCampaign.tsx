@@ -81,8 +81,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 			alert("Image upload is empty");
 			return false;
 		}
-
-		// localStorage.setItem("filePreview", JSON.stringify(filePreview));
+		localStorage.setItem("filePreview", JSON.stringify(filePreview));
 
 		const payload = {
 			...camp,

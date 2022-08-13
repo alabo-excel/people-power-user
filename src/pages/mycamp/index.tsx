@@ -23,7 +23,7 @@ const MyCamp: NextPage = (): JSX.Element => {
 
 	const [campaigns, setCampaigns] = useState<ICampaign[]>([]);
 	// const loading = true;
-	
+
 	const { loading } = useQuery(MY_CAMPAIGN, {
 		client: apollo,
 		onCompleted: (data) => setCampaigns(data.myCampaign),
@@ -37,7 +37,7 @@ const MyCamp: NextPage = (): JSX.Element => {
 				</Head>
 				<Wrapper className="my-camp bg-white ">
 					<div className="container">
-						<h1 className="text-secondary pt-2 mb-3 fs-3 fw-bold">
+						{/* <h1 className="text-secondary pt-2 mb-3 fs-3 fw-bold">
 							My Campaigns
 						</h1>
 						<p className="fs-4 fst-italic">Welcome {user?.firstName} !</p>
@@ -45,13 +45,12 @@ const MyCamp: NextPage = (): JSX.Element => {
 							<a className="btn btn-warning rounded-pill px-4">
 								<i className="fas fa-plus text-light me-2"></i> Create Campaign
 							</a>
-						</Link>
+						</Link> */}
 						<div className="mt-4 ">
 							{loading ? (
 								<p>Loading...</p>
 							) : campaigns?.length ? (
 								<div>
-									<h3 className="fs-4 fw-bold">Promote Your Campaigns</h3>
 									<div className="slide-sec mb-3">
 										<Slider />
 									</div>
@@ -60,9 +59,12 @@ const MyCamp: NextPage = (): JSX.Element => {
 								<p className="text-center">Start by creating a new campaign</p>
 							)}
 							{campaigns?.length > 0 && (
-								<div className="d-flex py-3 flex-column flex-md-row">
-									<div className="flex-fill overflow-auto">
-										<CampaignTable />
+								<div>
+									<h3 className="fs-4 fw-bold text-center">Check Campaign Progress</h3>
+									<div className="d-flex py-3 flex-column flex-md-row">
+										<div className="flex-fill overflow-auto">
+											<CampaignTable />
+										</div>
 									</div>
 								</div>
 							)}

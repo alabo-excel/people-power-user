@@ -131,6 +131,7 @@ const PromoteComp = (): JSX.Element => {
 												campaign and spare in some cash if this campaign is promoted
 												to them.
 											</li>
+											
 											<li className="nav-item mb-2 ms-3">
 												Hit the promote button below to reach our Community of
 												Supporters who are interested in supporting this Campaign.

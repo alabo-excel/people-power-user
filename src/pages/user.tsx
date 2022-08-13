@@ -69,7 +69,7 @@ const user = () => {
     // });
 
     return (
-        <FrontLayout showFooter={false}>
+        <FrontLayout showFooter={true}>
             <>
                 <Head>
                     <title>{`PEOPLE'S POWER`} || {user?.name} </title>
@@ -120,7 +120,7 @@ const user = () => {
                     <Slider />
                     <div className="text-center text-lg p-3">
                         <Link href={`/mycamp`}>
-                            <button className="bg-warning w-44 p-2 text-white rounded-full"> Start Cmapaign</button>
+                            <button className="bg-gray-200 w-44 p-2 rounded-full"> Start Campaign...</button>
                         </Link>
                     </div>
                     <div className="lg:flex mt-3">
