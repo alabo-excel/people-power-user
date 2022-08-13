@@ -14,9 +14,7 @@ import CampaignSlider from "../../components/camp-slider/Slider"
 
 const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 	campaigns,
-}: {
-	campaigns: ICampaign[];
-}): JSX.Element => {
+}: {campaigns: ICampaign[]}): JSX.Element => {
 
 	console.log(campaigns)
 

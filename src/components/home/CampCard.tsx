@@ -10,7 +10,7 @@ const CampaignCard = ({ camp }: { camp: ICampaign }): JSX.Element => {
 			<div className="shadow-md overflow-hidden rounded-md">
 				{/* <Link href={`/campaigns/${camp?.slug}`}> */}
 				<a className="text-decoration-none link-dark">
-					<img src={camp?.image} className="card-image h-44" alt={camp?.title} />
+					<img src={camp?.image} className="card-image h-44 w-full" alt={camp?.title} />
 					<div className="card-body p-3">
 						<Link href={`/user?page=${camp?.author.id}`}>
 							<div className="flex cursor-pointer">

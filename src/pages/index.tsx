@@ -32,26 +32,26 @@ import {
 	Strapi_Testimony,
 } from "types/Applicant.types";
 
-export const GET_CAMPAIGNS = gql`
-	query ($limit: Int) {
-		getCampaigns(limit: $limit) {
-			title
-			id
-			slug
-			image
-			createdAt
-			excerpt
-			likes
-			views
-			author {
-				id
-				firstName
-				lastName
-				image
-			}
-		}
-	}
-`;
+// export const GET_CAMPAIGNS = gql`
+// 	query ($limit: Int) {
+// 		getCampaigns(limit: $limit) {
+// 			title
+// 			id
+// 			slug
+// 			image
+// 			createdAt
+// 			excerpt
+// 			likes
+// 			views
+// 			author {
+// 				id
+// 				firstName
+// 				lastName
+// 				image
+// 			}
+// 		}
+// 	}
+// `;
 
 interface HomeProps {
 	campaigns: ICampaign[];
