@@ -51,9 +51,9 @@ const MyCamp: NextPage = (): JSX.Element => {
 								<p>Loading...</p>
 							) : campaigns?.length ? (
 								<div>
-									<div className="slide-sec mb-3">
+									{/* <div className="slide-sec mb-3">
 										<Slider />
-									</div>
+									</div> */}
 								</div>
 							) : (
 								<p className="text-center">Start by creating a new campaign</p>

@@ -111,17 +111,17 @@ const user = () => {
                                 </div>
                             )}
                         </div>
-                        {author?.id === query.page ? (
+                        {/* {author?.id === query.page ? (
                             <div className="text-center font-black text-lg">
                                 <Link href="/mycamp">
-                                    <button className=" bg-transparent p-2 w-44 text-warning">My Activity</button>
+                                    <button className=" bg-transparent p-2 w-44 text-warning">Dashboard</button>
                                 </Link>
                                 <button className=" bg-transparent p-2 w-44 text-warning" onClick={() => setProduct(!product)}> Products</button>
                                 <Link href={'/about'}>
                                     <button className=" bg-transparent p-2 w-44 text-warning"> Careers</button>
                                 </Link>
                             </div>
-                        ) : (<div></div>)}
+                        ) : (<div></div>)} */}
                     </div>
                     <Slider />
                     <div className="text-center text-lg p-3">
@@ -162,6 +162,10 @@ const user = () => {
                             )}
                             {author?.id === query.page ? (
                                 <div className="text-center font-black text-base p-3">
+                                    <Link href="/mycamp">
+                                        <button className=" bg-transparent p-2 w-44 text-warning">Dashboard</button>
+                                    </Link>
+                                    <button className=" bg-transparent p-2 w-44 text-warning" onClick={() => setProduct(!product)}> Products</button>
                                     <Link href={'/create'}>
                                         <button className="bg-transparent px-8 w-44 text-warning"> Create Organization</button>
                                     </Link>

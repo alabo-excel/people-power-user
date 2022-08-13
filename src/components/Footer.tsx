@@ -74,6 +74,11 @@ const Footer = (): JSX.Element => {
 									<a className="nav-link">Our Team</a>
 								</Link>
 							</li>
+							<li className="nav-item">
+								<Link href="/about">
+									<a className="nav-link">Career</a>
+								</Link>
+							</li>
 						</ul>
 
 						<ul className="w-80">

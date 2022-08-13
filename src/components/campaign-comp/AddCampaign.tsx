@@ -166,7 +166,7 @@ const AddCampaign = ({ category }: { category: string }): JSX.Element => {
 											onClick={() => uploadRef.current?.click()}
 											type="button"
 										>
-											{filePreview?.name || "Upload Image"}
+											{filePreview?.name || "Upload Image/Video"}
 										</button>
 									</div>
 								</div>
