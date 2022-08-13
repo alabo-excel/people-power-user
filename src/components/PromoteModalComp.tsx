@@ -16,7 +16,7 @@ const PromoteModalComp = ({show,onHide}:{show:boolean,onHide():void}): JSX.Eleme
   return (
     <Wrapper className='modal-container'>
       
-      <Modal show={show} onHide={onHide} backdrop={true}>
+      <Modal open={show} onClose={onHide} backdrop={true}>
             <Modal.Header closeButton></Modal.Header>
             <Modal.Body>
               <p className='fw-bold'>

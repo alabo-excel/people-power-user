@@ -66,7 +66,9 @@ const HomePage: NextPage<HomeProps> = ({
 	campaignBanner,
 	testimonies,
 }: HomeProps): JSX.Element => {
+
 	console.log(campaigns)
+	
 	return (
 		<FrontLayout>
 			<Wrapper>
@@ -75,21 +77,21 @@ const HomePage: NextPage<HomeProps> = ({
 						<div className="_index-txt">
 							<h1 className="  mb-3">
 								The <span className=" fw-700 fs-48">World’s Technology</span>{" "}
-								For <span className="fw-700 fs-48">People</span> facing{" "}
-								<span className="fw-700 fs-48">Criminal</span> &{" "}
-								<span className="fw-700 fs-48">Social Injustice</span>
+								For <span className="fw-700 fs-48">Social</span> Change.{" "}
+								{/* <span className="fw-700 fs-48">Criminal</span> &{" "}
+								<span className="fw-700 fs-48">Social Injustice</span> */}
 							</h1>
 							<p className="mb-5 fs-16">
-								There is so much to campaign about: Social policy, Government
-								decisions, Environment, Empowerment, Crime, Human Right etc.
+								There are so much to talk about: Social policy, Government
+								decisions, Politics, Environment, Empowerment, Development, Crime, Human Right etc.
 							</p>
 							<div
 								className="btn-holder d-flex flex-wrap"
 								style={{ gap: "1rem" }}
 							>
-								<Link href="/startcamp">
+								<Link href="/auth">
 									<a className="btn btn-warning btn-lg rounded-pill px-4 py-2 text-light font-weight-bolder fs-20 ">
-										Start Campaign
+									Join Now
 									</a>
 								</Link>
 								<Link href="/about">

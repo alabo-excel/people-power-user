@@ -17,6 +17,9 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 }: {
 	campaigns: ICampaign[];
 }): JSX.Element => {
+
+	console.log(campaigns)
+
 	const [searchTerm, setSearchTerm] = useState("");
 	const [queryCampaigns, setQueryCampaigns] = useState<ICampaign[]>([]);
 

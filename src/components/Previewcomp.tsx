@@ -57,7 +57,7 @@ const previewcamp = ({
           )}
 
           <ReactMarkdown>{camp.body}</ReactMarkdown>
-          <div className="launch-camp my-5 d-flex justify-content-center">
+          <div className="launch-camp mt-5 d-flex justify-content-center">
             <button
               className="btn px-3 py-2 font-weight-bolder"
               onClick={() => setNext()}
@@ -65,7 +65,7 @@ const previewcamp = ({
               {loading ? "Processing your campaign..." : "Launch Campaign"}
             </button>
           </div>
-          <h4 className="d-flex justify-content-end">
+          <h4 className="d-flex justify-content-center">
             <button
               className="btn rounded-pill text-success text-decoration-underline "
               type="button"

@@ -47,109 +47,111 @@ const StartCampPage = (): JSX.Element => {
 			</Head>
 			<FrontLayout>
 				<Wrapper>
-					{account === "" ? (
-						<div>
-							<div className="text-3xl font-bold text-center">Select Account to Start Campaign From</div>
-							<div className="flex justify-evenly text-center my-32">
-								<div className="w-80 cursor-pointer" onClick={() => setAccount("user")}>
-									<img src="/images/logo.svg" className="w-16 h-16 mx-auto" alt="" />
-									<div className="text-base my-3 capitalize">{user?.name}</div>
+					{
+						// account === "" ? (
+						// 	<div>
+						// 		<div className="text-3xl font-bold text-center">Select Account to Start Campaign From</div>
+						// 		<div className="flex justify-evenly text-center my-32">
+						// 			<div className="w-80 cursor-pointer" onClick={() => setAccount("user")}>
+						// 				<img src="/images/logo.svg" className="w-16 h-16 mx-auto" alt="" />
+						// 				<div className="text-base my-3 capitalize">{user?.name}</div>
+						// 			</div>
+						// 			{orgs.map(org => (
+						// 				<div className="w-80 cursor-pointer" onClick={() => {setAccount("org"), singleOrg(org._id)}}>
+						// 					<img src="/images/logo.svg" className="w-16 h-16 mx-auto" alt="" />
+						// 					<div className="text-base my-3 capitalize">{org?.name}</div>
+						// 				</div>
+						// 			))}
+						// 		</div>
+						// 	</div>
+						// ) : (
+						// 	account === "user" ? (
+						!query.category ? (
+							<Fragment>
+								<div className="homepage">
+									<div className="container">
+										{/* <div className="_action d-flex justify-content-center align-items-center">
+											<div className="_action-img">
+												<img
+													src="/images/undraw_black_lives_matter_rndk.png"
+													alt=""
+													className="animate__animated animate__rollIn"
+												/>
+											</div>
+											<div className="_action-txt">
+												Take <br /> Action {user?.name}
+											</div>
+										</div> */}
+										<div className="homepage-txt font-weight-bolder text-muted">
+											What kind of Campaign would <br /> you want to launch?
+										</div>
+										<div className="_homepage-txt mt-5 pb-2">
+											Selecting an area of interest helps EDF to recommend your{" "}
+											<br />
+											campaign to interested supporters.
+										</div>
+									</div>
 								</div>
-								{orgs.map(org => (
-									<div className="w-80 cursor-pointer" onClick={() => {setAccount("org"), singleOrg(org._id)}}>
-										<img src="/images/logo.svg" className="w-16 h-16 mx-auto" alt="" />
-										<div className="text-base my-3 capitalize">{org?.name}</div>
-									</div>
-								))}
-							</div>
-						</div>
-					) : (
-						account === "user" ? (
-							!query.category ? (
-								<Fragment>
-									<div className="homepage">
-										<div className="container">
-											<div className="_action d-flex justify-content-center align-items-center">
-												<div className="_action-img">
-													<img
-														src="/images/undraw_black_lives_matter_rndk.png"
-														alt=""
-														className="animate__animated animate__rollIn"
-													/>
-												</div>
-												<div className="_action-txt">
-													Take <br /> Action {user?.name}
-												</div>
-											</div>
-											<div className="homepage-txt font-weight-bolder text-muted">
-												What kind of Campaign would <br /> you want to launch?
-											</div>
-											<div className="_homepage-txt mt-5 pb-2">
-												Selecting an area of interest helps EDF to recommend your{" "}
-												<br />
-												campaign to interested supporters.
-											</div>
+								<div className="_camp-type py-5">
+									<div className="container">
+										<div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+											{camps.map((camp, i) => (
+												<CategoryItem key={i} camp={camp} />
+											))}
 										</div>
 									</div>
-									<div className="_camp-type py-5">
-										<div className="container">
-											<div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-												{camps.map((camp, i) => (
-													<CategoryItem key={i} camp={camp} />
-												))}
-											</div>
-										</div>
-									</div>
-								</Fragment>
-							) : (
-								<AddCampaign category={query?.category as string} />
-							)
+								</div>
+							</Fragment>
 						) : (
-							account === "org" ? (
-								!query.category ? (
-									<Fragment>
-										<div className="homepage">
-											<div className="container">
-												<div className="_action d-flex justify-content-center align-items-center">
-													<div className="_action-img">
-														<img
-															src="/images/undraw_black_lives_matter_rndk.png"
-															alt=""
-															className="animate__animated animate__rollIn"
-														/>
-													</div>
-													<div className="_action-txt">
-														Take <br /> Action 
-													</div>
-												</div>
-												<div className="homepage-txt font-weight-bolder text-muted">
-													What kind of Campaign would <br /> you want to launch?
-												</div>
-												<div className="_homepage-txt mt-5 pb-2">
-													Selecting an area of interest helps EDF to recommend your{" "}
-													<br />
-													campaign to interested supporters.
-												</div>
-											</div>
-										</div>
-										<div className="_camp-type py-5">
-											<div className="container">
-												<div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
-													{camps.map((camp, i) => (
-														<CategoryItem key={i} camp={camp} />
-													))}
-												</div>
-											</div>
-										</div>
-									</Fragment>
-								) : (
-									<AddCampaignOrg category={query?.category as string} organization={org}  />
-								)
-							) : (
-								<div></div>
-							)
+							<AddCampaign category={query?.category as string} />
 						)
-					)}
+						// ) : (
+						// 	account === "org" ? (
+						// 		!query.category ? (
+						// 			<Fragment>
+						// 				<div className="homepage">
+						// 					<div className="container">
+						// 						<div className="_action d-flex justify-content-center align-items-center">
+						// 							<div className="_action-img">
+						// 								<img
+						// 									src="/images/undraw_black_lives_matter_rndk.png"
+						// 									alt=""
+						// 									className="animate__animated animate__rollIn"
+						// 								/>
+						// 							</div>
+						// 							<div className="_action-txt">
+						// 								Take <br /> Action 
+						// 							</div>
+						// 						</div>
+						// 						<div className="homepage-txt font-weight-bolder text-muted">
+						// 							What kind of Campaign would <br /> you want to launch?
+						// 						</div>
+						// 						<div className="_homepage-txt mt-5 pb-2">
+						// 							Selecting an area of interest helps EDF to recommend your{" "}
+						// 							<br />
+						// 							campaign to interested supporters.
+						// 						</div>
+						// 					</div>
+						// 				</div>
+						// 				<div className="_camp-type py-5">
+						// 					<div className="container">
+						// 						<div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+						// 							{camps.map((camp, i) => (
+						// 								<CategoryItem key={i} camp={camp} />
+						// 							))}
+						// 						</div>
+						// 					</div>
+						// 				</div>
+						// 			</Fragment>
+						// 		) : (
+						// 			<AddCampaignOrg category={query?.category as string} organization={org}  />
+						// 		)
+						// 	) : (
+						// 		<div></div>
+						// 	)
+						// )
+						// )
+					}
 				</Wrapper>
 			</FrontLayout>
 		</Fragment>

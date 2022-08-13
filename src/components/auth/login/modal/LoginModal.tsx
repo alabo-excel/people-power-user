@@ -12,7 +12,7 @@ const LoginModal = ({
 }): JSX.Element => {
 	const [isLogin, setIsLogin] = useState(true);
 	return (
-		<Modal show={show} onHide={onHide} size="sm">
+		<Modal open={show} onClose={onHide} size="sm">
 			<Modal.Header>
 				<Modal.Title className="fw-bold text-center fs-3">Login</Modal.Title>
 			</Modal.Header>

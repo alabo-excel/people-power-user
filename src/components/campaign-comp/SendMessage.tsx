@@ -17,7 +17,7 @@ const sendMsgModel = (props: Props): JSX.Element => {
   return (
     <Wrapper className='modal-container'>
       
-      <Modal show={props.show} backdrop={true}>
+      <Modal open={props.show} backdrop={true}>
             <Modal.Header closeButton></Modal.Header>
             <Modal.Body>
             <div>
