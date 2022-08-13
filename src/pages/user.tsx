@@ -80,10 +80,16 @@ const user = () => {
                             <div>
                                 <img className="w-full h-44" src="/images/women_in_prison 1.png" alt="" />
                             </div>
-                            <div className="absolute top-32 left-10 rounded-full w-24 bg-white p-1 h-24">
-                                <img src="/images/logo.svg" alt="" />
+                            {user?.image === "" ? (
+                                <div className="absolute top-32 left-10 rounded-full w-24 bg-white p-1 h-24">
+                                    <img src="/images/logo.svg" alt="" />
 
-                            </div>
+                                </div>
+                            ) : (
+                                <div className="absolute top-32 left-10 rounded-full w-24 bg-white p-1 h-24">
+                                    <img src={user?.image} alt="" />
+                                </div>
+                            )}
                         </div>
                         <div className='mt-16 px-10'>
                             <div className="flex"><div className="text-lg font-bold ">{user?.name}</div> <div className="pt-1 ml-2"> {user?.city}, {user?.country}</div> </div>
@@ -130,7 +136,7 @@ const user = () => {
                                     <Link href={`/addadmin?page=${query.page}`}>
                                         <button className="bg-transparent px-8 w-44 text-warning"> Add Admin</button>
                                     </Link>
-                                    <div className="flex cursor-pointer my-2" onClick={() => {router.push(`/user?page=${author?.id}`), setOrganization(false) }}>
+                                    <div className="flex cursor-pointer my-2" onClick={() => { router.push(`/user?page=${author?.id}`), setOrganization(false) }}>
                                         {user?.image === "Upload org Image" ? (
                                             <img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
                                         ) : (

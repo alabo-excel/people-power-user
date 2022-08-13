@@ -86,7 +86,7 @@ const StartCampPage = (): JSX.Element => {
 											What kind of Campaign would <br /> you want to launch?
 										</div>
 										<div className="_homepage-txt mt-5 pb-2">
-											Selecting an area of interest helps EDF to recommend your{" "}
+											Selecting an area of interest helps us to recommend your{" "}
 											<br />
 											campaign to interested supporters.
 										</div>
