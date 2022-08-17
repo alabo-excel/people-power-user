@@ -10,6 +10,9 @@ import {
 import styled from "styled-components";
 import { ICampaign } from "types/Applicant.types";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const GET_CAMPAIGN = gql`
 	query ($slug: String) {
 		getCampaign(slug: $slug) {
@@ -44,7 +47,7 @@ const ShareChampaign = (): JSX.Element => {
 	});
 
 	const handleShareClosed = () => {
-		alert(
+		toast(
 			"You can start another campaign or promote your campaign to gain audience",
 		);
 		localStorage.clear();
@@ -120,6 +123,7 @@ const ShareChampaign = (): JSX.Element => {
 					</div>
 				</div>
 			</div>
+			<ToastContainer />
 		</Wrapper>
 	);
 };

@@ -24,6 +24,7 @@ import { getIP } from "utils";
 import Cookies from "js-cookie";
 import Script from 'next/script'
 
+
 if (process.browser) {
 	require("bootstrap/dist/js/bootstrap");
 }

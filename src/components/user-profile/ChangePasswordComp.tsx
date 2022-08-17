@@ -2,6 +2,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Loader } from "rsuite";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const ChangePasswordComp = (): JSX.Element => {
 	const [loading, setLoading] = useState(false);
 	const [password, setPassword] = useState({
@@ -18,16 +21,16 @@ const ChangePasswordComp = (): JSX.Element => {
 		e.preventDefault();
 		setLoading(true);
 		if (password.newPassword !== password.newPassword2)
-			return alert("Passwords do not match");
+			return toast("Passwords do not match");
 		try {
 			await axios.post("/auth/change-password", password);
-			alert("Password changed");
+			toast("Password changed");
 			setLoading(false);
 		} catch (error) {
 			const err: any = error;
 			console.log({ error });
 			if (err?.response?.data) {
-				alert(err?.response?.data?.message);
+				toast.warn(err?.response?.data?.message);
 			}
 			setLoading(false);
 		}
@@ -90,6 +93,7 @@ const ChangePasswordComp = (): JSX.Element => {
 					Cancel
 				</button>
 			</div>
+			<ToastContainer />
 		</form>
 	);
 };

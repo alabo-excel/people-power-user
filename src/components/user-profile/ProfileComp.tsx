@@ -5,6 +5,9 @@ import { useRecoilState } from "recoil";
 import ChangePasswordComp from "./ChangePasswordComp";
 import UpdateProfileComp from "./UpdateProfileComp";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const ProfileComp = (): JSX.Element => {
 	const uploadRef = useRef<HTMLInputElement>(null);
 	const [user, setUser] = useRecoilState(UserAtom);
@@ -49,7 +52,7 @@ const ProfileComp = (): JSX.Element => {
 			try {
 				setLoading(true);
 				const { data } = await axios.post("/user/upload", { image: img });
-				alert("Image uploaded successfully");
+				toast("Image uploaded successfully");
 				setUser({ ...user, image: data });
 				setImg("");
 			} catch (error) {
@@ -166,6 +169,7 @@ const ProfileComp = (): JSX.Element => {
 					</div>
 				</details>
 			</div>
+			<ToastContainer />
 		</main>
 	);
 };

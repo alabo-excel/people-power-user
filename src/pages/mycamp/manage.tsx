@@ -12,6 +12,9 @@ import SendMsgModel from "../../components/campaign-comp/SendMessage";
 import { useRouter } from "next/router";
 
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // import socketIOClient from "socket.io-client";
 import { TOKEN_NAME, WS_URI } from "../../utils/constants";
 import cookie from "js-cookie";
@@ -134,7 +137,7 @@ const ManageCampaignPage = (): JSX.Element => {
 		try {
 			await axios.delete(`/campaign/single/${id}`);
 			setCampaigns(campaigns.filter((camp) => camp.id !== id));
-			alert("Deleted");
+			toast("Deleted");
 		} catch (error) {
 			console.log(error);
 		}
@@ -152,7 +155,7 @@ const ManageCampaignPage = (): JSX.Element => {
 				),
 			);
 
-			alert("Updated");
+			toast("Updated");
 		} catch (error) {
 			console.log(error);
 		}
@@ -471,7 +474,7 @@ const ManageCampaignPage = (): JSX.Element => {
 						</div>
 					</div>
 				)}
-
+				<ToastContainer />
 			</Wrapper>
 		</FrontLayout >
 	);
