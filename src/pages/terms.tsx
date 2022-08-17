@@ -6,22 +6,22 @@ import { apolloStrapi } from "apollo";
 import gql from "graphql-tag";
 import ReactMarkdown from "react-markdown";
 
-interface IProps {
-	terms: {
-		body: string;
-	};
-}
-const TermsAndConditionPage: NextPage<IProps> = ({
-	terms,
-}: IProps): JSX.Element => {
+// interface IProps {
+// 	terms: {
+// 		body: string;
+// 	};
+// }
+const TermsAndConditionPage = () => {
+
 	return (
 		<Fragment>
 			<Head>
 				<title>Terms And Conditions</title>
 			</Head>
 			<FrontLayout>
-				<div className="terms container wrapper py-4">
-					<ReactMarkdown>{terms?.body}</ReactMarkdown>
+				<div className="w-full text-center py-4">
+					{/* <ReactMarkdown>{terms?.body}</ReactMarkdown> */}
+					<iframe width="1500"  height="3350" src="https://docs.google.com/document/d/e/2PACX-1vQ3KxI45yrRH4BLu0C-lKNI2GpcA5eZNPs8xJgWLedeb-iG--OQjww1AiN_F2ef7A/pub?embedded=true"></iframe>
 				</div>
 			</FrontLayout>
 		</Fragment>
@@ -29,33 +29,3 @@ const TermsAndConditionPage: NextPage<IProps> = ({
 };
 
 export default TermsAndConditionPage;
-
-export const getStaticProps: GetStaticProps = async () => {
-	try {
-		const { data } = await apolloStrapi.query({
-			query: GET_TERMS,
-		});
-
-		const terms = data?.term;
-		return {
-			props: {
-				terms,
-			},
-		};
-	} catch (error) {
-		console.log(error);
-		return {
-			props: {
-				terms: null,
-			},
-		};
-	}
-};
-
-const GET_TERMS = gql`
-	{
-		term {
-			body
-		}
-	}
-`;
