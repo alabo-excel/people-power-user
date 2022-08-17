@@ -7,7 +7,7 @@ import { truncateWord } from "utils";
 const CampaignCard = ({ camp }: { camp: ICampaign }): JSX.Element => {
 	return (
 		<Wrapper>
-			<div className="shadow-md overflow-hidden rounded-md">
+			<div className="shadow-md overflow-hidden rounded-md w-full">
 				{/* <Link href={`/campaigns/${camp?.slug}`}> */}
 				<a className="text-decoration-none link-dark">
 					<img src={camp?.image} className="card-image h-44 w-full" alt={camp?.title} />
@@ -27,7 +27,7 @@ const CampaignCard = ({ camp }: { camp: ICampaign }): JSX.Element => {
 								? `${camp?.title?.slice(0, 30)}...`
 								: camp?.title}
 						</p>
-						<p className="card-text  ">{truncateWord(camp?.excerpt)}</p>
+						<p className="card-text break-all">{truncateWord(camp?.excerpt)}</p>
 						<p className=" fst-italic">
 							<i className="fa fa-users mr-3"></i>
 							{(camp?.endorsements?.length) + 1} Supporters

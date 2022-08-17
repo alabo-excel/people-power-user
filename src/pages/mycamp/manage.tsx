@@ -282,8 +282,8 @@ const ManageCampaignPage = (): JSX.Element => {
 											Recent Notifications
 										</div>
 										<div className="">
-											{notification.slice(0, 6).map((notice) => (
-												<div className="flex justify-between p-2">
+											{notification.slice(0, 6).map((notice, i) => (
+												<div key={i} className="flex justify-between p-2">
 													<div className="flex">
 														<img src="/images/logo.svg" className="w-6 h-6 mr-3" alt="" />
 														<div>{notice.message}</div>
@@ -318,9 +318,9 @@ const ManageCampaignPage = (): JSX.Element => {
 									</div>
 									<div>
 										<div className="accordion" id="accordionExample">
-											{reports.map((report) => (
+											{reports.map((report, i) => (
 
-												<div className="accordion-item">
+												<div key={i} className="accordion-item">
 													<h2 className="accordion-header" id="headingOne">
 														<button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={"#" + report?.reportMessage.substring(0, 3)} aria-expanded="true" aria-controls={report?.reportMessage.substring(0, 3)}>
 															<div>

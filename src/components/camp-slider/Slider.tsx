@@ -83,7 +83,7 @@ const SwipeToSlide = () => {
 			<div className="">
 				<SliderTwo {...settings}>
 					{campaigns.map((camp, i) => (
-						<div className="mx-3 my-6">
+						<div key={i} className="mx-3 my-6">
 							<div className="relative">
 								<img
 									src={camp?.image}

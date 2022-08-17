@@ -47,7 +47,7 @@ export interface IUser extends Document {
 	country: string;
 	state: string;
 	city: string;
-	followersCount:string;
+	followersCount: string;
 	followingCount: string;
 	description: string;
 }
@@ -272,7 +272,8 @@ export interface Strapi_Testimony {
 	company: string;
 	job_position: string;
 	body: string;
-	image: IMage;
+	// image: IMage;
+	image: string;
 }
 
 export interface Strapi_About {

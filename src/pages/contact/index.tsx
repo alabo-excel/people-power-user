@@ -1,18 +1,54 @@
 import Contactsvg from "components/icon/Contactsvg";
 import { Contact, Div } from "components/styled/style";
 import FrontLayout from "layout/FrontLayout";
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import Head from "next/head";
 import { Strapi_Meta } from "types/Applicant.types";
 import { GetStaticProps, NextPage } from "next";
 import { apolloStrapi } from "apollo";
 import { GET_STRAPI_META } from "apollo/queries/strapiQuery";
 
-interface IProps {
-	meta: Strapi_Meta;
-}
 
-const ContactPage: NextPage<IProps> = ({ meta }: IProps): JSX.Element => {
+
+const ContactPage = () => {
+	const [name, setName] = useState('')
+	const [email, setEmail] = useState('')
+	const [subject, setSubject] = useState('')
+	const [message, setMessage] = useState('')
+	const [loading, setLoading] = useState(false)
+
+	const handleFormSubmit = (e: any) => {
+		setLoading(true)
+		e.preventDefault();
+		fetch("https://formsubmit.co/ajax/alaboexcel@gmail.com", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Accept: "application/json",
+			},
+			body: JSON.stringify({
+				name: name,
+				message: message,
+				email: email,
+				subject: subject,
+			}),
+		})
+			.then((response) => response.json())
+			.then((data) => {
+				console.log(data);
+				if (data.success == "true") {
+					setName('')
+					setEmail('')
+					setSubject('')
+					setMessage('')
+					setLoading(false)
+				}
+			})
+			.catch((error) => {
+				console.log(error);
+				setLoading(false)
+			});
+	}
 	return (
 		<Fragment>
 			<Head>
@@ -20,21 +56,21 @@ const ContactPage: NextPage<IProps> = ({ meta }: IProps): JSX.Element => {
 			</Head>
 			<FrontLayout>
 				<div>
-					<Div className="d-flex container flex-column-reverse flex-sm-row py-3">
+					{/* <Div className="d-flex container flex-column-reverse flex-sm-row py-3">
 						<div className="left d-flex flex-column justify-content-end">
 							<h1 className="text-secondary fw-bold text-center">Contact Support</h1>
-							{/* <p className="fs-5">
+							<p className="fs-5">
 								by influencing policy makers. So much to campaign about: Social
 								policy, Government decisions, Environment, Empowerment etc.
-							</p> */}
+							</p>
 						</div>
-						{/* <div className="right d-flex align-items-end">
+						<div className="right d-flex align-items-end">
 							<Contactsvg />
-						</div> */}
-					</Div>
+						</div>
+					</Div> */}
 					<section className="py-5">
-						<Contact className="container py-4 px-2 d-flex flex-column align-items-md-center flex-md-row bg-white">
-							<div className="left border-0 border-end px-3 border-3">
+						{/* <Contact className="container py-4 px-2 d-flex flex-column align-items-md-center flex-md-row bg-white"> */}
+						{/* <div className="left border-0 border-end px-3 border-3">
 								<div className="d-flex flex-column align-items-center mb-3">
 									<i className="fas mb-2 fa-map-marker-alt py-2 px-3 text-secondary fs-5 bg-success rounded-3"></i>
 									<span className="d-block mb-1 fw-bold fs-5 text-secondary">
@@ -57,46 +93,64 @@ const ContactPage: NextPage<IProps> = ({ meta }: IProps): JSX.Element => {
 									<b className="text-center">{meta?.phone}</b>
 									<b className="text-center">+1 737 210 1130 - USA</b>
 								</div>
+							</div> */}
+						<div className="flex px-32 justify-between">
+							<div className="w-[45%]">
+								<Contactsvg />
 							</div>
-							<div className="right d-flex justify-content-end ">
-								<div className="right_">
-									<p className=" text-lg mb-2">
-										Send us a message
-									</p>
-									{/* <p className="m-0 mb-2 p-0">
+							<div className="text-center w-1/2">
+								<p className="text-4xl font-bold my-2">
+									Send us a message
+								</p>
+								{/* <p className="m-0 mb-2 p-0">
 										If you have any work from me or any types of queries related
 										to our forum you can send us a message now. Its our pleasure
 										to help
 									</p> */}
-									<form>
-										<div className="mb-3">
-											<input
-												type="text"
-												className="form-control bg-light py-3"
-											/>
-										</div>
-										<div className="mb-4">
-											<input
-												type="text"
-												className="form-control bg-light py-3"
-											/>
-										</div>
-										<textarea
-											name=""
-											id=""
-											cols={30}
-											rows={10}
-											className="bg-light form-control mb-3"
-										></textarea>
-										<button className="btn btn-warning px-5 py-2 text-white fs-5 fw-bolder rounded-pill">
-											Send Message
-										</button>
-									</form>
+								{/* <form> */}
+								<div className="mb-3">
+									<input
+										type="text"
+										className="form-control bg-light py-3 w-full"
+										placeholder="Enter your Name"
+										onChange={(e) => setName(e.target.value)}
+									/>
 								</div>
+								<div className="mb-4">
+									<input
+										type="text"
+										className="form-control bg-light py-3"
+										placeholder="Enter your Email"
+										onChange={(e) => setEmail(e.target.value)}
+									/>
+								</div>
+								<div className="mb-4">
+									<input
+										type="text"
+										className="form-control bg-light py-3"
+										placeholder="Enter the subject"
+										onChange={(e) => setSubject(e.target.value)}
+									/>
+								</div>
+
+								<textarea
+									name=""
+									id=""
+									cols={30}
+									rows={6}
+									className="bg-light form-control mb-3"
+									placeholder="Enter your Message"
+									onChange={(e) => setMessage(e.target.value)}
+								></textarea>
+								<button onClick={(e) => handleFormSubmit(e)} className="btn btn-warning px-5 py-2 text-white fs-5 fw-bolder rounded-pill">
+									{loading ? "Sending" : "Send Message"}
+								</button>
+								{/* </form> */}
 							</div>
-						</Contact>
+						</div>
+						{/* </Contact> */}
 					</section>
-					<section className="">
+					{/* <section className="">
 						<iframe
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15902.049573576072!2d7.024268335564958!3d4.85343172442949!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1069d27581a232db%3A0x5746f5c6e635dcbd!2sEDFHR!5e0!3m2!1sen!2sng!4v1624892454974!5m2!1sen!2sng"
 							width="600"
@@ -106,34 +160,10 @@ const ContactPage: NextPage<IProps> = ({ meta }: IProps): JSX.Element => {
 							frameBorder={0}
 							className="w-100 p-0 m-0 rounded-3"
 						></iframe>
-					</section>
+					</section> */}
 				</div>
 			</FrontLayout>
 		</Fragment>
 	);
 };
-
 export default ContactPage;
-
-export const getStaticProps: GetStaticProps = async (): Promise<{
-	props: { meta: Strapi_Meta | null };
-}> => {
-	try {
-		const { data } = await apolloStrapi.query({
-			query: GET_STRAPI_META,
-		});
-		const meta = data?.meta;
-		return {
-			props: {
-				meta,
-			},
-		};
-	} catch (error) {
-		console.log(error);
-		return {
-			props: {
-				meta: null,
-			},
-		};
-	}
-};
