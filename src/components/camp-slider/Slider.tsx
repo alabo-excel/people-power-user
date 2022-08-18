@@ -43,6 +43,7 @@ const SwipeToSlide = () => {
 		slidesToScroll: 1,
 		initialSlide: 0,
 		autoplay: false,
+		arrows:false,
 		responsive: [
 			{
 				breakpoint: 1024,

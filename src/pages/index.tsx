@@ -195,6 +195,31 @@ const HomePage: NextPage<HomeProps> = ({
 				/> */}
 
 
+
+				<section className="community-saying">
+					<div className="py-10 w-2/3 mx-auto text-center">
+						<div className="lg:text-3xl text-xl font-bold">
+							Leave the complexity of writing, designing, editing and organizing your campaigns and other administration to us
+						</div>
+						<div>
+							<TeamSlide />
+						</div>
+						<div className="text-base">
+							With our team of professionals, journalists, content writers, designers and social skilled workers, you can leave with us the complexity of writing, designing, editing and organizing your campaigns and other administration.
+						</div>
+					</div>
+				</section>
+				<section>
+					<div className="lg:flex my-10">
+						<div className="lg:w-1/2">
+							<img src="/images/camp9.svg" className="lg:w-5/6 w-full mx-auto" alt="" />
+						</div>
+						<div className="lg:w-1/2 my-auto lg:p-0 p-5">
+							<div className="lg:text-3xl text-xl font-bold">Subscribe for our Human Right Applications and Proceedings</div>
+							<div className="text-lg">With our Human Right Applications and thousands of Human Right Lawyers and Social Skilled Workers across the globe, you will be able to compel authorities to respect your rights, social policies and Rule of Law through Human Right Proceedings and influence policy makers</div>
+						</div>
+					</div>
+				</section>
 				<section className="py-5 community-saying">
 					<div className="_community-saying container">
 						<p className="text-center mb-5 fs-1 fw-bold">
@@ -202,27 +227,6 @@ const HomePage: NextPage<HomeProps> = ({
 						</p>
 						<div className="container">
 							<Slider testimonies={testimonies} />
-						</div>
-					</div>
-				</section>
-				<section className="my-10 w-2/3 mx-auto text-center">
-					<div className="text-3xl font-bold">
-						Leave the complexity of writing, designing, editing and organizing your campaigns and other administration to us
-					</div>
-					<div>
-						<TeamSlide />
-					</div>
-					<div className="text-base">
-						With our team of professionals, journalists, content writers, designers and social skilled workers, you can leave with us the complexity of writing, designing, editing and organizing your campaigns and other administration.</div>
-				</section>
-				<section>
-					<div className="lg:flex">
-						<div className="lg:w-1/2">
-							<img src="/images/promote.png" alt="" />
-						</div>
-						<div className="lg:w-1/2 my-auto lg:p-0 p-5">
-							<div className="text-3xl font-bold">Subscribe for our Human Right Applications and Proceedings</div>
-							<div className="text-lg">With our Human Right Applications and thousands of Human Right Lawyers and Social Skilled Workers across the globe, you will be able to compel authorities to respect your rights, social policies and Rule of Law through Human Right Proceedings and influence policy makers</div>
 						</div>
 					</div>
 				</section>
