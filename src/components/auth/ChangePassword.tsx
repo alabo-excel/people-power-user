@@ -3,6 +3,9 @@ import { useRouter } from "next/router";
 import React from "react";
 import { useState } from "react";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const ChangePassword = (): JSX.Element => {
 	const [info, setInfo] = useState({ password: "", password2: "" });
 	const { query } = useRouter();
@@ -12,20 +15,20 @@ const ChangePassword = (): JSX.Element => {
 		e.preventDefault();
 		if (!query?.id) return;
 		if (info?.password !== info?.password2)
-			return alert("Passsword do not match");
+			return toast.warn("Passsword do not match");
 		try {
 			setLoading(true);
 			await axios.post("/auth/change-password", {
 				password: info.password,
 				id: query?.id,
 			});
-			alert("Password changed !");
+			toast.success("Password changed !");
 			setLoading(true);
 			window.location.href = "/auth?mode=login";
 		} catch (error) {
 			const e = error as any;
 			console.log({ error });
-			alert(e?.response?.data?.message);
+			toast.warn(e?.response?.data?.message);
 			setLoading(false);
 		}
 	};
@@ -58,6 +61,7 @@ const ChangePassword = (): JSX.Element => {
 					{loading ? "loading..." : "Change Password"}
 				</button>
 			</form>
+			<ToastContainer />
 		</div>
 	);
 };

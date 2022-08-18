@@ -159,8 +159,8 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 									<Link href={`/report?page=${camp?.slug}`}>
 										<div className="text-red-500 cursor-pointer">Report Abuse</div>
 									</Link>
-									{update.length >= 1 ? (update.map((item) => (
-										<div>{item}</div>
+									{update.length >= 1 ? (update.map((item, i) => (
+										<div key={i}>{item}</div>
 									))) : (null)}
 									{user?.id === camp?.author?.id && camp?.promoted !== true ? (
 										<button
@@ -215,9 +215,9 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 											<Endorsements endorsement={endorsement} key={i} />
 										))}
 									</div>
-									{endorsements.length >= 1 ? (endorsements.map((endorse) => (
+									{endorsements.length >= 1 ? (endorsements.map((endorse, i) => (
 										user.id === endorse.author.id ? (
-											<div>
+											<div key={i}>
 												<div>Thank you {user.firstName} for endorsing this campaign. Let's now make this campaign get to other supporters on Peoples Power by promoting it.</div>
 												<Link href={`/promote?slug=${camp.slug}`}>
 													<a className="btn btn-warning btn-sm  rounded-pill px-3 fw-bold my-3 text-center mx-auto">

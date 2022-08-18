@@ -11,6 +11,9 @@ import { ICampaign } from "types/Applicant.types";
 import PromoteComp from "./PromoteComp";
 import ShareChampaign from "./ShareChampaign";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 interface IFile {
 	file: string;
 	type: string;
@@ -77,7 +80,7 @@ const AddCampaign = ({ category, organization }: { category: string, organizatio
 	const handleNext = (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!filePreview) {
-			alert("Image upload is empty");
+			toast.warn("Image upload is empty");
 			return false;
 		}
 
@@ -247,6 +250,7 @@ const AddCampaign = ({ category, organization }: { category: string, organizatio
 				{query.step === "promote" && <PromoteComp />}
 				<LoginModal show={show} onHide={() => setShow(false)} />
 			</main>
+			<ToastContainer />
 		</Wrapper>
 	);
 };

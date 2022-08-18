@@ -8,6 +8,9 @@ import { Loader } from "rsuite";
 import GoogleAuthComp from "../GoogleAuth";
 import Facebook from "../Facebook";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const RegisterComp = (): JSX.Element => {
 	// const router = useRouter()
 
@@ -80,7 +83,7 @@ export const SignupCom = ({
 			setLoading(false);
 		} catch (error) {
 			const e = error as any;
-			alert(error && e?.response?.data?.message);
+			toast.warn(error && e?.response?.data?.message);
 			setLoading(false);
 			console.log({ error });
 		}
@@ -161,6 +164,7 @@ export const SignupCom = ({
 					{loading ? <Loader content="Loading...." /> : "Sign up"}
 				</button>
 			</form>
+			<ToastContainer />
 		</div>
 	);
 };

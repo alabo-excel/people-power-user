@@ -7,14 +7,7 @@ import { apolloStrapi } from "apollo";
 import { gql } from "@apollo/client";
 import ReactMarkdown from "react-markdown";
 
-interface IProps {
-	privacy: {
-		body: string;
-		id: string;
-	};
-}
-
-const PrivacyPage: NextPage<IProps> = ({ privacy }: IProps): JSX.Element => {
+const PrivacyPage = () => {
 	return (
 		<Fragment>
 			<Head>
@@ -23,7 +16,7 @@ const PrivacyPage: NextPage<IProps> = ({ privacy }: IProps): JSX.Element => {
 			<FrontLayout>
 				<Wrapper className="privacy-policy py-5">
 					<div className="container">
-						<ReactMarkdown>{privacy?.body}</ReactMarkdown>
+						<iframe width="1500" height="3350" src="https://docs.google.com/document/d/e/2PACX-1vR7lKCvGByBvSW90xpSgNpcP-Lwn9vFctx7jWTTb2Z4qn6QsiGB_Pz85kovCZQ-Lw/pub?embedded=true"></iframe>
 					</div>
 				</Wrapper>
 			</FrontLayout>
@@ -34,32 +27,3 @@ const PrivacyPage: NextPage<IProps> = ({ privacy }: IProps): JSX.Element => {
 export default PrivacyPage;
 
 const Wrapper = styled.div``;
-
-export const getStaticProps: GetStaticProps = async () => {
-	try {
-		const { data } = await apolloStrapi.query({
-			query: GET_PRIVACY,
-		});
-		const privacy = data?.privacy;
-		return {
-			props: {
-				privacy,
-			},
-		};
-	} catch (error) {
-		console.log(error);
-		return {
-			props: {
-				privacy: null,
-			},
-		};
-	}
-};
-
-const GET_PRIVACY = gql`
-	{
-		privacy {
-			body
-		}
-	}
-`;

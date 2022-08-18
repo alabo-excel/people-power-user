@@ -2,6 +2,10 @@ import axios from "axios";
 import React, { Fragment, useState } from "react";
 import router from "next/router";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+
 const VerifyToken = (): JSX.Element => {
 	const [token, setToken] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -12,7 +16,7 @@ const VerifyToken = (): JSX.Element => {
 		try {
 			setLoading(true);
 			await axios.post("/auth/verify-token", { token });
-			alert(
+			toast(
 				"Your account has been verified. Continue to login with your password",
 			);
 			router.push("/auth");
@@ -21,7 +25,7 @@ const VerifyToken = (): JSX.Element => {
 		} catch (error) {
 			const e = error as any;
 			if (e?.response?.data) {
-				alert(e?.response?.data?.message);
+				toast(e?.response?.data?.message);
 			}
 			console.log(error);
 			setLoading(false);
@@ -66,6 +70,7 @@ const VerifyToken = (): JSX.Element => {
 			) : (
 				<ResendVerification onSuccess={() => setView(!view)} />
 			)}
+			<ToastContainer />
 		</Fragment>
 	);
 };
@@ -80,14 +85,14 @@ const ResendVerification = ({ onSuccess }: { onSuccess(): void }) => {
 		try {
 			setLoading(true);
 			const { data } = await axios.post("/auth/resend-token", { email });
-			alert(`Verification message sent to ${email}`);
+			toast(`Verification message sent to ${email}`);
 			onSuccess();
 			console.log(data);
 			// router.push(`/auth?mode=change password&&id=${data}`);
 		} catch (error) {
 			const e = error as any;
 			if (e?.response?.data) {
-				alert(e?.response?.data?.message);
+				toast(e?.response?.data?.message);
 			}
 			console.log(error);
 		} finally {

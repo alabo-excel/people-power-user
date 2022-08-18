@@ -7,6 +7,8 @@ import { TOKEN_NAME } from "utils/constants";
 import GoogleAuthComp from "../GoogleAuth";
 import Facebook from "../Facebook";
 
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const LoginComp = ({
 	onSuccess,
 }: {
@@ -34,7 +36,7 @@ const LoginComp = ({
 			onSuccess(data);
 		} catch (error) {
 			const e = error as any;
-			alert(error && e?.response?.data?.message);
+			toast.warn(error && e?.response?.data?.message);
 
 			console.log({ error });
 		} finally {
@@ -46,7 +48,7 @@ const LoginComp = ({
 		<div>
 			<h4 className="text-center">Login with</h4>
 			<div className="flex center w-[88px] m-auto">
-				<Facebook onSuccess={() => onSuccess()}/>
+				<Facebook onSuccess={() => onSuccess()} />
 				<GoogleAuthComp onSuccess={() => onSuccess()} />
 			</div>
 			<form onSubmit={handleLogin}>
@@ -80,6 +82,7 @@ const LoginComp = ({
 					{loading ? <Loader content="Loading...." /> : "Log In"}
 				</button>
 			</form>
+			<ToastContainer />
 		</div>
 	);
 };

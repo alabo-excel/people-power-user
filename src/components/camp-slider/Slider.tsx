@@ -83,7 +83,7 @@ const SwipeToSlide = () => {
 			<div className="">
 				<SliderTwo {...settings}>
 					{campaigns.map((camp, i) => (
-						<div className="mx-3 my-6">
+						<div key={i} className="mx-3 my-6">
 							<div className="relative">
 								<img
 									src={camp?.image}
@@ -99,7 +99,7 @@ const SwipeToSlide = () => {
 							<div className="py-2 relative" >
 								{!camp.promoted ? (
 									<Link href={`/promote?slug=${camp.slug}`}>
-										<a className="btn border-warning btn-sm  rounded-pill px-3 fw-bold">
+										<a className="btn border-warning btn-sm  rounded-pill px-3 text-warning">
 											Promote
 										</a>
 									</Link>
@@ -126,14 +126,14 @@ const SwipeToSlide = () => {
 									{camp.author.id === user?.id ? (
 										<div className="text-center w-full">
 											<Link href={`/promote?slug=${camp.slug}`}>
-												<a className="btn border-warning btn-sm  rounded-pill px-3 fw-bold">
+												<a className="btn border-warning btn-sm  rounded-pill px-3 text-warning">
 													Promote
 												</a>
 											</Link>
 										</div>
 									) : (<div className="text-center w-full">
 										<Link href={`/campaigns/${camp.slug}`}>
-											<a className="btn border-warning btn-sm  rounded-pill px-3 fw-bold">
+											<a className="btn border-warning btn-sm rounded-pill px-3 text-warning">
 												Endorse
 											</a>
 										</Link>

@@ -87,8 +87,8 @@ const addadmin = () => {
                                 <div className="text-lg my-1">Add Page admin</div>
                                 <input type="text" className="p-3 rounded-md border border-gray w-full" onChange={(e) => search(e)} placeholder="Type here to search for a user to assign role" />
                                 <div>
-                                    {searched.map((search) => (
-                                        <div className="p-3 bg-gray-100 text-base mb-1" onClick={() => setId(search.id)}>{search.firstName} {search.lastName}</div>
+                                    {searched.map((search, i) => (
+                                        <div key={i} className="p-3 bg-gray-100 text-base mb-1" onClick={() => setId(search.id)}>{search.firstName} {search.lastName}</div>
                                     ))}
                                 </div>
                                 <div className="text-lg mt-4">Assign an admin role</div>

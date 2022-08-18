@@ -131,16 +131,16 @@ const PromoteComp = (): JSX.Element => {
 												campaign and spare in some cash if this campaign is promoted
 												to them.
 											</li>
-											
+
 											<li className="nav-item mb-2 ms-3">
 												Hit the promote button below to reach our Community of
 												Supporters who are interested in supporting this Campaign.
 											</li>
 										</ul>
 										<div>
-											{transactions && transactions?.length >1 ? (transactions.slice(0,6).map((item : any) => (
-												<div className="bg-gray-100 my-2 p-2">{item?.message}</div>
-											))):(null)}
+											{transactions && transactions?.length > 1 ? (transactions.slice(0, 6).map((item: any, i) => (
+												<div key={i} className="bg-gray-100 my-2 p-2">{item?.message}</div>
+											))) : (null)}
 										</div>
 										<div className="my-5 text-center promote-btn ">
 											<button

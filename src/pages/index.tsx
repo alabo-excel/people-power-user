@@ -1,16 +1,17 @@
 import { apollo } from "apollo";
-import {
-	getStrapiLawyers,
-	getStrapiReps,
-	getStrapiSingleCampaign,
-	getStrapiTestimonies,
-} from "apollo/actions/strapiAction";
+// import {
+// 	getStrapiLawyers,
+// 	getStrapiReps,
+// 	getStrapiSingleCampaign,
+// 	getStrapiTestimonies,
+// } from "apollo/actions/strapiAction";
 import { GET_ACTIVE_CAMPAIGNS } from "apollo/queries/campaignQuery";
-import CampaignBanner from "components/campaign-comp/CampaignBanner";
+// import CampaignBanner from "components/campaign-comp/CampaignBanner";
 import CampCard from "components/home/CampCard";
 // import LegalReprensentatives from "components/home/Representatives";
 import Indexsvg from "components/icon/Indexsvg";
 import Slider from "components/Slider";
+import TeamSlide from "components/camp-slider/team-slider"
 import gql from "graphql-tag";
 import FrontLayout from "layout/FrontLayout";
 import { NextPage } from "next";
@@ -26,49 +27,65 @@ import CampaignSlider from "../components/camp-slider/Slider"
 
 import {
 	ICampaign,
-	Strapi_Lawyer,
-	Strapi_Rep,
-	Strapi_Single_Campaign,
+	// Strapi_Lawyer,
+	// Strapi_Rep,
+	// Strapi_Single_Campaign,
 	Strapi_Testimony,
 } from "types/Applicant.types";
 
-export const GET_CAMPAIGNS = gql`
-	query ($limit: Int) {
-		getCampaigns(limit: $limit) {
-			title
-			id
-			slug
-			image
-			createdAt
-			excerpt
-			likes
-			views
-			author {
-				id
-				firstName
-				lastName
-				image
-			}
-		}
+// export const GET_CAMPAIGNS = gql`
+// 	query ($limit: Int) {
+// 		getCampaigns(limit: $limit) {
+// 			title
+// 			id
+// 			slug
+// 			image
+// 			createdAt
+// 			excerpt
+// 			likes
+// 			views
+// 			author {
+// 				id
+// 				firstName
+// 				lastName
+// 				image
+// 			}
+// 		}
+// 	}
+// `;
+const testimonies: Strapi_Testimony[] | null = [
+	{
+		id: "88uiwhkjhwjknmd",
+		author: "Alabo Excel",
+		company: "Edf foundation",
+		job_position: "Software Developer",
+		body: "	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos debitis ex sequi nesciunt? Voluptatem optio necessitatibus quidem molestias debitis. Quibusdam inventore eaque doloribus illum ullam quidem quos ipsam molestias maxime!		",
+		image: "https://images.unsplash.com/photo-1657299170950-87e5b0eaf77c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
+	},
+	{
+		id: "88uiwhkjhwjknmd",
+		author: "Alabo Excel",
+		company: "Edf foundation",
+		job_position: "Software Developer",
+		body: "	Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos debitis ex sequi nesciunt? Voluptatem optio necessitatibus quidem molestias debitis. Quibusdam inventore eaque doloribus illum ullam quidem quos ipsam molestias maxime!		",
+		image: "https://images.unsplash.com/photo-1657299170950-87e5b0eaf77c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80"
 	}
-`;
-
+]
 interface HomeProps {
 	campaigns: ICampaign[];
-	reps: Strapi_Rep[] | null;
-	lawyers: Strapi_Lawyer[] | null;
-	campaignBanner: Strapi_Single_Campaign | null;
-	testimonies: Strapi_Testimony[] | null;
+	// reps: Strapi_Rep[] | null;
+	// lawyers: Strapi_Lawyer[] | null;
+	// campaignBanner: Strapi_Single_Campaign | null;
+	// testimonies: Strapi_Testimony[] | null;
 }
 
 const HomePage: NextPage<HomeProps> = ({
 	campaigns,
-	campaignBanner,
-	testimonies,
+	// campaignBanner,
+	// testimonies,
 }: HomeProps): JSX.Element => {
 
 	console.log(campaigns)
-	
 	return (
 		<FrontLayout>
 			<Wrapper>
@@ -91,7 +108,7 @@ const HomePage: NextPage<HomeProps> = ({
 							>
 								<Link href="/auth">
 									<a className="btn btn-warning btn-lg rounded-pill px-4 py-2 text-light font-weight-bolder fs-20 ">
-									Join Now
+										Join Now
 									</a>
 								</Link>
 								<Link href="/about">
@@ -101,15 +118,16 @@ const HomePage: NextPage<HomeProps> = ({
 								</Link>
 							</div>
 						</div>
-
-						<Zoom>
-							<div className="_index-img">
-								<Indexsvg />
-							</div>
-						</Zoom>
+						<div className="lg:block hidden">
+							<Zoom>
+								<div className="_index-img">
+									<Indexsvg />
+								</div>
+							</Zoom>
+						</div>
 					</div>
 					{/* <ApolloProvider client={apollo}> */}
-						<CampaignSlider />
+					<CampaignSlider />
 					{/* </ApolloProvider> */}
 
 					{/* {campaigns.some((c) => c.promoted) && (
@@ -169,12 +187,12 @@ const HomePage: NextPage<HomeProps> = ({
 
 
 
-				<h4 className="text-center event-title fs-3 fw-bold mb-5">
+				{/* <h4 className="text-center event-title fs-3 fw-bold mb-5">
 					Up-coming Events
 				</h4>
 				<CampaignBanner
 					campaignBanner={campaignBanner as Strapi_Single_Campaign}
-				/>
+				/> */}
 
 
 				<section className="py-5 community-saying">
@@ -183,7 +201,28 @@ const HomePage: NextPage<HomeProps> = ({
 							What the community says
 						</p>
 						<div className="container">
-							<Slider testimonies={testimonies as Strapi_Testimony[]} />
+							<Slider testimonies={testimonies} />
+						</div>
+					</div>
+				</section>
+				<section className="my-10 w-2/3 mx-auto text-center">
+					<div className="text-3xl font-bold">
+						Leave the complexity of writing, designing, editing and organizing your campaigns and other administration to us
+					</div>
+					<div>
+						<TeamSlide />
+					</div>
+					<div className="text-base">
+						With our team of professionals, journalists, content writers, designers and social skilled workers, you can leave with us the complexity of writing, designing, editing and organizing your campaigns and other administration.</div>
+				</section>
+				<section>
+					<div className="lg:flex">
+						<div className="lg:w-1/2">
+							<img src="/images/promote.png" alt="" />
+						</div>
+						<div className="lg:w-1/2 my-auto lg:p-0 p-5">
+							<div className="text-3xl font-bold">Subscribe for our Human Right Applications and Proceedings</div>
+							<div className="text-lg">With our Human Right Applications and thousands of Human Right Lawyers and Social Skilled Workers across the globe, you will be able to compel authorities to respect your rights, social policies and Rule of Law through Human Right Proceedings and influence policy makers</div>
 						</div>
 					</div>
 				</section>
@@ -195,10 +234,10 @@ const HomePage: NextPage<HomeProps> = ({
 export default HomePage;
 
 HomePage.getInitialProps = async (): Promise<HomeProps> => {
-	const reps = await getStrapiReps();
-	const lawyers = await getStrapiLawyers();
-	const singleCamp = await getStrapiSingleCampaign();
-	const testimonies = await getStrapiTestimonies();
+	// const reps = await getStrapiReps();
+	// const lawyers = await getStrapiLawyers();
+	// const singleCamp = await getStrapiSingleCampaign();
+	// const testimonies = await getStrapiTestimonies();
 	const getCampaigns = async () => {
 		try {
 			const { data } = await apollo.query({
@@ -214,11 +253,7 @@ HomePage.getInitialProps = async (): Promise<HomeProps> => {
 		}
 	};
 	return {
-		reps,
-		lawyers,
-		campaigns: await getCampaigns(),
-		campaignBanner: singleCamp,
-		testimonies,
+		campaigns: await getCampaigns()
 	};
 };
 

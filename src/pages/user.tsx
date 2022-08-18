@@ -43,6 +43,8 @@ const user = () => {
             .catch(function (error) {
                 console.log(error);
             })
+
+
     }, [])
 
     const singleOrg = (id: string) => {
@@ -78,15 +80,15 @@ const user = () => {
                     <div className="rounded-md bg-gray-100">
                         <div className="relative ">
                             <div>
-                                <img className="w-full h-44" src="/images/women_in_prison 1.png" alt="" />
+                                <img className="w-full h-52" src="https://source.unsplash.com/random/800x400?nature" alt="" />
                             </div>
-                            {user?.image === "" ? (
-                                <div className="absolute top-32 left-10 rounded-full w-24 bg-white p-1 h-24">
+                            {user?.image === null ? (
+                                <div className="absolute top-40 left-10 rounded-full w-24 bg-white p-1 h-24">
                                     <img src="/images/logo.svg" alt="" />
 
                                 </div>
                             ) : (
-                                <div className="absolute top-32 left-10 rounded-full w-24 bg-white p-1 h-24">
+                                <div className="absolute top-40 left-10 rounded-full w-24 bg-white p-1 h-24">
                                     <img src={user?.image} alt="" />
                                 </div>
                             )}
@@ -145,8 +147,8 @@ const user = () => {
                                         <p className="pl-2 mt-2 capitalize">{author?.name}</p>
                                     </div>
                                     <div>
-                                        {orgs.map((org) => (
-                                            <div className="flex cursor-pointer my-2" onClick={() => singleOrg(org?._id)}>
+                                        {orgs.map((org, i) => (
+                                            <div key={i} className="flex cursor-pointer my-2" onClick={() => singleOrg(org?._id)}>
                                                 {org?.image === "Upload org Image" ? (
                                                     <img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
                                                 ) : (
@@ -170,8 +172,8 @@ const user = () => {
                                         <button className="bg-transparent px-8 w-44 text-warning"> Create Organization</button>
                                     </Link>
                                     <div>
-                                        {orgs.map((org) => (
-                                            <div className="flex cursor-pointer my-2" onClick={() => singleOrg(org?._id)}>
+                                        {orgs.map((org, i) => (
+                                            <div key={i} className="flex cursor-pointer my-2" onClick={() => singleOrg(org?._id)}>
                                                 {org?.image === "Upload org Image" ? (
                                                     <img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
                                                 ) : (
@@ -192,8 +194,8 @@ const user = () => {
                                 <button className="btn bg-warning p-2 px-8 my-3 mx-auto text-white w-44">Suscribe</button>
                             </div>
                         </div>) : (<div className='w-full'>
-                            {campaigns.map((camp) => (
-                                <div className="mt-3 bg-gray-50 w-full rounded-md flex relative">
+                            {campaigns.map((camp, i) => (
+                                <div key={i} className="mt-3 bg-gray-50 w-full rounded-md flex relative">
                                     <div className='absolute right-2 top-2'>
                                         <div className="dropdown">
                                             <a className="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">

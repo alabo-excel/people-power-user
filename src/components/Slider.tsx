@@ -37,15 +37,15 @@ const SlideComp = ({ testimony }: { testimony: Strapi_Testimony }) => {
 		<Wrapper className="slidecontainer px-3 m-0">
 			<div className="container wrapper">
 				<img
-					src={testimony?.image?.url}
+					src={testimony?.image}
 					alt=""
-					className="d-block mx-auto mb-3 rounded-circle"
+					className="mx-auto mb-3 rounded-circle"
 					width="105"
-					height="105"
+					height="150"
 				/>
 				<p className="side-txt mb-4 text-center">{testimony?.body}</p>
 				<div className=" info">
-					<p className="text-center _p1 m-0 fs-4">{testimony?.author}</p>
+					<p className="text-center _p1 m-0 fs-4 text-bold">{testimony?.author}</p>
 					<p className="text-center _p2 mb-0 fw-bold fs-5">
 						{testimony?.company}
 					</p>

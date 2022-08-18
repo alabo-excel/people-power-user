@@ -3,6 +3,10 @@ import Link from "next/link";
 import React from "react";
 import { useState } from "react";
 import router from "next/router";
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 const ForgotPassword = (): JSX.Element => {
 	const [email, setEmail] = useState("");
 	const [loading, setLoading] = useState(false);
@@ -12,7 +16,7 @@ const ForgotPassword = (): JSX.Element => {
 		try {
 			setLoading(true);
 			await axios.post("/auth/forgot-password", { email });
-			alert("An email has been sent to you with your verification code");
+			toast("An email has been sent to you with your verification code");
 			router.push("/auth?mode=verify token");
 			setLoading(false);
 		} catch (error) {
@@ -54,6 +58,7 @@ const ForgotPassword = (): JSX.Element => {
 					</a>
 				</Link>
 			</form>
+			<ToastContainer />
 		</div>
 	);
 };
