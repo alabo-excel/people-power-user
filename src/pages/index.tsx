@@ -11,6 +11,7 @@ import CampCard from "components/home/CampCard";
 // import LegalReprensentatives from "components/home/Representatives";
 import Indexsvg from "components/icon/Indexsvg";
 import Slider from "components/Slider";
+import TeamSlide from "components/camp-slider/team-slider"
 import gql from "graphql-tag";
 import FrontLayout from "layout/FrontLayout";
 import { NextPage } from "next";
@@ -202,6 +203,16 @@ const HomePage: NextPage<HomeProps> = ({
 							<Slider testimonies={testimonies} />
 						</div>
 					</div>
+				</section>
+				<section className="my-10 w-2/3 mx-auto text-center">
+					<div className="text-3xl font-bold">
+						Leave the complexity of writing, designing, editing and organizing your campaigns and other administration to us
+					</div>
+					<div>
+						<TeamSlide />
+					</div>
+					<div className="text-base">
+						With our team of professionals, journalists, content writers, designers and social skilled workers, you can leave with us the complexity of writing, designing, editing and organizing your campaigns and other administration.</div>
 				</section>
 			</Wrapper>
 		</FrontLayout>

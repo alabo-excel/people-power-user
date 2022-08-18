@@ -20,7 +20,7 @@ const ContactPage = () => {
 	const handleFormSubmit = (e: any) => {
 		setLoading(true)
 		e.preventDefault();
-		fetch("https://formsubmit.co/ajax/alaboexcel@gmail.com", {
+		fetch("https://formsubmit.co/ajax/support@peoplespow.com", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
