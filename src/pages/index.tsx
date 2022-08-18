@@ -118,12 +118,13 @@ const HomePage: NextPage<HomeProps> = ({
 								</Link>
 							</div>
 						</div>
-
-						<Zoom>
-							<div className="_index-img">
-								<Indexsvg />
-							</div>
-						</Zoom>
+						<div className="lg:block hidden">
+							<Zoom>
+								<div className="_index-img">
+									<Indexsvg />
+								</div>
+							</Zoom>
+						</div>
 					</div>
 					{/* <ApolloProvider client={apollo}> */}
 					<CampaignSlider />
@@ -213,6 +214,17 @@ const HomePage: NextPage<HomeProps> = ({
 					</div>
 					<div className="text-base">
 						With our team of professionals, journalists, content writers, designers and social skilled workers, you can leave with us the complexity of writing, designing, editing and organizing your campaigns and other administration.</div>
+				</section>
+				<section>
+					<div className="lg:flex">
+						<div className="lg:w-1/2">
+							<img src="/images/promote.png" alt="" />
+						</div>
+						<div className="lg:w-1/2 my-auto lg:p-0 p-5">
+							<div className="text-3xl font-bold">Subscribe for our Human Right Applications and Proceedings</div>
+							<div className="text-lg">With our Human Right Applications and thousands of Human Right Lawyers and Social Skilled Workers across the globe, you will be able to compel authorities to respect your rights, social policies and Rule of Law through Human Right Proceedings and influence policy makers</div>
+						</div>
+					</div>
 				</section>
 			</Wrapper>
 		</FrontLayout>
