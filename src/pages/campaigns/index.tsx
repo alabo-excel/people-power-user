@@ -14,7 +14,7 @@ import CampaignSlider from "../../components/camp-slider/Slider"
 
 const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 	campaigns,
-}: {campaigns: ICampaign[]}): JSX.Element => {
+}: { campaigns: ICampaign[] }): JSX.Element => {
 
 	console.log(campaigns)
 
@@ -127,7 +127,7 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 								</select>
 							</div>
 						</div>
-						
+
 						<CampaignSlider />
 
 						<div className="campaign-list ">
@@ -143,10 +143,11 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 						</div>
 
 						<div
-							className='w-52 text-center py-3 rounded-xl mt-5 text-light m-auto bg-gray-200 cursor-pointer'
+							className='px-20 w-1/2 text-center py-3 rounded-xl mt-5 text-black m-auto bg-gray-200 cursor-pointer'
 							onClick={handleClick}
 						>
-							Start your own Campaign
+							Do you think you have the soial concern? <br />
+							Start writing your own Campaign...  <span>&#x270E;</span>
 						</div>
 					</div>
 				</div>

@@ -113,7 +113,7 @@ const SwipeToSlide = () => {
 									<strong className="d-block text-capitalize">{camp?.title.substring(0, 80)}</strong>
 
 									<small className="mt-10 pt-0 break-all">
-										<span className="text-xs">{camp?.excerpt.substring(0, 400)}
+										<span className="text-xs">{camp?.excerpt.substring(0, 300)}
 											<button type="button" className="text-xs text-warning" onClick={() => {
 												setShowModal(true)
 												setPosition(i)
