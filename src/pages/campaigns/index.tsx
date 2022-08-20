@@ -47,8 +47,8 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 			cate: 'Environment'
 		},
 		{
-			title: 'Rehabilitation',
-			cate: 'Rehabilitation/ Empowerment'
+			title: 'Development',
+			cate: 'Development'
 		},
 		{
 			title: 'Health',
@@ -143,7 +143,7 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 						</div>
 
 						<div
-							className='w-52 text-center py-3 rounded-xl mt-5 text-light m-auto bg-[#00401c] cursor-pointer'
+							className='w-52 text-center py-3 rounded-xl mt-5 text-light m-auto bg-gray-200 cursor-pointer'
 							onClick={handleClick}
 						>
 							Start your own Campaign

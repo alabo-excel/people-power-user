@@ -19,9 +19,9 @@ const TermsAndConditionPage = () => {
 				<title>Terms And Conditions</title>
 			</Head>
 			<FrontLayout>
-				<div className="w-full text-center py-4">
+				<div className="text-center py-4">
 					{/* <ReactMarkdown>{terms?.body}</ReactMarkdown> */}
-					<iframe width="1500"  height="3350" src="https://docs.google.com/document/d/e/2PACX-1vQ3KxI45yrRH4BLu0C-lKNI2GpcA5eZNPs8xJgWLedeb-iG--OQjww1AiN_F2ef7A/pub?embedded=true"></iframe>
+					<iframe width="100%" height="3500" src="https://docs.google.com/document/d/e/2PACX-1vSZxnjx1NPklNew0-ytqATLRRZBl97ei6RQ_QgopAERLYPDAPABdJrm50U0hePA7F5T7vJ5PJdqlyNZ/pub?embedded=true"></iframe>
 				</div>
 			</FrontLayout>
 		</Fragment>

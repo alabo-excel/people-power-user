@@ -21,7 +21,7 @@ const ContactPage = () => {
 	const handleFormSubmit = (e: any) => {
 		setLoading(true)
 		e.preventDefault();
-		fetch("https://formsubmit.co/ajax/evansb45@yahoo.com", {
+		fetch("https://formsubmit.co/ajax/support@peoplespow.com", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -38,11 +38,6 @@ const ContactPage = () => {
 			.then((data) => {
 				console.log(data);
 				if (data.success == "true") {
-					setName(' ')
-					setEmail(' ')
-					setSubject(' ')
-					setMessage(' ')
-					setLoading(false)
 					toast.success("Message sent successfully !");
 				} else {
 					setLoading(false)

@@ -22,6 +22,8 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 						<div className="container _who-we-are mb-4">
 							<h1 className="text-secondary  fs-1 fw-bold">Who we are</h1>
 
+							{/* <iframe  width="100%" height="900" src="https://docs.google.com/document/d/e/2PACX-1vRx89kPjOl5zLjSUopJKxZocFUoVbBS1DwOhUSC_Hu1lPTZkU1lYUt3MFp8AVyX-PqzIvlsYEk4l-pY/pub?embedded=true"></iframe> */}
+							
 							PEOPLE’S POWER is a web-based technology for those facing social injustice and Human Right Abuse. It is created to inspire people to cause a change in their local communities. The Platform enables one, group and organizations to start a campaign for the change that they want, vis-a-vis Social Policies, Health, Politics, Environment, Development, Government policies, Employment, Criminal Justice and of course Human Right.
 							<br /> <br />
 							People’s Power also converts citizens’ complaint into a petition and campaigns which wins. When citizens are not happy with government policies, and other social challenges, they make their complaints to the attention of other citizens and organizations with similar interest or challenges for comments, opinions and endorsements. With the Citizens’ support, the complaint is petitioned to the appropriate persons and authorities who will resolve it.

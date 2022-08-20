@@ -30,7 +30,7 @@ const RegisterComp = (): JSX.Element => {
 				privacy.
 			</p>
 			<SignupCom onSucess={(d) => console.log(d)} />
-			<Link href="/auth?mode=forgot password">
+			<Link href="/auth?mode=login">
 				<a className="text-decoration-none text-center d-block">
 					Login instead
 				</a>
