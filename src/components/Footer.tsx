@@ -12,21 +12,22 @@ const Footer = (): JSX.Element => {
 					<section className="socials d-flex justify-content-center mb-4 py-3 ">
 						<div className="_socials d-flex justify-content-between">
 							<a
-								href={`https://twitter.com/${publicRuntimeConfig.META?.socials?.twitter}`}
+								href={`https://web.facebook.com/peoplespow`}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<i className="fab fa-facebook"></i>
+							</a>
+							<a
+								href={`https://twitter.com/evans_dule`}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
 								<i className="fab fa-twitter"></i>
 							</a>
+
 							<a
-								href={`https://instagram.com/${publicRuntimeConfig.META?.socials?.instagram}`}
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<i className="fab fa-instagram"></i>
-							</a>
-							<a
-								href={`https://linkedin.com/in/${publicRuntimeConfig.META?.socials?.linkedin}`}
+								href={`https://www.linkedin.com/company/peoples-power/mycompany/?viewAsMember=true`}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -75,7 +76,7 @@ const Footer = (): JSX.Element => {
 								</Link>
 							</li>
 							<li className="nav-item">
-								<Link href="/about">
+								<Link href="/about#career">
 									<a className="nav-link">Career</a>
 								</Link>
 							</li>

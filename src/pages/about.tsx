@@ -141,7 +141,8 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 							</div>
 						</div>
 					</div>
-					<section className="my-8">
+
+					<section id="career" className="my-8 lg:my-32">
 						<div className="what-we-do-txt bg-light h-100 px-4 py-3 my-2 lg:mx-32">
 							<div className=" text-secondary fw-bold text-4xl my-2">Join our team</div>
 							<div className="text-base">If you’re passionate and ready to dive in, we’d love to meet you.</div>

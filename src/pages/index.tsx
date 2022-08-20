@@ -156,7 +156,7 @@ const HomePage: NextPage<HomeProps> = ({
 						</div>
 					</section>
 				)} */}
-					<div className="second-row  d-flex align-items justify-content-around">
+					<div className="second-row  d-flex align-items justify-content-evenly">
 						{secondRowContent?.map((e, i) => (
 							<SecondRowComp {...e} key={i} />
 						))}
@@ -167,10 +167,9 @@ const HomePage: NextPage<HomeProps> = ({
 						<p className="text-center fw-bold mb-5 fs-2"> Campaigns</p>
 						<main>
 							<div className="campaign-list">
-								{campaigns?.length &&
-									campaigns
-										?.slice(0, 6)
-										.map((camp, i) => <CampCard camp={camp} key={i} />)}
+								{campaigns?.length >= 1
+									? (campaigns?.slice(0, 6).map((camp, i) => <CampCard camp={camp} key={i} />))
+									: (<div></div>)}
 							</div>
 							{campaigns && campaigns?.length > 6 && (
 								<div className="d-flex justify-content-center mt-3">
@@ -278,7 +277,7 @@ const SecondRowComp = ({
 				<div>
 					<img src={`/images/${img}`} alt="" />
 				</div>
-				<Link href={link || "/"} passHref>
+				<Link href={link || "/"}>
 					<div className="c-pointer d-flex flex-column align-items-md-start align-items-center">
 						<span className="">{text1}</span>
 						<b className="fs-5">{text2}</b>
@@ -290,23 +289,23 @@ const SecondRowComp = ({
 };
 
 const secondRowContent = [
-	{
-		img: "hands.svg",
-		text1: "Download",
-		text2: "Our Mobile App",
-		link: "https://play.google.com/store/apps/details?id=com.gappsy.dashboard.www.android606daa4127835&hl=en",
-	},
+	// {
+	// 	img: "hands.svg",
+	// 	text1: "Download",
+	// 	text2: "Our Mobile App",
+	// 	link: "https://play.google.com/store/apps/details?id=com.gappsy.dashboard.www.android606daa4127835&hl=en",
+	// },
 	{
 		img: "donor.svg",
-		text1: "Report",
-		text2: "Human Right Abuse",
+		text1: "Suscribe",
+		text2: "Human Right Application",
 		link: "https://app.flowtrack.co/form/vaf5v8",
 	},
 	{
 		img: "Bulls eye.svg",
 		text1: "Become",
 		text2: "A Staff",
-		link: "https://team.edfhr.org/",
+		link: "/about#career",
 	},
 ];
 

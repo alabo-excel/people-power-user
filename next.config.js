@@ -9,7 +9,7 @@ const SERVER_URL = process.env.SERVER_URL;
 // "https://cms.edfhr.org"
 // "http://localhost:8001";
 
-const meta = async() => {
+const meta = async () => {
     try {
         // const { data } = await axios.get(STRAPI_URL + "/meta");
 

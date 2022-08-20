@@ -43,7 +43,7 @@ const SwipeToSlide = () => {
 		slidesToScroll: 1,
 		initialSlide: 0,
 		autoplay: false,
-		arrows:false,
+		arrows: false,
 		responsive: [
 			{
 				breakpoint: 1024,
@@ -110,10 +110,10 @@ const SwipeToSlide = () => {
 									</span>
 								)}
 								<div className="text-white absolute -top-36 p-2 w-11/12">
-									<strong className="d-block text-capitalize">{camp?.title}</strong>
+									<strong className="d-block text-capitalize">{camp?.title.substring(0, 80)}</strong>
 
 									<small className="mt-10 pt-0 break-all">
-										<span className="text-xs">{camp?.excerpt.substring(0, 100)}
+										<span className="text-xs">{camp?.excerpt.substring(0, 400)}
 											<button type="button" className="text-xs text-warning" onClick={() => {
 												setShowModal(true)
 												setPosition(i)
@@ -127,14 +127,14 @@ const SwipeToSlide = () => {
 									{camp.author.id === user?.id ? (
 										<div className="text-center w-full">
 											<Link href={`/promote?slug=${camp.slug}`}>
-												<a className="btn border-warning btn-sm  rounded-pill px-3 text-warning">
+												<a className="p-2 bg-warning btn-sm rounded-pill px-3 text-white font-black">
 													Promote
 												</a>
 											</Link>
 										</div>
 									) : (<div className="text-center w-full">
 										<Link href={`/campaigns/${camp.slug}`}>
-											<a className="btn border-warning btn-sm rounded-pill px-3 text-warning">
+											<a className="bg-warning p-2 btn-sm rounded-pill px-3 text-white font-black">
 												Endorse
 											</a>
 										</Link>
