@@ -36,7 +36,7 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 						</div>
 					</div>
 					{/* ---------------------------------------------- */}
-					<div className="our-mission py-5 d-flex flex-column justify-content-center">
+					<div className="our-mission d-flex flex-column justify-content-center">
 						<div className="container _our-mission">
 							<div className="row mb-4 mission-wrap row-cols-1 row-cols-md-3 g-4">
 								<div className="col mb-4 mission-card">
@@ -152,7 +152,9 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 						</div>
 					</div> */}
 
-					<section id="career" className="my-8 lg:my-32">
+
+
+					<section id="career" className="my-8">
 						<div className="what-we-do-txt bg-light h-100 px-4 py-3 my-2 lg:mx-32">
 							<div className=" text-secondary fw-bold text-4xl my-2">Join our team</div>
 							<div className="text-base">If you’re passionate and ready to dive in, we’d love to meet you.</div>

@@ -27,7 +27,7 @@ const Footer = (): JSX.Element => {
 							</a>
 
 							<a
-								href={`https://www.linkedin.com/company/peoples-power/mycompany/?viewAsMember=true`}
+								href={`https://www.linkedin.com/company/82634752/`}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
