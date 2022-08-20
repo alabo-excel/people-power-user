@@ -36,7 +36,7 @@ const Footer = (): JSX.Element => {
 					</section>
 
 					<section className="d-flex justify-between mb-4 footer-list container mt-5">
-						<ul className="w-2/3 ">
+						<ul className="lg:w-2/3 ">
 							<li className="mb-4 fs-4 fw-bold">About us</li>
 							<li className="">
 								<strong>{`PEOPLE'S POWER`}</strong> is a web-based technology for those
@@ -52,7 +52,7 @@ const Footer = (): JSX.Element => {
 							</li>
 						</ul>
 						{/* <div className="d-flex footer-list_links"> */}
-						<ul className="w-80">
+						<ul className="lg:w-80">
 							<li className="mb-4 fs-4 fw-bold">Quick Links </li>
 							<li className="nav-item ">
 								<Link href="/terms">
@@ -81,7 +81,7 @@ const Footer = (): JSX.Element => {
 							</li>
 						</ul>
 
-						<ul className="w-80">
+						<ul className="lg:w-80">
 							<li className="fs-4 mb-4 fw-bold ">Contact info</li>
 							<li className=" ">
 								<i className="fas fa-history"></i> Monday to Friday 24hours

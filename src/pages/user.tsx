@@ -76,7 +76,7 @@ const user = () => {
                 <Head>
                     <title>{`PEOPLE'S POWER`} || {user?.name} </title>
                 </Head>
-                <div className="mx-32">
+                <div className="lg:mx-32">
                     <div className="rounded-md bg-gray-100">
                         <div className="relative ">
                             <div>
@@ -132,7 +132,7 @@ const user = () => {
                         </Link>
                     </div>
                     <div className="lg:flex mt-3">
-                        <div className="w-72 mt-3 h-80 lg:mr-4 rounded-md bg-gray-50">
+                        <div className="lg:w-72 mt-3 h-80 lg:mr-4 rounded-md bg-gray-50">
                             {organization === true ? (
                                 <div className="text-center font-black text-base p-3">
                                     <Link href={`/addadmin?page=${query.page}`}>
