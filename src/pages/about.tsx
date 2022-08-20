@@ -22,7 +22,15 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 						<div className="container _who-we-are mb-4">
 							<h1 className="text-secondary  fs-1 fw-bold">Who we are</h1>
 
-							<ReactMarkdown>{about?.who_we_are}</ReactMarkdown>
+							PEOPLE’S POWER is a web-based technology for those facing social injustice and Human Right Abuse. It is created to inspire people to cause a change in their local communities. The Platform enables one, group and organizations to start a campaign for the change that they want, vis-a-vis Social Policies, Health, Politics, Environment, Development, Government policies, Employment, Criminal Justice and of course Human Right.
+							<br /> <br />
+							People’s Power also converts citizens’ complaint into a petition and campaigns which wins. When citizens are not happy with government policies, and other social challenges, they make their complaints to the attention of other citizens and organizations with similar interest or challenges for comments, opinions and endorsements. With the Citizens’ support, the complaint is petitioned to the appropriate persons and authorities who will resolve it.
+							<br /> <br />
+							Where the relevant authorities neglect the citizens’ complaint, with Human Right Applications and thousands of Human Right Lawyers and Social Skilled Workers across the globe, we compel the authorities to respect citizens’ rights, social policies and Rule of Law. In other words, we pressurize those in power to implement citizens’ complaint and petitions through our Human Right Applications and Proceedings in the event the relevant authority neglect the complaint and petitions of the Public. PEOPLE’S POWER technology is the last hope of a common man.
+							<br /> <br />
+							With our team of professionals, journalists, content writers, designers and social skilled workers, you can leave with us the complexity of writing, designing, editing and organizing your campaigns and other administration. We handle your campaigns, contents, designs, updates and other administrations while you focus on building a strong and physical campaigns with momentum.
+							<br /> <br />
+							At People’s Power, we also help you grow your followers and supporters through active campaigns and email marketing. Our technology enables us to be more effective in this area.
 						</div>
 					</div>
 					{/* ---------------------------------------------- */}
@@ -31,7 +39,7 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 							<div className="row mb-4 mission-wrap row-cols-1 row-cols-md-3 g-4">
 								<div className="col mb-4 mission-card">
 									<div className="card _mission-card ">
-										<div className="card-img-top mission-img py-3">
+										<div className="py-3">
 											<img
 												src="/images/campaign.svg"
 												alt=""
@@ -53,7 +61,7 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 								</div>
 								<div className="col mb-4 mission-card">
 									<div className="card _mission-card ">
-										<div className="card-img-top mission-img py-3">
+										<div className=" py-3">
 											<img
 												src="/images/rehabilitate.svg"
 												alt=""
@@ -77,7 +85,7 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 								</div>
 								<div className="col mb-4 mission-card">
 									<div className="card _mission-card ">
-										<div className="card-img-top mission-img py-3">
+										<div className="py-3">
 											<img
 												src="/images/educate.svg"
 												alt=""
@@ -101,7 +109,7 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 						</div>
 					</div>
 
-					<div className="our-vision py-5">
+					{/* <div className="our-vision py-5">
 						<div className="_our-vision container">
 							<div
 								className="vision-goal mb-5 flex-column flex-sm-row align-items-sm-center text-white d-flex"
@@ -140,7 +148,7 @@ const AboutPage: NextPage<IProps> = ({ about }: IProps): JSX.Element => {
 								/>
 							</div>
 						</div>
-					</div>
+					</div> */}
 
 					<section id="career" className="my-8 lg:my-32">
 						<div className="what-we-do-txt bg-light h-100 px-4 py-3 my-2 lg:mx-32">
