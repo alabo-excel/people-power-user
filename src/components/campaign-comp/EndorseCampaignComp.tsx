@@ -62,7 +62,7 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 		<section className="comment">
 			<div className="card border-1 rounded-3">
 				<div className="card-body">
-					<div className="comment-profile d-flex flex-column align-items-sm-center flex-sm-row">
+					{user ? (<div className="comment-profile d-flex flex-column align-items-sm-center flex-sm-row">
 						<div className="comment-profile-img position-relative">
 							<img src={user?.image} alt="" className="position-absolute" />
 						</div>
@@ -72,7 +72,8 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 								<i className="fa fa-pen fa-2"></i>
 							</Link>
 						</div>
-					</div>
+					</div>) : (<div></div>)
+					}
 					<hr />
 
 					<small>Why do you endorse? (Optional)</small>
@@ -81,16 +82,17 @@ const EndorseCampaignComp = ({ camp }: { camp: ICampaign }): JSX.Element => {
 						value={body}
 						onChange={(txt) => { setBody(txt) }}
 					/>
-					<div className="d-flex align-items-center justify-content-between">
-						<button
-							className="bg-warning my-3 p-2 rounded-full"
-							onClick={handleSubmit}
-							disabled={loading}
-						>
-							{loading ? <Loader content="Processing" /> : "Endorse Campaign"}
-						</button>
-					</div>
+
 				</div>
+			</div>
+			<div className="d-flex align-items-center justify-content-between">
+				<button
+					className="bg-warning text-white my-3 p-2 rounded-full"
+					onClick={handleSubmit}
+					disabled={loading}
+				>
+					{loading ? <Loader content="Processing" /> : "Endorse Campaign"}
+				</button>
 			</div>
 		</section>
 	);

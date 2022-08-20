@@ -8,7 +8,8 @@ import { GetStaticProps, NextPage } from "next";
 import { apolloStrapi } from "apollo";
 import { GET_STRAPI_META } from "apollo/queries/strapiQuery";
 
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ContactPage = () => {
 	const [name, setName] = useState('')
@@ -37,15 +38,15 @@ const ContactPage = () => {
 			.then((data) => {
 				console.log(data);
 				if (data.success == "true") {
-					setName('')
-					setEmail('')
-					setSubject('')
-					setMessage('')
+					toast.success("Message sent successfully !");
+				} else {
 					setLoading(false)
+					toast.warn("Oops an error occoured!");
 				}
 			})
 			.catch((error) => {
 				console.log(error);
+				toast.error("Error: " + error.message)
 				setLoading(false)
 			});
 	}
@@ -94,11 +95,11 @@ const ContactPage = () => {
 									<b className="text-center">+1 737 210 1130 - USA</b>
 								</div>
 							</div> */}
-						<div className="flex px-32 justify-between">
-							<div className="w-[45%]">
+						<div className="lg:flex lg:px-32 justify-between">
+							<div className="lg:w-[45%] lg:block hidden">
 								<Contactsvg />
 							</div>
-							<div className="text-center w-1/2">
+							<div className="text-center lg:w-1/2 lg:p-0 p-8">
 								<p className="text-4xl font-bold my-2">
 									Send us a message
 								</p>
@@ -107,45 +108,49 @@ const ContactPage = () => {
 										to our forum you can send us a message now. Its our pleasure
 										to help
 									</p> */}
-								{/* <form> */}
-								<div className="mb-3">
-									<input
-										type="text"
-										className="form-control bg-light py-3 w-full"
-										placeholder="Enter your Name"
-										onChange={(e) => setName(e.target.value)}
-									/>
-								</div>
-								<div className="mb-4">
-									<input
-										type="text"
-										className="form-control bg-light py-3"
-										placeholder="Enter your Email"
-										onChange={(e) => setEmail(e.target.value)}
-									/>
-								</div>
-								<div className="mb-4">
-									<input
-										type="text"
-										className="form-control bg-light py-3"
-										placeholder="Enter the subject"
-										onChange={(e) => setSubject(e.target.value)}
-									/>
-								</div>
+								<form onSubmit={(e) => handleFormSubmit(e)}>
+									<div className="mb-3">
+										<input
+											required
+											type="text"
+											className="form-control bg-light py-3 w-full"
+											placeholder="Enter your Name"
+											onChange={(e) => setName(e.target.value)}
+										/>
+									</div>
+									<div className="mb-4">
+										<input
+											required
+											type="email"
+											className="form-control bg-light py-3"
+											placeholder="Enter your Email"
+											onChange={(e) => setEmail(e.target.value)}
+										/>
+									</div>
+									<div className="mb-4">
+										<input
+											type="text"
+											required
+											className="form-control bg-light py-3"
+											placeholder="Enter the subject"
+											onChange={(e) => setSubject(e.target.value)}
+										/>
+									</div>
 
-								<textarea
-									name=""
-									id=""
-									cols={30}
-									rows={6}
-									className="bg-light form-control mb-3"
-									placeholder="Enter your Message"
-									onChange={(e) => setMessage(e.target.value)}
-								></textarea>
-								<button onClick={(e) => handleFormSubmit(e)} className="btn btn-warning px-5 py-2 text-white fs-5 fw-bolder rounded-pill">
-									{loading ? "Sending" : "Send Message"}
-								</button>
-								{/* </form> */}
+									<textarea
+										name=""
+										id=""
+										cols={30}
+										rows={6}
+										className="bg-light form-control mb-3"
+										placeholder="Enter your Message"
+										required
+										onChange={(e) => setMessage(e.target.value)}
+									></textarea>
+									<button className="btn btn-warning px-5 py-2 text-white fs-5 fw-bolder rounded-pill">
+										{loading ? "Sending..." : "Send Message"}
+									</button>
+								</form>
 							</div>
 						</div>
 						{/* </Contact> */}
@@ -161,6 +166,7 @@ const ContactPage = () => {
 							className="w-100 p-0 m-0 rounded-3"
 						></iframe>
 					</section> */}
+					<ToastContainer />
 				</div>
 			</FrontLayout>
 		</Fragment>

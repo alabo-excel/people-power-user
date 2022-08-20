@@ -12,21 +12,22 @@ const Footer = (): JSX.Element => {
 					<section className="socials d-flex justify-content-center mb-4 py-3 ">
 						<div className="_socials d-flex justify-content-between">
 							<a
-								href={`https://twitter.com/${publicRuntimeConfig.META?.socials?.twitter}`}
+								href={`https://web.facebook.com/peoplespow`}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								<i className="fab fa-facebook"></i>
+							</a>
+							<a
+								href={`https://twitter.com/evans_dule`}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
 								<i className="fab fa-twitter"></i>
 							</a>
+
 							<a
-								href={`https://instagram.com/${publicRuntimeConfig.META?.socials?.instagram}`}
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								<i className="fab fa-instagram"></i>
-							</a>
-							<a
-								href={`https://linkedin.com/in/${publicRuntimeConfig.META?.socials?.linkedin}`}
+								href={`https://www.linkedin.com/company/peoples-power/mycompany/?viewAsMember=true`}
 								target="_blank"
 								rel="noopener noreferrer"
 							>
@@ -36,7 +37,7 @@ const Footer = (): JSX.Element => {
 					</section>
 
 					<section className="d-flex justify-between mb-4 footer-list container mt-5">
-						<ul className="w-2/3 ">
+						<ul className="lg:w-2/3 ">
 							<li className="mb-4 fs-4 fw-bold">About us</li>
 							<li className="">
 								<strong>{`PEOPLE'S POWER`}</strong> is a web-based technology for those
@@ -52,7 +53,7 @@ const Footer = (): JSX.Element => {
 							</li>
 						</ul>
 						{/* <div className="d-flex footer-list_links"> */}
-						<ul className="w-80">
+						<ul className="lg:w-80">
 							<li className="mb-4 fs-4 fw-bold">Quick Links </li>
 							<li className="nav-item ">
 								<Link href="/terms">
@@ -75,13 +76,13 @@ const Footer = (): JSX.Element => {
 								</Link>
 							</li>
 							<li className="nav-item">
-								<Link href="/about">
+								<Link href="/about#career">
 									<a className="nav-link">Career</a>
 								</Link>
 							</li>
 						</ul>
 
-						<ul className="w-80">
+						<ul className="lg:w-80">
 							<li className="fs-4 mb-4 fw-bold ">Contact info</li>
 							<li className=" ">
 								<i className="fas fa-history"></i> Monday to Friday 24hours

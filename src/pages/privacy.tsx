@@ -16,7 +16,7 @@ const PrivacyPage = () => {
 			<FrontLayout>
 				<Wrapper className="privacy-policy py-5">
 					<div className="container">
-						<iframe width="1500" height="3350" src="https://docs.google.com/document/d/e/2PACX-1vR7lKCvGByBvSW90xpSgNpcP-Lwn9vFctx7jWTTb2Z4qn6QsiGB_Pz85kovCZQ-Lw/pub?embedded=true"></iframe>
+						<iframe width="100%" height="3500" src="https://docs.google.com/document/d/e/2PACX-1vS9WeduCRmpPm5qsOAe_5cmr51I2nP1UJj7eHa9DjH9oyGBKjsPMrxrhkv2gSbESphBR6e-BllV0Vx8/pub?embedded=true"></iframe>
 					</div>
 				</Wrapper>
 			</FrontLayout>

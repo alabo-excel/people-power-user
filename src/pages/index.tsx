@@ -156,7 +156,7 @@ const HomePage: NextPage<HomeProps> = ({
 						</div>
 					</section>
 				)} */}
-					<div className="second-row  d-flex align-items justify-content-around">
+					<div className="second-row  d-flex align-items justify-content-evenly">
 						{secondRowContent?.map((e, i) => (
 							<SecondRowComp {...e} key={i} />
 						))}
@@ -167,10 +167,9 @@ const HomePage: NextPage<HomeProps> = ({
 						<p className="text-center fw-bold mb-5 fs-2"> Campaigns</p>
 						<main>
 							<div className="campaign-list">
-								{campaigns?.length &&
-									campaigns
-										?.slice(0, 6)
-										.map((camp, i) => <CampCard camp={camp} key={i} />)}
+								{campaigns?.length >= 1
+									? (campaigns?.slice(0, 6).map((camp, i) => <CampCard camp={camp} key={i} />))
+									: (<div></div>)}
 							</div>
 							{campaigns && campaigns?.length > 6 && (
 								<div className="d-flex justify-content-center mt-3">
@@ -195,6 +194,31 @@ const HomePage: NextPage<HomeProps> = ({
 				/> */}
 
 
+
+				<section className="community-saying">
+					<div className="py-10 w-2/3 mx-auto text-center">
+						<div className="lg:text-3xl text-xl font-bold">
+							Leave the complexity of writing, designing, editing and organizing your campaigns and other administration to us
+						</div>
+						<div>
+							<TeamSlide />
+						</div>
+						<div className="text-base">
+							With our team of professionals, journalists, content writers, designers and social skilled workers, you can leave with us the complexity of writing, designing, editing and organizing your campaigns and other administration.
+						</div>
+					</div>
+				</section>
+				<section>
+					<div className="lg:flex my-10">
+						<div className="lg:w-1/2">
+							<img src="/images/camp9.svg" className="lg:w-5/6 w-full mx-auto" alt="" />
+						</div>
+						<div className="lg:w-1/2 my-auto lg:p-0 p-5">
+							<div className="lg:text-3xl text-xl font-bold">Subscribe for our Human Right Applications and Proceedings</div>
+							<div className="text-lg">With our Human Right Applications and thousands of Human Right Lawyers and Social Skilled Workers across the globe, you will be able to compel authorities to respect your rights, social policies and Rule of Law through Human Right Proceedings and influence policy makers</div>
+						</div>
+					</div>
+				</section>
 				<section className="py-5 community-saying">
 					<div className="_community-saying container">
 						<p className="text-center mb-5 fs-1 fw-bold">
@@ -202,27 +226,6 @@ const HomePage: NextPage<HomeProps> = ({
 						</p>
 						<div className="container">
 							<Slider testimonies={testimonies} />
-						</div>
-					</div>
-				</section>
-				<section className="my-10 w-2/3 mx-auto text-center">
-					<div className="text-3xl font-bold">
-						Leave the complexity of writing, designing, editing and organizing your campaigns and other administration to us
-					</div>
-					<div>
-						<TeamSlide />
-					</div>
-					<div className="text-base">
-						With our team of professionals, journalists, content writers, designers and social skilled workers, you can leave with us the complexity of writing, designing, editing and organizing your campaigns and other administration.</div>
-				</section>
-				<section>
-					<div className="lg:flex">
-						<div className="lg:w-1/2">
-							<img src="/images/promote.png" alt="" />
-						</div>
-						<div className="lg:w-1/2 my-auto lg:p-0 p-5">
-							<div className="text-3xl font-bold">Subscribe for our Human Right Applications and Proceedings</div>
-							<div className="text-lg">With our Human Right Applications and thousands of Human Right Lawyers and Social Skilled Workers across the globe, you will be able to compel authorities to respect your rights, social policies and Rule of Law through Human Right Proceedings and influence policy makers</div>
 						</div>
 					</div>
 				</section>
@@ -274,7 +277,7 @@ const SecondRowComp = ({
 				<div>
 					<img src={`/images/${img}`} alt="" />
 				</div>
-				<Link href={link || "/"} passHref>
+				<Link href={link || "/"}>
 					<div className="c-pointer d-flex flex-column align-items-md-start align-items-center">
 						<span className="">{text1}</span>
 						<b className="fs-5">{text2}</b>
@@ -286,23 +289,23 @@ const SecondRowComp = ({
 };
 
 const secondRowContent = [
-	{
-		img: "hands.svg",
-		text1: "Download",
-		text2: "Our Mobile App",
-		link: "https://play.google.com/store/apps/details?id=com.gappsy.dashboard.www.android606daa4127835&hl=en",
-	},
+	// {
+	// 	img: "hands.svg",
+	// 	text1: "Download",
+	// 	text2: "Our Mobile App",
+	// 	link: "https://play.google.com/store/apps/details?id=com.gappsy.dashboard.www.android606daa4127835&hl=en",
+	// },
 	{
 		img: "donor.svg",
-		text1: "Report",
-		text2: "Human Right Abuse",
+		text1: "Suscribe",
+		text2: "Human Right Application",
 		link: "https://app.flowtrack.co/form/vaf5v8",
 	},
 	{
 		img: "Bulls eye.svg",
 		text1: "Become",
 		text2: "A Staff",
-		link: "https://team.edfhr.org/",
+		link: "/about#career",
 	},
 ];
 

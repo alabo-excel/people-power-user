@@ -91,7 +91,6 @@ const UpdateProfileComp = (): JSX.Element => {
 						name="description"
 						className="form-control"
 						onChange={handleChange}
-						disabled
 						cols={30}
 						rows={10}
 						value={info?.description}
@@ -131,7 +130,10 @@ const UpdateProfileComp = (): JSX.Element => {
 					<input
 						type="text"
 						className="form-control"
+						name="country"
 						placeholder={user?.country}
+						value={info?.country}
+						onChange={handleChange}
 					/>
 				</div>
 
@@ -145,7 +147,7 @@ const UpdateProfileComp = (): JSX.Element => {
 						className="form-control"
 						value={info?.city}
 						onChange={handleChange}
-						// id="city"
+					// id="city"
 					/>
 				</div>
 			</div>

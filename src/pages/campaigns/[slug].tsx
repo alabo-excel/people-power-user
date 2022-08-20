@@ -162,7 +162,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 									{update.length >= 1 ? (update.map((item, i) => (
 										<div key={i}>{item}</div>
 									))) : (null)}
-									{user?.id === camp?.author?.id && camp?.promoted !== true ? (
+									{/* {user?.id === camp?.author?.id && camp?.promoted !== true ? (
 										<button
 											onClick={() =>
 												router.push(`/promote?slug=${query?.slug}&view=true`)
@@ -178,7 +178,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 										>
 											Endorse campaign
 										</button>
-									)}
+									)} */}
 									{/* {showEndorsement && <EndorseCampaignComp camp={camp} />} */}
 								</div>
 

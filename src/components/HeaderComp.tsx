@@ -39,8 +39,8 @@ const Header = (): JSX.Element => {
 
 	return (
 		<header>
-			<nav className="navbar">
-				<div className="container header m-c">
+			<nav className="navbar sticky-top">
+				<div className="container header ">
 					<div className="navbar-brand d-flex justify-content-between align-items-center justify-content-md-start min">
 						<Link href="/">
 							<a className="navbar-brand">
@@ -79,7 +79,7 @@ const Header = (): JSX.Element => {
 						<li className="nav-item">
 							{!user ? (
 								<Link href="/auth">
-									<button className="btn px-5 mt-2 join rounded-pill bg-warning text-white font-weight-bold">
+									<button className="p-2 font-black px-5 mt-2 join rounded-pill bg-warning text-white">
 										Join
 									</button>
 								</Link>
