@@ -12,14 +12,14 @@ const CampaignCard = ({ camp }: { camp: ICampaign }): JSX.Element => {
 				<a className="text-decoration-none link-dark">
 					<img src={camp?.image} className="card-image h-44 w-full" alt={camp?.title} />
 					<div className="card-body p-3">
-						<Link href={`/user?page=${camp?.author.id}`}>
+						<Link href={`/user?page=${camp?.authorId}`}>
 							<div className="flex cursor-pointer">
-								{camp?.author.image === null ? (
+								{camp?.authorImg === null || "No img" ? (
 									<img className="w-8 h-8 opacity-20" src="/images/logo.svg" alt="" />
 								) : (
-									<img className="w-8 h-8 " src={camp?.author.image} alt="" />
+									<img className="w-8 h-8 " src={camp?.authorImg} alt="" />
 								)}
-								<p className="pl-2 mt-2">{camp?.author.firstName} {camp?.author.lastName}</p>
+								<p className="pl-2 mt-2">{camp?.authorName}</p>
 							</div>
 						</Link>
 						<p className="card-title fs-5 fw-bold capitalize">

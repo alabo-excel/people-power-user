@@ -15,15 +15,9 @@ export const GET_CAMPAIGN = gql`
 			likes
 			slug
 			category
-			author {
-				id
-				firstName
-				lastName
-				phone
-				email
-				country
-				image
-			}
+			authorName
+			authorId
+			authorImg
 		}
 	}
 `;
@@ -43,15 +37,13 @@ export const GET_CAMPAIGNS = gql`
 			endorsements {
 				id
 			}
-			author {
-				id
-				firstName
-				lastName
-				image
-			}
+			authorName
+			authorId
+			authorImg
 		}
 	}
 `;
+
 export const GET_ACTIVE_CAMPAIGNS = gql`
 	{
 		getActiveCampaigns {
@@ -66,12 +58,9 @@ export const GET_ACTIVE_CAMPAIGNS = gql`
 			endorsements {
 				id
 			}
-			author {
-				id
-				firstName
-				lastName
-				image
-			}
+			authorName
+			authorId
+			authorImg
 		}
 	}
 `;
@@ -82,12 +71,9 @@ export const GET_ENDORSEMENTS_BY_CAMPAIGN = gql`
 			createdAt
 			body
 			likes
-			author {
-				id
-				image
-				firstName
-				lastName
-			}
+			authorName
+			authorId
+			authorImg
 		}
 	}
 `;

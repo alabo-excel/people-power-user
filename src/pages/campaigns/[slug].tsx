@@ -34,6 +34,8 @@ import router, { useRouter } from "next/router";
 // 		authorization: Cookies.get("token") || "",
 // 	},
 // });
+
+
 const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 	camp,
 }: {
@@ -62,8 +64,6 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 		console.log("handlike");
 	};
 
-	console.log(endorsements)
-
 	const viewCamp = async () => {
 		if (!user) return
 		const data = {
@@ -73,10 +73,11 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 		console.log(res)
 	}
 
+
 	useEffect(() => {
 		axios.get(`/campaign/update/${camp?.id}`)
 			.then(function (response) {
-				console.log(response);
+				// console.log(response);
 				setUpdate(response.data)
 			})
 			.catch(function (error) {
@@ -130,7 +131,7 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 												className={`btn rounded-circle me-5 like-btn 
                    								 ${isLiked ? "bg-sky text-primary" : "text-muted"}`}
 												onClick={() => {
-													user?.id !== camp?.author?.id && handleLike();
+													user?.id !== camp?.authorId && handleLike();
 												}}
 											>
 												<i className="fas fa-thumbs-up small"></i>
@@ -145,14 +146,14 @@ const SingleCampaignPage: NextPage<{ camp: ICampaign }> = ({
 									</div>
 									<h3 className="mb-0 p-0 fw-bold m-0 capitalize">{camp?.title}</h3>
 									<div className="m-0 mt-2 fw-bold flex">
-										{camp?.author?.image === null ? (
+										{camp?.authorImg === null || "No img" ? (
 											<img src="/images/logo.svg" className="w-8 h-8 opacity-20 rounded-full" alt="" />
 										) : (
-											<img className="w-8 h-8 rounded-full" src={camp?.author?.image} alt="" />
+											<img className="w-8 h-8 rounded-full" src={camp?.authorImg} alt="" />
 										)}
-										{camp?.author?.image}
+										{camp?.authorImg}
 										<p className="ml-3">
-											{`${camp?.author?.firstName} ${camp?.author?.lastName}`} launched this campaign to {camp?.target}
+											{`${camp?.authorName}`} launched this campaign to {camp?.target}
 										</p>
 									</div>
 									<ReactMarkdown className="fs-5">{camp?.body}</ReactMarkdown>
@@ -290,7 +291,6 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
 			variables: { slug },
 		});
 		const camp = data?.getCampaign;
-
 		return {
 			props: {
 				camp,
@@ -314,8 +314,10 @@ export const getStaticPaths: GetStaticPaths = async (): Promise<
 		query: GET_CAMPAIGNS,
 	});
 	const campaigns: ICampaign[] = data?.getCampaigns;
+	console.log(campaigns)
 	const paths = campaigns?.map((campaign) => ({
-		params: { slug: campaign?.slug },
+		params: { slug: `${campaign?.slug}` },
 	}));
 	return { paths, fallback: "blocking" };
 };
+

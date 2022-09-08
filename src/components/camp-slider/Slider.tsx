@@ -111,9 +111,8 @@ const SwipeToSlide = () => {
 								)}
 								<div className="text-white absolute -top-36 p-2 w-11/12">
 									<strong className="d-block text-capitalize">{camp?.title.substring(0, 80)}</strong>
-
 									<small className="mt-10 pt-0 break-all">
-										<span className="text-xs">{camp?.excerpt.substring(0, 300)}
+										<span className="text-xs">{camp?.excerpt.substring(0, 100)}
 											<button type="button" className="text-xs text-warning" onClick={() => {
 												setShowModal(true)
 												setPosition(i)
@@ -124,7 +123,7 @@ const SwipeToSlide = () => {
 									</small>
 								</div>
 								<div>
-									{camp.author.id === user?.id ? (
+									{camp.authorId === user?.id ? (
 										<div className="text-center w-full">
 											<Link href={`/promote?slug=${camp.slug}`}>
 												<a className="p-2 bg-warning btn-sm rounded-pill px-3 text-white font-black">

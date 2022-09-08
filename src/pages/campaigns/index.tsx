@@ -127,9 +127,7 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 								</select>
 							</div>
 						</div>
-
 						<CampaignSlider />
-
 						<div className="campaign-list ">
 							{queryCampaigns
 								.filter((camp) =>
@@ -146,8 +144,9 @@ const CampaignPage: NextPage<{ campaigns: ICampaign[] }> = ({
 							className='px-20 w-1/2 text-center py-3 rounded-xl mt-5 text-black m-auto bg-gray-200 cursor-pointer'
 							onClick={handleClick}
 						>
-							Do you think you have the soial concern? <br />
+							Do you think you have a social concern? <br />
 							Start writing your own Campaign...  <span>&#x270E;</span>
+							
 						</div>
 					</div>
 				</div>
