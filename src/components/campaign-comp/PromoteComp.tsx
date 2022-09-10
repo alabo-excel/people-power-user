@@ -16,6 +16,7 @@ import { IEnvironments } from "utils/constants";
 import { checkFX, formateMoney } from "utils/formateMoney";
 import Link from "next/link";
 import axios from "axios";
+import { apollo } from "apollo";
 
 export const GET_CAMPAIGN = gql`
 	query ($slug: String) {
@@ -48,9 +49,12 @@ const PromoteComp = (): JSX.Element => {
 	const [showModalClose, setShowModalClose] = useState(false);
 	const [transactions, setTransactions] = useState<ITransactions[]>([]);
 
-	const { loading } = useQuery(GET_CAMPAIGN, {
+	useQuery(GET_CAMPAIGN, {
+		client: apollo,
 		variables: { slug: query.slug },
-		onCompleted: (data) => setCampaign(data.getCampaign),
+		onCompleted: (data) => {
+			setCampaign(data.getCampaign)
+		},
 		onError: (err) => console.log(err),
 	});
 
@@ -68,7 +72,7 @@ const PromoteComp = (): JSX.Element => {
 	useEffect(() => {
 		axios.get('/transaction')
 			.then(function (response) {
-				console.log(response.data);
+				// console.log(response.data);
 				setTransactions(response.data)
 			})
 			.catch(function (error) {

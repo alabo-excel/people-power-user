@@ -24,7 +24,7 @@ const user = () => {
     const [organization, setOrganization] = useState(false)
 
     useEffect(() => {
-        // console.log(author)
+        console.log(author)
         axios.get(`/user/single/${query.page}`)
             .then(function (response) {
                 // console.log(response);

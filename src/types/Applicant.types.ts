@@ -178,7 +178,6 @@ export interface ICampaign extends Document {
 	body: string;
 	slug: string;
 	status: CampaignStatusEnum;
-	author: IUser;
 	createdAt: string;
 	updatedAt: Date;
 	addedFrom: string;
@@ -190,6 +189,9 @@ export interface ICampaign extends Document {
 	promoted: boolean;
 	views: IViews[];
 	checked?: boolean;
+	authorName: string;
+	authorId: string;
+	authorImg: string;
 }
 
 export interface IViews {

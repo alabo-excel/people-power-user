@@ -19,7 +19,7 @@ const StartCampPage = (): JSX.Element => {
 	const user = useRecoilValue(UserAtom);
 
 	useEffect(() => {
-		console.log(user)
+		// console.log(user)
 		axios.post('/orgs/user/orgs')
 			.then(function (response) {
 				console.log(response);
